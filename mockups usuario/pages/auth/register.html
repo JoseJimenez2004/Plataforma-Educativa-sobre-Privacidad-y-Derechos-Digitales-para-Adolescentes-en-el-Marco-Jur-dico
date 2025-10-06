@@ -3,118 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - COSECOVI</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="../../css/components/auth.css">
-    <link rel="stylesheet" href="../../css/components/dashboard.css">
-    <link rel="stylesheet" href="../../css/components/forms.css">
-    <link rel="stylesheet" href="../../css/components/responsive.css">
+    <title>Registro - Defensoría Politécnica</title>
+    <link rel="stylesheet" href="/mockups usuario/css/auth/registre.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-50 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
-        <!-- Header -->
-        <div class="text-center">
-            <a href="../../index.html" class="inline-block">
-                <div class="flex items-center justify-center">
-                    <img src="../../assets/images/ipn.png" alt="IPN" class="h-12">
-                    <div class="ml-3">
-                        <h1 class="text-2xl font-bold text-gray-900">COSECOVI</h1>
-                        <p class="text-sm text-gray-600">Crear Cuenta</p>
-                    </div>
-                </div>
-            </a>
+<body>
+    <div class="register-container">
+        <!-- Background Animation -->
+        <div class="background-animation">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
         </div>
 
-        <!-- Formulario de Registro -->
-        <form id="formulario-registro" class="card mt-8 space-y-6">
-            <div>
-                <label class="form-label">Tipo de Persona *</label>
-                <div class="grid grid-cols-2 gap-4">
-                    <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
-                        <input type="radio" name="tipoPersona" value="estudiante" class="mr-3" data-validate="required" required>
-                        <span>Estudiante</span>
-                    </label>
-                    <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
-                        <input type="radio" name="tipoPersona" value="trabajador" class="mr-3" data-validate="required" required>
-                        <span>Trabajador</span>
-                    </label>
+        <!-- Main Content -->
+        <div class="register-content">
+            <!-- Header -->
+            <div class="register-header">
+                <div class="logo-container">
+                    <img src="/mockups usuario/assets/images/ipn.png" alt="IPN" class="logo">
+                    <div class="logo-text">
+                        <h1>Defensoría Politécnica</h1>
+                        <p>Instituto Politécnico Nacional</p>
+                    </div>
                 </div>
-                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                <h2 class="welcome-text">Crear Cuenta</h2>
+                <p class="subtitle">Completa tus datos personales</p>
             </div>
 
-            <div>
-                <label for="numeroIdentificacion" class="form-label">Número de Boleta/Trabajador *</label>
-                <input type="text" id="numeroIdentificacion" name="numeroIdentificacion" 
-                       class="form-input" data-validate="required" required
-                       placeholder="Ej: 2024678901">
-                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
-            </div>
+            <!-- Registration Form -->
+            <form id="register-form" class="register-form">
+                <!-- Información Personal -->
+                <div class="form-step active" data-step="1">
+                    <h3 class="step-title">Información Personal</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-user-tag"></i>
+                            Tipo de Persona *
+                        </label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="tipoPersona" value="estudiante" required>
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>Estudiante</span>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="tipoPersona" value="trabajador" required>
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <i class="fas fa-briefcase"></i>
+                                    <span>Trabajador</span>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="tipoPersona" value="egresado" required>
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <i class="fas fa-user-check"></i>
+                                    <span>Egresado</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="error-message"></div>
+                    </div>
 
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label for="nombre" class="form-label">Nombre(s) *</label>
-                    <input type="text" id="nombre" name="nombre" 
-                           class="form-input" data-validate="required" required>
-                    <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                    <div class="form-group">
+                        <label for="numeroIdentificacion" class="form-label">
+                            <i class="fas fa-id-card"></i>
+                            Número de Boleta o Empleado *
+                        </label>
+                        <input type="text" id="numeroIdentificacion" name="numeroIdentificacion" 
+                               class="form-input" placeholder="Ej: 2024678901 o 123456" required>
+                        <div class="error-message"></div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nombre" class="form-label">
+                                <i class="fas fa-signature"></i>
+                                Nombre(s) *
+                            </label>
+                            <input type="text" id="nombre" name="nombre" 
+                                   class="form-input" placeholder="Tu nombre" required>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidoPaterno" class="form-label">
+                                <i class="fas fa-signature"></i>
+                                Apellido Paterno *
+                            </label>
+                            <input type="text" id="apellidoPaterno" name="apellidoPaterno" 
+                                   class="form-input" placeholder="Primer apellido" required>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidoMaterno" class="form-label">
+                                <i class="fas fa-signature"></i>
+                                Apellido Materno *
+                            </label>
+                            <input type="text" id="apellidoMaterno" name="apellidoMaterno" 
+                                   class="form-input" placeholder="Segundo apellido" required>
+                            <div class="error-message"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="curp" class="form-label">
+                            <i class="fas fa-fingerprint"></i>
+                            CURP *
+                        </label>
+                        <input type="text" id="curp" name="curp" 
+                               class="form-input" placeholder="Ej: ABCDEFGHIJKLMNOPQR" 
+                               pattern="[A-Z]{4}[0-9]{6}[A-Z]{6}[0-9A-Z]{2}" required>
+                        <div class="error-message"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="genero" class="form-label">
+                            <i class="fas fa-venus-mars"></i>
+                            Género *
+                        </label>
+                        <select id="genero" name="genero" class="form-input" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="otro">Otro</option>
+                            <option value="prefiero-no-decir">Prefiero no decir</option>
+                        </select>
+                        <div class="error-message"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">
+                            <i class="fas fa-envelope"></i>
+                            Correo Electrónico *
+                        </label>
+                        <input type="email" id="email" name="email" 
+                               class="form-input" placeholder="usuario@ipn.mx" required>
+                        <div class="error-message"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmarEmail" class="form-label">
+                            <i class="fas fa-envelope"></i>
+                            Confirmar Correo Electrónico *
+                        </label>
+                        <input type="email" id="confirmarEmail" name="confirmarEmail" 
+                               class="form-input" placeholder="Confirma tu correo" required>
+                        <div class="error-message"></div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="password" class="form-label">
+                                <i class="fas fa-lock"></i>
+                                Contraseña *
+                            </label>
+                            <div class="password-container">
+                                <input type="password" id="password" name="password" 
+                                       class="form-input" placeholder="Mínimo 8 caracteres" required>
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="error-message"></div>
+                            <div class="password-strength">
+                                <div class="strength-bar">
+                                    <div class="strength-fill" id="strengthFill"></div>
+                                </div>
+                                <span class="strength-text" id="strengthText">Seguridad de la contraseña</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmarPassword" class="form-label">
+                                <i class="fas fa-lock"></i>
+                                Confirmar Contraseña *
+                            </label>
+                            <div class="password-container">
+                                <input type="password" id="confirmarPassword" name="confirmarPassword" 
+                                       class="form-input" placeholder="Repite tu contraseña" required>
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="error-message"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="terminos" name="terminos" required>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">
+                                Acepto los <a href="#" class="link">términos y condiciones</a> y la 
+                                <a href="#" class="link">política de privacidad</a> *
+                            </span>
+                        </label>
+                        <div class="error-message"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">
+                                Deseo recibir información sobre actividades de la Defensoría Politécnica
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-submit">
+                        <span class="btn-text">Crear Cuenta</span>
+                        <div class="btn-loader hidden">
+                            <div class="spinner"></div>
+                            <span>Creando cuenta...</span>
+                        </div>
+                    </button>
                 </div>
-                <div>
-                    <label for="apellidos" class="form-label">Apellidos *</label>
-                    <input type="text" id="apellidos" name="apellidos" 
-                           class="form-input" data-validate="required" required>
-                    <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                </div>
-            </div>
+            </form>
 
-            <div>
-                <label for="email" class="form-label">Correo Electrónico *</label>
-                <input type="email" id="email" name="email" 
-                       class="form-input" data-validate="email" required
-                       placeholder="usuario@ipn.mx">
-                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+            <!-- Login Link -->
+            <div class="login-link">
+                <p>¿Ya tienes una cuenta?</p>
+                <a href="login.html" class="login-btn">
+                    Iniciar Sesión
+                </a>
             </div>
+        </div>
 
-            <div>
-                <label for="password" class="form-label">Contraseña *</label>
-                <input type="password" id="password" name="password" 
-                       class="form-input" data-validate="password" required
-                       placeholder="Mínimo 8 caracteres">
-                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                <p class="text-xs text-gray-500 mt-1">
-                    Debe incluir mayúsculas, minúsculas, números y caracteres especiales
-                </p>
-            </div>
-
-            <div>
-                <label for="confirmarPassword" class="form-label">Confirmar Contraseña *</label>
-                <input type="password" id="confirmarPassword" name="confirmarPassword" 
-                       class="form-input" data-validate="required" required>
-                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
-            </div>
-
-            <div class="flex items-center">
-                <input type="checkbox" id="terminos" name="terminos" 
-                       class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required>
-                <label for="terminos" class="ml-2 block text-sm text-gray-700">
-                    Acepto los <a href="#" class="text-blue-600 hover:text-blue-500">términos y condiciones</a>
-                </label>
-            </div>
-
-            <button type="submit" class="btn-primary w-full">
-                Crear Cuenta
-            </button>
-
-            <div class="text-center">
-                <p class="text-sm text-gray-600">
-                    ¿Ya tienes una cuenta?
-                    <a href="login.html" class="text-blue-600 hover:text-blue-500 font-medium">
-                        Iniciar Sesión
-                    </a>
-                </p>
-            </div>
-        </form>
+        <!-- Notification Container -->
+        <div id="notificationContainer" class="notification-container"></div>
     </div>
 
-    <script src="../../js/auth/register.js"></script>
+    <script src="/mockups usuario/js/auth/register.js"></script>
 </body>
 </html>

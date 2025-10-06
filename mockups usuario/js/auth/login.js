@@ -96,8 +96,8 @@ class LoginSistema {
         if (sesion) {
             const usuario = JSON.parse(sesion);
             console.log('Sesión activa encontrada:', usuario);
-            // Podrías redirigir automáticamente si quieres
-            // this.redirigirDashboard();
+            // Redirigir automáticamente si ya hay sesión
+            this.redirigirTipoDenuncia();
         }
     }
 
@@ -117,11 +117,11 @@ class LoginSistema {
             const resultado = await this.autenticarUsuario(datos);
             
             if (resultado.exito) {
-                this.mostrarExito('¡Inicio de sesión exitoso!');
+                this.mostrarExito('¡Inicio de sesión exitoso! Redirigiendo...');
                 this.guardarSesion(resultado.usuario, datos.remember);
                 
                 setTimeout(() => {
-                    this.redirigirDashboard();
+                    this.redirigirTipoDenuncia();
                 }, 2000);
             } else {
                 this.mostrarError(resultado.mensaje);
@@ -253,18 +253,48 @@ class LoginSistema {
         console.log('Sesión guardada:', usuarioSeguro);
     }
 
-    redirigirDashboard() {
-        // Simular redirección al dashboard
-        this.mostrarNotificacion('Redirigiendo al dashboard...', 'info');
-        
-        setTimeout(() => {
-            // En un entorno real, esto redirigiría al dashboard
-            // window.location.href = 'dashboard.html';
+    redirigirTipoDenuncia() {
+        // Intentar diferentes rutas posibles para tipo-denuncia.html
+        const rutasPosibles = [
+            '/mockups usuario/pages/denuncia/tipo-denuncia.html'
+        ];
+
+        // Función para verificar si una ruta existe
+        const verificarRuta = (ruta) => {
+            return new Promise((resolve) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('HEAD', ruta, true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        resolve(xhr.status !== 404);
+                    }
+                };
+                xhr.send();
+            });
+        };
+
+        // Intentar redirigir a la primera ruta que funcione
+        const intentarRedireccion = async () => {
+            for (const ruta of rutasPosibles) {
+                try {
+                    const existe = await verificarRuta(ruta);
+                    if (existe) {
+                        console.log(`✅ Redirigiendo a: ${ruta}`);
+                        window.location.href = ruta;
+                        return;
+                    }
+                } catch (error) {
+                    console.log(`❌ Ruta no válida: ${ruta}`);
+                    continue;
+                }
+            }
             
-            // Por ahora, mostramos un mensaje
-            this.mostrarExito('¡Redirección exitosa! (Simulación)');
-            console.log('Redirigiendo al dashboard...');
-        }, 1000);
+            // Si ninguna ruta funciona, mostrar error
+            this.mostrarError('No se pudo encontrar la página de destino. Contacta al administrador.');
+            console.error('❌ No se encontró tipo-denuncia.html en ninguna ruta posible');
+        };
+
+        intentarRedireccion();
     }
 
     mostrarCargando(mostrar) {
@@ -459,6 +489,11 @@ class LoginSistema {
                 console.log('Usuarios en sistema:', localStorage.getItem('defensoria_usuarios'));
             },
             
+            // Redirección directa para testing
+            redirigir: () => {
+                this.redirigirTipoDenuncia();
+            },
+            
             // Comandos de notificación
             testSuccess: () => this.mostrarExito('Esta es una notificación de éxito'),
             testError: () => this.mostrarError('Esta es una notificación de error'),
@@ -471,6 +506,7 @@ class LoginSistema {
         console.log('   loginCommands.loginUsuario() - Cargar credenciales por usuario');
         console.log('   loginCommands.clearForm() - Limpiar formulario');
         console.log('   loginCommands.doLogin() - Ejecutar login');
+        console.log('   loginCommands.redirigir() - Redirigir directamente');
         console.log('   loginCommands.debug() - Información de debug');
         console.log('   loginCommands.testSuccess() - Probar notificación éxito');
         console.log('   loginCommands.testError() - Probar notificación error');
