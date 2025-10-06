@@ -3,38 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COSECOVI - Comité de Seguridad y Convivencia</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="../../css/components/auth.css">
-    <link rel="stylesheet" href="../../css/components/dashboard.css">
-    <link rel="stylesheet" href="../../css/components/forms.css">
-    <link rel="stylesheet" href="../../css/components/responsive.css">
+    <title>Defensoría de los Derechos Politécnicos - IPN</title>
+    <link rel="stylesheet" href="/mockups usuario/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-50">
+<body>
     <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
                 <div class="flex items-center">
-                    <img src="assets/images/ipn.png" alt="IPN" class="h-12">
+                    <img src="/mockups usuario/assets/images/ipn.png" alt="IPN" class="logo">
                     <div class="ml-4">
-                        <h1 class="text-2xl font-bold text-gray-900">COSECOVI</h1>
-                        <p class="text-sm text-gray-600">Comité de Seguridad y Convivencia</p>
+                        <h1 class="site-title">Defensoría de los Derechos Politécnicos</h1>
+                        <p class="site-subtitle">Instituto Politécnico Nacional</p>
                     </div>
                 </div>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#informacion" class="text-gray-700 hover:text-blue-600">Información</a>
-                    <a href="#prevencion" class="text-gray-700 hover:text-blue-600">Prevención</a>
-                    <a href="#contacto" class="text-gray-700 hover:text-blue-600">Contacto</a>
+                <nav class="nav-menu">
+                    <a href="#mision" class="nav-link">Misión</a>
+                    <a href="#funciones" class="nav-link">Funciones</a>
+                    <a href="#servicios" class="nav-link">Servicios</a>
+                    <a href="#contacto" class="nav-link">Contacto</a>
                 </nav>
                 <div class="flex space-x-4">
-                    <a href="pages/auth/login.html" 
-                       class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                    <a href="pages/auth/login.html" class="btn btn-primary">
                         Iniciar Sesión
                     </a>
-                    <a href="pages/auth/register.html" 
-                       class="border border-blue-600 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition">
+                    <a href="pages/auth/register.html" class="btn btn-secondary">
                         Registrarse
                     </a>
                 </div>
@@ -43,80 +38,249 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-blue-700 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="text-center">
-                <h2 class="text-4xl font-bold mb-4">Tu Seguridad es Nuestra Prioridad</h2>
-                <p class="text-xl mb-8">Sistema de Denuncias del Comité de Seguridad y Convivencia</p>
-                <a href="pages/auth/register.html" 
-                   class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-                    Realizar una Denuncia
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Información Pública -->
-    <section id="informacion" class="py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 class="text-3xl font-bold text-center mb-12">Información de COSECOVI</h3>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h4 class="text-xl font-semibold mb-4">Misión</h4>
-                    <p class="text-gray-600">Garantizar un ambiente seguro y de convivencia armónica en toda la comunidad IPN.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h4 class="text-xl font-semibold mb-4">Valores</h4>
-                    <ul class="text-gray-600 list-disc list-inside">
-                        <li>Confidencialidad</li>
-                        <li>Imparcialidad</li>
-                        <li>Profesionalismo</li>
-                    </ul>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h4 class="text-xl font-semibold mb-4">Servicios</h4>
-                    <ul class="text-gray-600 list-disc list-inside">
-                        <li>Recepción de denuncias</li>
-                        <li>Acompañamiento psicológico</li>
-                        <li>Asesoría legal</li>
-                    </ul>
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">Defensoría de los Derechos Politécnicos</h2>
+                <p class="hero-subtitle">Órgano autónomo que protege y defiende los derechos de la comunidad politécnica</p>
+                <div class="hero-buttons">
+                    <a href="pages/auth/register.html" class="btn btn-hero-primary">
+                        Presentar Queja o Denuncia
+                    </a>
+                    <a href="#funciones" class="btn btn-hero-secondary">
+                        Conoce Nuestras Funciones
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Directorio de Contactos -->
-    <section id="contacto" class="py-16 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 class="text-3xl font-bold text-center mb-12">Directorio de Contactos</h3>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                    <h4 class="font-semibold mb-2">Emergencias</h4>
-                    <p class="text-blue-600 font-bold">555-123-4567</p>
+    <!-- Misión Section -->
+    <section id="mision" class="section">
+        <div class="container">
+            <h3 class="section-title">Nuestra Misión</h3>
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <div class="icon-container bg-ipn-rojo">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4 class="mission-title">Protección de Derechos</h4>
+                    <p class="mission-text">Garantizamos el respeto a los derechos humanos y politécnicos de estudiantes, profesores, personal y egresados.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                    <h4 class="font-semibold mb-2">Atención Psicológica</h4>
-                    <p class="text-blue-600 font-bold">555-123-4568</p>
+                <div class="mission-card">
+                    <div class="icon-container bg-ipn-rojo">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h4 class="mission-title">Autonomía e Independencia</h4>
+                    <p class="mission-text">Trabajamos con completa independencia de las autoridades del Instituto para garantizar imparcialidad.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                    <h4 class="font-semibold mb-2">Asesoría Legal</h4>
-                    <p class="text-blue-600 font-bold">555-123-4569</p>
+                <div class="mission-card">
+                    <div class="icon-container bg-ipn-rojo">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4 class="mission-title">Solución de Conflictos</h4>
+                    <p class="mission-text">Buscamos soluciones conciliatorias y emitimos recomendaciones para resolver conflictos dentro de la comunidad.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                    <h4 class="font-semibold mb-2">Coordinación General</h4>
-                    <p class="text-blue-600 font-bold">555-123-4570</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Funciones Section -->
+    <section id="funciones" class="section bg-gray-50">
+        <div class="container">
+            <h3 class="section-title">Funciones Principales</h3>
+            <div class="funciones-container">
+                <div class="funcion-item">
+                    <div class="step-indicator bg-ipn-rojo">1</div>
+                    <div class="funcion-content">
+                        <h4 class="funcion-title">Atención de Quejas y Denuncias</h4>
+                        <ul class="funcion-list">
+                            <li>Recibe y conoce quejas por presuntas violaciones a los Derechos Humanos y derechos politécnicos</li>
+                            <li>Actúa cuando las afectaciones son imputadas a autoridades administrativas o académicas del IPN</li>
+                            <li>Propone soluciones conciliatorias y emite resoluciones o recomendaciones</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="funcion-item">
+                    <div class="step-indicator bg-ipn-rojo">2</div>
+                    <div class="funcion-content">
+                        <h4 class="funcion-title">Promoción y Formación</h4>
+                        <ul class="funcion-list">
+                            <li>Impulsa la observancia de los Derechos Humanos por parte de las autoridades</li>
+                            <li>Realiza actividades de divulgación, estudio e investigación de derechos</li>
+                            <li>Organiza pláticas, conferencias, cursos y diplomados para fomentar una cultura de paz</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="funcion-item">
+                    <div class="step-indicator bg-ipn-rojo">3</div>
+                    <div class="funcion-content">
+                        <h4 class="funcion-title">Orientación y Asesoría</h4>
+                        <ul class="funcion-list">
+                            <li>Proporciona orientación para encauzar problemáticas a las áreas competentes</li>
+                            <li>Brinda asesoría para la presentación de quejas</li>
+                            <li>Ofrece orientación para realizar acciones preventivas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section id="servicios" class="section">
+        <div class="container">
+            <h3 class="section-title">Nuestros Servicios</h3>
+            <div class="servicios-grid">
+                <div class="servicio-card card-hover">
+                    <div class="servicio-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h4 class="servicio-title">Asesoría Jurídica</h4>
+                    <p class="servicio-text">Orientación legal especializada en conflictos académicos, laborales y administrativos dentro del IPN.</p>
+                </div>
+                <div class="servicio-card card-hover">
+                    <div class="servicio-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4 class="servicio-title">Mediación de Conflictos</h4>
+                    <p class="servicio-text">Resolución pacífica de controversias entre miembros de la comunidad politécnica.</p>
+                </div>
+                <div class="servicio-card card-hover">
+                    <div class="servicio-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h4 class="servicio-title">Protección de Derechos</h4>
+                    <p class="servicio-text">Defensa de derechos académicos, laborales y humanos de la comunidad del IPN.</p>
+                </div>
+                <div class="servicio-card card-hover">
+                    <div class="servicio-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h4 class="servicio-title">Orientación y Acompañamiento</h4>
+                    <p class="servicio-text">Apoyo en procedimientos administrativos y seguimiento de quejas y denuncias.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comunidad Section -->
+    <section class="section bg-ipn-rojo text-white">
+        <div class="container">
+            <h3 class="section-title text-white">Para Toda la Comunidad Politécnica</h3>
+            <div class="comunidad-grid">
+                <div class="comunidad-item">
+                    <i class="fas fa-user-graduate"></i>
+                    <h4>Estudiantes</h4>
+                </div>
+                <div class="comunidad-item">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h4>Profesores</h4>
+                </div>
+                <div class="comunidad-item">
+                    <i class="fas fa-user-tie"></i>
+                    <h4>Personal</h4>
+                </div>
+                <div class="comunidad-item">
+                    <i class="fas fa-user-check"></i>
+                    <h4>Egresados</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="section">
+        <div class="container">
+            <h3 class="section-title">Contacto y Ubicación</h3>
+            <div class="contacto-grid">
+                <div class="contacto-info">
+                    <div class="contacto-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Ubicación</h4>
+                            <p>Unidad Profesional "Adolfo López Mateos"<br>Edificio de la Defensoría de los Derechos Politécnicos</p>
+                        </div>
+                    </div>
+                    <div class="contacto-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Teléfono</h4>
+                            <p>+52 (55) 5729-6000 Ext. 12345</p>
+                        </div>
+                    </div>
+                    <div class="contacto-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Correo Electrónico</h4>
+                            <p>defensoria@ipn.mx</p>
+                        </div>
+                    </div>
+                    <div class="contacto-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Horario de Atención</h4>
+                            <p>Lunes a Viernes: 9:00 - 18:00 hrs</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contacto-form">
+                    <h4 class="form-title">¿Tienes alguna duda?</h4>
+                    <form id="contactForm" class="space-y-4">
+                        <div>
+                            <label for="nombre" class="form-label">Nombre completo</label>
+                            <input type="text" id="nombre" class="form-input" required>
+                        </div>
+                        <div>
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input type="email" id="email" class="form-input" required>
+                        </div>
+                        <div>
+                            <label for="mensaje" class="form-label">Mensaje</label>
+                            <textarea id="mensaje" class="form-input" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-full">Enviar Mensaje</button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; 2024 COSECOVI - Instituto Politécnico Nacional. Todos los derechos reservados.</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/mockups usuario/assets/images/ipn.png" alt="IPN" class="logo">
+                    <div>
+                        <h3>Defensoría de los Derechos Politécnicos</h3>
+                        <p>Instituto Politécnico Nacional</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Enlaces Rápidos</h4>
+                        <a href="#mision">Misión</a>
+                        <a href="#funciones">Funciones</a>
+                        <a href="#servicios">Servicios</a>
+                        <a href="#contacto">Contacto</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Recursos</h4>
+                        <a href="#">Normatividad</a>
+                        <a href="#">Formatos</a>
+                        <a href="#">Preguntas Frecuentes</a>
+                        <a href="#">Documentos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Defensoría de los Derechos Politécnicos - Instituto Politécnico Nacional. Todos los derechos reservados.</p>
+                <p class="mt-2">"La Técnica al Servicio de la Patria"</p>
+            </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="/mockups usuario/js/main.js"></script>
 </body>
 </html>
