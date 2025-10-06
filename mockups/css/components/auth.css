@@ -1,0 +1,575 @@
+/* ==========================================================================
+   ESTILOS DE AUTENTICACIÓN
+   Componentes específicos para login, registro y perfil
+   ========================================================================== */
+
+/* Contenedor principal de autenticación */
+.auth-container {
+    @apply min-h-screen bg-gray-50 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8;
+}
+
+/* Tarjeta de autenticación */
+.auth-card {
+    @apply max-w-md w-full mx-auto bg-white rounded-2xl shadow-xl overflow-hidden;
+}
+
+.auth-card-header {
+    @apply px-8 py-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-center;
+}
+
+.auth-card-body {
+    @apply px-8 py-6;
+}
+
+/* Formularios de autenticación */
+.auth-form {
+    @apply space-y-6;
+}
+
+.auth-form-group {
+    @apply space-y-4;
+}
+
+.auth-form-actions {
+    @apply flex items-center justify-between pt-4;
+}
+
+.auth-form-footer {
+    @apply text-center pt-6 border-t border-gray-200;
+}
+
+/* Campos de formulario específicos */
+.auth-input-group {
+    @apply relative;
+}
+
+.auth-input-icon {
+    @apply absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none;
+}
+
+.auth-input-icon svg {
+    @apply h-5 w-5 text-gray-400;
+}
+
+.auth-input {
+    @apply block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg 
+           placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 
+           focus:border-transparent transition duration-200;
+}
+
+.auth-input-error {
+    @apply border-red-500 focus:ring-red-500 focus:border-transparent;
+}
+
+.auth-input-success {
+    @apply border-green-500 focus:ring-green-500 focus:border-transparent;
+}
+
+/* Botones de autenticación */
+.auth-btn-primary {
+    @apply w-full flex justify-center py-3 px-4 border border-transparent 
+           rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 
+           hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 
+           focus:ring-blue-500 transition duration-200;
+}
+
+.auth-btn-secondary {
+    @apply w-full flex justify-center py-3 px-4 border border-gray-300 
+           rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white 
+           hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 
+           focus:ring-blue-500 transition duration-200;
+}
+
+.auth-btn-loading {
+    @apply opacity-70 cursor-not-allowed;
+}
+
+/* Estados de validación */
+.auth-validation-message {
+    @apply mt-1 text-sm;
+}
+
+.auth-validation-error {
+    @apply text-red-600;
+}
+
+.auth-validation-success {
+    @apply text-green-600;
+}
+
+.auth-field-error {
+    @apply border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500;
+}
+
+/* Grupos de opciones (radio buttons) */
+.auth-option-group {
+    @apply grid gap-4;
+}
+
+.auth-option-card {
+    @apply relative rounded-lg border border-gray-300 bg-white p-4 
+           shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 
+           focus:border-blue-500 cursor-pointer transition duration-200;
+}
+
+.auth-option-card:hover {
+    @apply border-blue-300 bg-blue-50;
+}
+
+.auth-option-card.selected {
+    @apply border-blue-500 bg-blue-50 ring-2 ring-blue-500;
+}
+
+.auth-option-input {
+    @apply sr-only;
+}
+
+.auth-option-content {
+    @apply flex items-center;
+}
+
+.auth-option-icon {
+    @apply flex-shrink-0 w-6 h-6 text-blue-600;
+}
+
+.auth-option-label {
+    @apply ml-3 text-sm font-medium text-gray-900;
+}
+
+/* Indicadores de fortaleza de contraseña */
+.password-strength {
+    @apply mt-2;
+}
+
+.password-strength-bar {
+    @apply h-2 bg-gray-200 rounded-full overflow-hidden;
+}
+
+.password-strength-fill {
+    @apply h-full transition-all duration-500;
+}
+
+.password-strength-weak {
+    @apply bg-red-500 w-1/4;
+}
+
+.password-strength-fair {
+    @apply bg-yellow-500 w-1/2;
+}
+
+.password-strength-good {
+    @apply bg-blue-500 w-3/4;
+}
+
+.password-strength-strong {
+    @apply bg-green-500 w-full;
+}
+
+.password-strength-text {
+    @apply text-xs mt-1 text-gray-600;
+}
+
+/* Recordatorio de contraseña */
+.password-requirements {
+    @apply mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200;
+}
+
+.password-requirements-title {
+    @apply text-sm font-medium text-gray-700 mb-2;
+}
+
+.password-requirements-list {
+    @apply text-xs text-gray-600 space-y-1;
+}
+
+.password-requirement {
+    @apply flex items-center;
+}
+
+.password-requirement.met {
+    @apply text-green-600;
+}
+
+.password-requirement.unmet {
+    @apply text-gray-500;
+}
+
+.password-requirement-icon {
+    @apply w-3 h-3 mr-2;
+}
+
+/* Notificaciones de autenticación */
+.auth-notification {
+    @apply fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 
+           transform transition-all duration-300 ease-in-out;
+}
+
+.auth-notification.entering {
+    @apply translate-x-full opacity-0;
+}
+
+.auth-notification.entered {
+    @apply translate-x-0 opacity-100;
+}
+
+.auth-notification.exiting {
+    @apply translate-x-full opacity-0;
+}
+
+.auth-notification-success {
+    @apply bg-green-50 border border-green-200 text-green-800;
+}
+
+.auth-notification-error {
+    @apply bg-red-50 border border-red-200 text-red-800;
+}
+
+.auth-notification-warning {
+    @apply bg-yellow-50 border border-yellow-200 text-yellow-800;
+}
+
+.auth-notification-info {
+    @apply bg-blue-50 border border-blue-200 text-blue-800;
+}
+
+/* Estados de carga */
+.auth-loading {
+    @apply flex items-center justify-center;
+}
+
+.auth-loading-spinner {
+    @apply animate-spin rounded-full h-5 w-5 border-b-2 border-current;
+}
+
+.auth-loading-text {
+    @apply ml-2 text-sm;
+}
+
+/* Enlaces de autenticación */
+.auth-link {
+    @apply font-medium text-blue-600 hover:text-blue-500 transition duration-200;
+}
+
+.auth-link-muted {
+    @apply text-gray-500 hover:text-gray-700 transition duration-200;
+}
+
+/* Separadores */
+.auth-separator {
+    @apply relative my-6;
+}
+
+.auth-separator::before {
+    content: '';
+    @apply absolute inset-0 flex items-center;
+}
+
+.auth-separator::before {
+    @apply border-t border-gray-300 w-full;
+}
+
+.auth-separator-text {
+    @apply relative inline-flex items-center justify-center px-3 bg-white text-sm text-gray-500;
+}
+
+/* Avatar de usuario */
+.auth-avatar {
+    @apply flex items-center;
+}
+
+.auth-avatar-image {
+    @apply h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center;
+}
+
+.auth-avatar-fallback {
+    @apply text-lg font-semibold text-gray-600;
+}
+
+.auth-avatar-info {
+    @apply ml-3;
+}
+
+.auth-avatar-name {
+    @apply text-sm font-medium text-gray-700;
+}
+
+.auth-avatar-email {
+    @apply text-xs text-gray-500;
+}
+
+/* Panel de configuración de cuenta */
+.account-settings {
+    @apply max-w-4xl mx-auto py-8;
+}
+
+.account-nav {
+    @apply bg-white rounded-lg shadow-sm border;
+}
+
+.account-nav-item {
+    @apply block px-4 py-3 text-sm font-medium transition duration-200;
+}
+
+.account-nav-item.active {
+    @apply bg-blue-50 text-blue-700 border-r-4 border-blue-700;
+}
+
+.account-nav-item:not(.active) {
+    @apply text-gray-600 hover:text-gray-900 hover:bg-gray-50;
+}
+
+.account-section {
+    @apply bg-white rounded-lg shadow-sm border p-6;
+}
+
+.account-section-title {
+    @apply text-lg font-semibold text-gray-900 mb-4;
+}
+
+/* Formulario de cambio de contraseña */
+.password-change-form {
+    @apply space-y-6;
+}
+
+.password-change-field {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2;
+}
+
+/* Modal de confirmación */
+.auth-modal {
+    @apply fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 
+           transition-opacity duration-300;
+}
+
+.auth-modal-content {
+    @apply relative top-20 mx-auto p-5 border w-full max-w-md shadow-lg rounded-md bg-white 
+           transform transition-all duration-300;
+}
+
+.auth-modal.entering .auth-modal-content {
+    @apply scale-95 opacity-0;
+}
+
+.auth-modal.entered .auth-modal-content {
+    @apply scale-100 opacity-100;
+}
+
+.auth-modal.exiting .auth-modal-content {
+    @apply scale-95 opacity-0;
+}
+
+.auth-modal-header {
+    @apply text-center;
+}
+
+.auth-modal-icon {
+    @apply mx-auto flex items-center justify-center h-12 w-12 rounded-full;
+}
+
+.auth-modal-icon.success {
+    @apply bg-green-100;
+}
+
+.auth-modal-icon.error {
+    @apply bg-red-100;
+}
+
+.auth-modal-icon.warning {
+    @apply bg-yellow-100;
+}
+
+.auth-modal-icon.info {
+    @apply bg-blue-100;
+}
+
+.auth-modal-title {
+    @apply text-lg font-medium text-gray-900 mt-2;
+}
+
+.auth-modal-body {
+    @apply mt-2 px-7 py-3;
+}
+
+.auth-modal-message {
+    @apply text-sm text-gray-500;
+}
+
+.auth-modal-actions {
+    @apply flex justify-center space-x-4 mt-4;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .auth-container {
+        @apply py-8 px-4;
+    }
+    
+    .auth-card {
+        @apply rounded-xl shadow-lg;
+    }
+    
+    .auth-card-body {
+        @apply px-6 py-4;
+    }
+    
+    .auth-form-actions {
+        @apply flex-col space-y-4;
+    }
+    
+    .account-settings {
+        @apply py-4;
+    }
+    
+    .password-change-field {
+        @apply grid-cols-1;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        @apply mx-2;
+    }
+    
+    .auth-modal-content {
+        @apply mx-4;
+    }
+}
+
+/* Animaciones específicas */
+@keyframes authSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes authPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.auth-slide-in {
+    animation: authSlideIn 0.3s ease-out;
+}
+
+.auth-pulse {
+    animation: authPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Estados de focus mejorados */
+.auth-input:focus {
+    @apply ring-2 ring-blue-500 ring-opacity-50;
+}
+
+.auth-btn-primary:focus {
+    @apply ring-2 ring-blue-500 ring-offset-2;
+}
+
+.auth-btn-secondary:focus {
+    @apply ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .auth-notification,
+    .auth-modal-content,
+    .auth-slide-in,
+    .auth-pulse {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .auth-input {
+        @apply border-2;
+    }
+    
+    .auth-btn-primary {
+        @apply border-2 border-transparent;
+    }
+    
+    .auth-btn-secondary {
+        @apply border-2 border-gray-700;
+    }
+}
+
+/* Dark mode support (opcional) */
+@media (prefers-color-scheme: dark) {
+    .auth-container {
+        @apply bg-gray-900;
+    }
+    
+    .auth-card {
+        @apply bg-gray-800 border-gray-700;
+    }
+    
+    .auth-card-header {
+        @apply from-blue-700 to-blue-800;
+    }
+    
+    .auth-input {
+        @apply bg-gray-700 border-gray-600 text-white placeholder-gray-400 
+               focus:ring-blue-400 focus:border-blue-400;
+    }
+    
+    .auth-option-card {
+        @apply bg-gray-700 border-gray-600 text-white;
+    }
+    
+    .auth-option-card:hover {
+        @apply border-blue-400 bg-blue-900;
+    }
+    
+    .auth-option-card.selected {
+        @apply border-blue-400 bg-blue-900 ring-2 ring-blue-400;
+    }
+    
+    .password-requirements {
+        @apply bg-gray-700 border-gray-600;
+    }
+    
+    .password-requirements-title {
+        @apply text-gray-300;
+    }
+    
+    .password-requirements-list {
+        @apply text-gray-400;
+    }
+}
+
+/* Utilidades específicas para autenticación */
+.auth-visually-hidden {
+    @apply sr-only;
+}
+
+.auth-sr-only {
+    @apply sr-only;
+}
+
+.auth-skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 
+           bg-white p-2 text-blue-600 font-medium z-50;
+}
+
+/* Estados de deshabilitado */
+.auth-input:disabled {
+    @apply opacity-50 cursor-not-allowed bg-gray-100;
+}
+
+.auth-btn-primary:disabled {
+    @apply opacity-50 cursor-not-allowed;
+}
+
+.auth-btn-secondary:disabled {
+    @apply opacity-50 cursor-not-allowed;
+}
