@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - COSECOVI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/components/auth.css">
+    <link rel="stylesheet" href="../../css/components/dashboard.css">
+    <link rel="stylesheet" href="../../css/components/forms.css">
+    <link rel="stylesheet" href="../../css/components/responsive.css">
+    <style>
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .profile-pic-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #e5e7eb;
+        }
+        
+        .profile-pic-edit {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-item.active {
+            background-color: #eff6ff;
+            color: #2563eb;
+            font-weight: 600;
+        }
+        
+        .nav-item:hover:not(.active) {
+            background-color: #f9fafb;
+        }
+        
+        .nav-icon {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .password-strength {
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .password-weak {
+            background-color: #ef4444;
+            width: 25%;
+        }
+        
+        .password-medium {
+            background-color: #f59e0b;
+            width: 50%;
+        }
+        
+        .password-strong {
+            background-color: #10b981;
+            width: 100%;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 0.5rem;
+        }
+        
+        .notificacion-flotante {
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background-color: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #10b981;
+            transition: width 0.3s ease;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-success {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        
+        .badge-warning {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+        
+        .badge-danger {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #e5e7eb;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #3b82f6;
+        }
+        
+        .achievement-card {
+            border: 2px solid #f3f4f6;
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .achievement-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+        
+        .achievement-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .dark-mode {
+            background-color: #1f2937;
+            color: #f9fafb;
+        }
+        
+        .dark-mode .card {
+            background-color: #374151;
+            color: #f9fafb;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="../../index.html" class="flex items-center">
+                        <img src="../../assets/images/ipn.png" alt="IPN" class="h-10">
+                        <div class="ml-3">
+                            <h1 class="text-xl font-bold text-gray-900">COSECOVI</h1>
+                        </div>
+                    </a>
+                </div>
+                <nav class="flex items-center space-x-6">
+                    <a href="../seguimiento/historial.html" class="text-gray-700 hover:text-blue-600">Mis Denuncias</a>
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600">Inicio</a>
+                    <button id="cerrar-sesion" class="text-red-600 hover:text-red-700">Cerrar Sesión</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Mi Perfil</h1>
+            <p class="text-gray-600 mt-2">Gestiona tu información personal, seguridad y preferencias</p>
+        </div>
+
+        <div class="grid lg:grid-cols-4 gap-8">
+            <!-- Menú Lateral y Perfil -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Tarjeta de Perfil -->
+                <div class="card text-center">
+                    <div class="profile-pic-container mx-auto mb-4">
+                        <img id="foto-perfil" src="../../assets/images/default-avatar.png" alt="Foto de perfil" class="profile-pic">
+                        <div class="profile-pic-edit" id="cambiar-foto">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </div>
+                    <h2 id="nombre-completo" class="text-xl font-bold text-gray-900">-</h2>
+                    <p id="tipo-usuario" class="text-gray-600 mb-2">-</p>
+                    <p id="matricula" class="text-sm text-gray-500">-</p>
+                    
+                    <!-- Nivel de Reputación -->
+                    <div class="mt-4 bg-gray-50 p-3 rounded-lg">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-sm font-medium">Reputación</span>
+                            <span class="text-sm text-gray-600" id="nivel-reputacion">Nivel 2</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>65%</span>
+                            <span>Próximo: 80%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 flex justify-center space-x-3">
+                        <button class="bg-blue-100 text-blue-700 p-2 rounded-full hover:bg-blue-200 transition-colors">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                        <button class="bg-blue-100 text-blue-700 p-2 rounded-full hover:bg-blue-200 transition-colors">
+                            <i class="fas fa-qrcode"></i>
+                        </button>
+                        <button class="bg-blue-100 text-blue-700 p-2 rounded-full hover:bg-blue-200 transition-colors" id="toggle-dark-mode">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Menú de Navegación -->
+                <div class="card">
+                    <nav>
+                        <div class="nav-item active" data-section="informacion">
+                            <div class="nav-icon">
+                                <i class="fas fa-user text-blue-600"></i>
+                            </div>
+                            <span>Información Personal</span>
+                        </div>
+                        <div class="nav-item" data-section="seguridad">
+                            <div class="nav-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <span>Seguridad</span>
+                        </div>
+                        <div class="nav-item" data-section="estadisticas">
+                            <div class="nav-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <span>Estadísticas</span>
+                        </div>
+                        <div class="nav-item" data-section="denuncias">
+                            <div class="nav-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <span>Mis Denuncias</span>
+                        </div>
+                        <div class="nav-item" data-section="logros">
+                            <div class="nav-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <span>Logros</span>
+                        </div>
+                        <div class="nav-item" data-section="preferencias">
+                            <div class="nav-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <span>Preferencias</span>
+                        </div>
+                        <div class="nav-item" data-section="soporte">
+                            <div class="nav-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <span>Soporte</span>
+                        </div>
+                    </nav>
+                </div>
+
+                <!-- Estado de Verificación -->
+                <div class="card">
+                    <h3 class="font-medium text-gray-900 mb-3">Estado de Verificación</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Correo verificado</span>
+                            <span class="badge badge-success">
+                                <i class="fas fa-check mr-1"></i> Verificado
+                            </span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Identificación</span>
+                            <span class="badge badge-warning">
+                                <i class="fas fa-clock mr-1"></i> Pendiente
+                            </span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Teléfono</span>
+                            <span class="badge badge-danger">
+                                <i class="fas fa-times mr-1"></i> No verificado
+                            </span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Completar Verificación
+                    </button>
+                </div>
+            </div>
+
+            <!-- Contenido Principal -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- Información Personal -->
+                <div id="informacion" class="card section-content active">
+                    <div class="section-title">
+                        <i class="fas fa-user text-blue-600"></i>
+                        <span>Información Personal</span>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="info-item">
+                            <div class="info-icon bg-blue-100 text-blue-600">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Tipo de Persona</p>
+                                <p class="text-gray-900 font-medium" id="tipo-persona">-</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon bg-green-100 text-green-600">
+                                <i class="fas fa-fingerprint"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Número de Identificación</p>
+                                <p class="text-gray-900 font-medium" id="numero-identificacion">-</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon bg-purple-100 text-purple-600">
+                                <i class="fas fa-signature"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Nombre(s)</p>
+                                <p class="text-gray-900 font-medium" id="nombre-usuario">-</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon bg-purple-100 text-purple-600">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Apellidos</p>
+                                <p class="text-gray-900 font-medium" id="apellidos-usuario">-</p>
+                            </div>
+                        </div>
+                        <div class="info-item md:col-span-2">
+                            <div class="info-icon bg-red-100 text-red-600">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Correo Electrónico</p>
+                                <p class="text-gray-900 font-medium" id="email-usuario">-</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon bg-yellow-100 text-yellow-600">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Teléfono</p>
+                                <p class="text-gray-900 font-medium" id="telefono-usuario">-</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon bg-indigo-100 text-indigo-600">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Fecha de Registro</p>
+                                <p class="text-gray-900 font-medium" id="fecha-registro">-</p>
+                            </div>
+                        </div>
+                        <div class="info-item md:col-span-2">
+                            <div class="info-icon bg-pink-100 text-pink-600">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Dirección</p>
+                                <p class="text-gray-900 font-medium" id="direccion-usuario">-</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-gray-200 flex space-x-4">
+                        <button class="btn-primary flex items-center">
+                            <i class="fas fa-edit mr-2"></i>
+                            Editar Información
+                        </button>
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center">
+                            <i class="fas fa-download mr-2"></i>
+                            Descargar Datos
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Seguridad -->
+                <div id="seguridad" class="card section-content hidden">
+                    <div class="section-title">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Seguridad</span>
+                    </div>
+                    
+                    <form id="formulario-password" class="space-y-6">
+                        <div>
+                            <label for="password-actual" class="form-label">Contraseña Actual *</label>
+                            <div class="relative">
+                                <input type="password" id="password-actual" name="passwordActual" 
+                                       class="form-input pr-10" data-validate="required" required>
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-eye-slash text-gray-400 cursor-pointer toggle-password"></i>
+                                </div>
+                            </div>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <div>
+                            <label for="nueva-password" class="form-label">Nueva Contraseña *</label>
+                            <div class="relative">
+                                <input type="password" id="nueva-password" name="nuevaPassword" 
+                                       class="form-input pr-10" data-validate="password" required
+                                       placeholder="Mínimo 8 caracteres con mayúsculas, minúsculas, números y especiales">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-eye-slash text-gray-400 cursor-pointer toggle-password"></i>
+                                </div>
+                            </div>
+                            <div id="password-strength-bar" class="password-strength password-weak"></div>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <div>
+                            <label for="confirmar-password" class="form-label">Confirmar Nueva Contraseña *</label>
+                            <div class="relative">
+                                <input type="password" id="confirmar-password" name="confirmarPassword" 
+                                       class="form-input pr-10" data-validate="required" required>
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <i class="fas fa-eye-slash text-gray-400 cursor-pointer toggle-password"></i>
+                                </div>
+                            </div>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <button type="submit" class="btn-primary flex items-center">
+                            <i class="fas fa-key mr-2"></i>
+                            Actualizar Contraseña
+                        </button>
+                    </form>
+
+                    <div class="mt-8 pt-6 border-t border-gray-200">
+                        <h3 class="font-medium text-gray-900 mb-4">Autenticación de Dos Factores</h3>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-700">Protege tu cuenta con verificación en dos pasos</p>
+                                <p class="text-sm text-gray-500 mt-1">Añade una capa extra de seguridad a tu cuenta</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                        <div class="flex">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-yellow-800">Sesiones Activas</h4>
+                                <p class="text-yellow-700 text-sm mt-1">Tienes 3 dispositivos conectados actualmente</p>
+                                <button class="text-yellow-800 text-sm font-medium mt-2 hover:text-yellow-900">
+                                    Ver todas las sesiones →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estadísticas -->
+                <div id="estadisticas" class="card section-content hidden">
+                    <div class="section-title">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Estadísticas</span>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="stat-card">
+                            <div class="stat-number" id="total-denuncias">0</div>
+                            <div class="stat-label">Total de Denuncias</div>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <div class="stat-number" id="denuncias-pendientes">0</div>
+                            <div class="stat-label">Denuncias Pendientes</div>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <div class="stat-number" id="denuncias-resueltas">0</div>
+                            <div class="stat-label">Denuncias Resueltas</div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="font-medium text-gray-700 mb-4">Actividad Reciente</h3>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <p class="font-medium text-gray-900">Denuncia registrada</p>
+                                    <p class="text-sm text-gray-500">Área: Biblioteca Central</p>
+                                    <p class="text-xs text-gray-400">Hace 2 días</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <p class="font-medium text-gray-900">Actualización de perfil</p>
+                                    <p class="text-sm text-gray-500">Cambio de foto</p>
+                                    <p class="text-xs text-gray-400">Hace 1 semana</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <p class="font-medium text-gray-900">Denuncia en proceso</p>
+                                    <p class="text-sm text-gray-500">Área: Cafetería</p>
+                                    <p class="text-xs text-gray-400">Hace 2 semanas</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="font-medium text-gray-700 mb-4">Distribución por Tipo</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm">Infraestructura</span>
+                                    <span class="text-sm font-medium">40%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 40%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm">Servicios</span>
+                                    <span class="text-sm font-medium">30%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 30%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm">Seguridad</span>
+                                    <span class="text-sm font-medium">20%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 20%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm">Otros</span>
+                                    <span class="text-sm font-medium">10%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 10%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mis Denuncias -->
+                <div id="denuncias" class="card section-content hidden">
+                    <div class="section-title">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Mis Denuncias</span>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-4 py-3 text-sm font-medium text-gray-900">#D-001</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700">Infraestructura</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700">15/03/2024</td>
+                                    <td class="px-4 py-3">
+                                        <span class="badge badge-success">Resuelta</span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                            Ver Detalles
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm font-medium text-gray-900">#D-002</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700">Servicios</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700">10/03/2024</td>
+                                    <td class="px-4 py-3">
+                                        <span class="badge badge-warning">En Proceso</span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                            Ver Detalles
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm font-medium text-gray-900">#D-003</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700">Seguridad</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700">05/03/2024</td>
+                                    <td class="px-4 py-3">
+                                        <span class="badge badge-danger">Pendiente</span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                            Ver Detalles
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="mt-6 flex justify-between items-center">
+                        <p class="text-sm text-gray-600">Mostrando 3 de 5 denuncias</p>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Ver Todas las Denuncias
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Logros -->
+                <div id="logros" class="card section-content hidden">
+                    <div class="section-title">
+                        <i class="fas fa-trophy"></i>
+                        <span>Logros y Reconocimientos</span>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="achievement-card">
+                            <div class="achievement-icon bg-yellow-100 text-yellow-600">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3 class="font-medium text-gray-900">Primera Denuncia</h3>
+                            <p class="text-sm text-gray-600 mt-1">Completaste tu primera denuncia</p>
+                            <div class="mt-3">
+                                <span class="badge badge-success">Obtenido</span>
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-card">
+                            <div class="achievement-icon bg-blue-100 text-blue-600">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <h3 class="font-medium text-gray-900">Vocero Activo</h3>
+                            <p class="text-sm text-gray-600 mt-1">5 denuncias registradas</p>
+                            <div class="mt-3">
+                                <span class="badge badge-success">Obtenido</span>
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-card">
+                            <div class="achievement-icon bg-purple-100 text-purple-600">
+                                <i class="fas fa-check-double"></i>
+                            </div>
+                            <h3 class="font-medium text-gray-900">Eficiente</h3>
+                            <p class="text-sm text-gray-600 mt-1">3 denuncias resueltas</p>
+                            <div class="mt-3">
+                                <span class="badge badge-warning">En Progreso</span>
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-card opacity-50">
+                            <div class="achievement-icon bg-gray-100 text-gray-400">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <h3 class="font-medium text-gray-900">Defensor Comunitario</h3>
+                            <p class="text-sm text-gray-600 mt-1">10 denuncias registradas</p>
+                            <div class="mt-3">
+                                <span class="badge badge-danger">Bloqueado</span>
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-card opacity-50">
+                            <div class="achievement-icon bg-gray-100 text-gray-400">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <h3 class="font-medium text-gray-900">Líder Comunitario</h3>
+                            <p class="text-sm text-gray-600 mt-1">20 denuncias registradas</p>
+                            <div class="mt-3">
+                                <span class="badge badge-danger">Bloqueado</span>
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-card opacity-50">
+                            <div class="achievement-icon bg-gray-100 text-gray-400">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="font-medium text-gray-900">Guardian</h3>
+                            <p class="text-sm text-gray-600 mt-1">Completa tu perfil al 100%</p>
+                            <div class="mt-3">
+                                <span class="badge badge-danger">Bloqueado</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <div class="flex">
+                            <i class="fas fa-info-circle text-blue-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-blue-800">Sistema de Logros</h4>
+                                <p class="text-blue-700 text-sm mt-1">Completa acciones específicas para desbloquear logros y aumentar tu reputación en la comunidad.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preferencias -->
+                <div id="preferencias" class="card section-content hidden">
+                    <div class="section-title">
+                        <i class="fas fa-cog"></i>
+                        <span>Preferencias</span>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium text-gray-900">Notificaciones por correo</h3>
+                                <p class="text-sm text-gray-500">Recibir actualizaciones sobre mis denuncias</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium text-gray-900">Recordatorios</h3>
+                                <p class="text-sm text-gray-500">Recordatorios sobre el estado de mis denuncias</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium text-gray-900">Modo oscuro</h3>
+                                <p class="text-sm text-gray-500">Cambiar la apariencia del sistema</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" id="toggle-dark-mode-checkbox">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium text-gray-900">Idioma</h3>
+                                <p class="text-sm text-gray-500">Selecciona tu idioma preferido</p>
+                            </div>
+                            <select class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option>Español</option>
+                                <option>English</option>
+                            </select>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium text-gray-900">Zona horaria</h3>
+                                <p class="text-sm text-gray-500">Ajusta la zona horaria para las notificaciones</p>
+                            </div>
+                            <select class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option>UTC-6: Centro de México</option>
+                                <option>UTC-5: Este de México</option>
+                                <option>UTC-7: Pacífico de México</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-gray-200 flex space-x-4">
+                        <button class="btn-primary flex items-center">
+                            <i class="fas fa-save mr-2"></i>
+                            Guardar Preferencias
+                        </button>
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center">
+                            <i class="fas fa-undo mr-2"></i>
+                            Restablecer
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Soporte -->
+                <div id="soporte" class="card section-content hidden">
+                    <div class="section-title">
+                        <i class="fas fa-headset"></i>
+                        <span>Soporte y Ayuda</span>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-question-circle text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-900">Centro de Ayuda</h3>
+                                    <p class="text-sm text-gray-600">Encuentra respuestas a tus preguntas</p>
+                                </div>
+                            </div>
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Visitar Centro de Ayuda
+                            </button>
+                        </div>
+                        
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-comments text-green-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-900">Chat en Vivo</h3>
+                                    <p class="text-sm text-gray-600">Habla con nuestro equipo de soporte</p>
+                                </div>
+                            </div>
+                            <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                Iniciar Chat
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-medium text-gray-900 mb-4">Preguntas Frecuentes</h3>
+                        <div class="space-y-4">
+                            <div class="border-b border-gray-200 pb-4">
+                                <button class="flex justify-between items-center w-full text-left">
+                                    <span class="font-medium text-gray-700">¿Cómo cambio mi contraseña?</span>
+                                    <i class="fas fa-chevron-down text-gray-400"></i>
+                                </button>
+                                <p class="text-sm text-gray-600 mt-2 hidden">Puedes cambiar tu contraseña en la sección de Seguridad de tu perfil.</p>
+                            </div>
+                            
+                            <div class="border-b border-gray-200 pb-4">
+                                <button class="flex justify-between items-center w-full text-left">
+                                    <span class="font-medium text-gray-700">¿Cómo registro una nueva denuncia?</span>
+                                    <i class="fas fa-chevron-down text-gray-400"></i>
+                                </button>
+                                <p class="text-sm text-gray-600 mt-2 hidden">Ve a la página de inicio y haz clic en "Realizar Denuncia".</p>
+                            </div>
+                            
+                            <div class="border-b border-gray-200 pb-4">
+                                <button class="flex justify-between items-center w-full text-left">
+                                    <span class="font-medium text-gray-700">¿Dónde veo el estado de mis denuncias?</span>
+                                    <i class="fas fa-chevron-down text-gray-400"></i>
+                                </button>
+                                <p class="text-sm text-gray-600 mt-2 hidden">Puedes ver el estado en la sección "Mis Denuncias" de tu perfil.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                        <div class="flex">
+                            <i class="fas fa-exclamation-circle text-yellow-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-yellow-800">¿Necesitas ayuda inmediata?</h4>
+                                <p class="text-yellow-700 text-sm mt-1">Contacta a nuestro equipo de soporte técnico:</p>
+                                <div class="mt-2 flex space-x-4">
+                                    <a href="mailto:soporte@cosecovi.ipn.mx" class="text-yellow-800 text-sm font-medium hover:text-yellow-900">
+                                        <i class="fas fa-envelope mr-1"></i> soporte@cosecovi.ipn.mx
+                                    </a>
+                                    <a href="tel:+525555555555" class="text-yellow-800 text-sm font-medium hover:text-yellow-900">
+                                        <i class="fas fa-phone mr-1"></i> +52 55 5555 5555
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para cambiar foto -->
+    <div id="modal-foto" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Cambiar foto de perfil</h3>
+            <div class="mb-4">
+                <input type="file" id="input-foto" accept="image/*" class="hidden">
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer" id="area-subida">
+                    <i class="fas fa-cloud-upload-alt text-gray-400 text-3xl mb-2"></i>
+                    <p class="text-gray-600">Haz clic o arrastra una imagen aquí</p>
+                    <p class="text-sm text-gray-500 mt-1">Formatos: JPG, PNG (Máx. 2MB)</p>
+                </div>
+            </div>
+            <div class="flex justify-end space-x-3">
+                <button id="cancelar-foto" class="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200">
+                    Cancelar
+                </button>
+                <button id="guardar-foto" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/auth/profile.js"></script>
+</body>
+</html>

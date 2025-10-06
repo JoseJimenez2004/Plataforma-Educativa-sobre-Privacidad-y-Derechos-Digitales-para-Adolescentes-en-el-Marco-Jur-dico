@@ -1,0 +1,1313 @@
+/* ==========================================================================
+   ESTILOS DE FORMULARIOS - SOLO CSS
+   Componentes específicos para formularios y controles de entrada
+   ========================================================================== */
+
+:root {
+    /* Colores específicos para formularios */
+    --form-bg: #ffffff;
+    --form-border: #d1d5db;
+    --form-border-focus: #3b82f6;
+    --form-text: #111827;
+    --form-text-muted: #6b7280;
+    --form-text-placeholder: #9ca3af;
+    --form-error: #ef4444;
+    --form-success: #10b981;
+    --form-warning: #f59e0b;
+    --form-disabled: #f3f4f6;
+}
+
+/* ==========================================================================
+   CONTENEDORES DE FORMULARIO
+   ========================================================================== */
+
+.form-container {
+    max-width: 56rem;
+    margin: 0 auto;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.form-col-full {
+    grid-column: 1 / -1;
+}
+
+/* ==========================================================================
+   ETIQUETAS Y TEXTO DE AYUDA
+   ========================================================================== */
+
+.form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--form-text);
+    margin-bottom: 0.5rem;
+}
+
+.form-label-required::after {
+    content: '*';
+    margin-left: 0.25rem;
+    color: var(--form-error);
+}
+
+.form-helper-text {
+    font-size: 0.875rem;
+    color: var(--form-text-muted);
+    margin-top: 0.25rem;
+}
+
+.form-error-text {
+    font-size: 0.875rem;
+    color: var(--form-error);
+    margin-top: 0.25rem;
+}
+
+.form-success-text {
+    font-size: 0.875rem;
+    color: var(--form-success);
+    margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   CAMPOS DE ENTRADA BÁSICOS
+   ========================================================================== */
+
+.form-input {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--form-border);
+    border-radius: 0.5rem;
+    background-color: var(--form-bg);
+    color: var(--form-text);
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-input::placeholder {
+    color: var(--form-text-placeholder);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--form-border-focus);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-input-sm {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.form-input-lg {
+    padding: 1rem 1rem;
+    font-size: 1.125rem;
+}
+
+/* ==========================================================================
+   ESTADOS DE CAMPOS
+   ========================================================================== */
+
+.form-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--form-disabled);
+}
+
+.form-input-error {
+    border-color: var(--form-error);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-input-success {
+    border-color: var(--form-success);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.form-input-warning {
+    border-color: var(--form-warning);
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+}
+
+/* ==========================================================================
+   TEXTAREA
+   ========================================================================== */
+
+.form-textarea {
+    composes: form-input;
+    resize: vertical;
+    min-height: 6rem;
+}
+
+.form-textarea-sm {
+    min-height: 5rem;
+}
+
+.form-textarea-lg {
+    min-height: 8rem;
+}
+
+/* ==========================================================================
+   SELECT
+   ========================================================================== */
+
+.form-select {
+    composes: form-input;
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    appearance: none;
+}
+
+.form-select-multiple {
+    composes: form-select;
+    background-image: none;
+    padding-right: 1rem;
+}
+
+/* ==========================================================================
+   CHECKBOXES Y RADIOS
+   ========================================================================== */
+
+.form-checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.form-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.form-checkbox,
+.form-radio {
+    position: absolute;
+    opacity: 0;
+}
+
+.form-checkbox-label,
+.form-radio-label {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--form-text);
+}
+
+.form-checkbox-custom,
+.form-radio-custom {
+    display: flex;
+    align-items: center;
+    height: 1.25rem;
+    margin-top: 0.125rem;
+}
+
+.form-checkbox-box {
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--form-border);
+    border-radius: 0.25rem;
+    background-color: var(--form-bg);
+    transition: all 0.2s ease-in-out;
+}
+
+.form-radio-circle {
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--form-border);
+    border-radius: 50%;
+    background-color: var(--form-bg);
+    transition: all 0.2s ease-in-out;
+}
+
+.form-checkbox-text,
+.form-radio-text {
+    margin-left: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--form-text);
+}
+
+.form-checkbox-description,
+.form-radio-description {
+    margin-left: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--form-text-muted);
+}
+
+/* ==========================================================================
+   ESTADOS DE CHECKBOX Y RADIO
+   ========================================================================== */
+
+.form-checkbox:checked + .form-checkbox-box {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 0.75em 0.75em;
+}
+
+.form-radio:checked + .form-radio-circle {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 0.5em 0.5em;
+}
+
+.form-checkbox:focus + .form-checkbox-box,
+.form-radio:focus + .form-radio-circle {
+    outline: none;
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #3b82f6;
+}
+
+/* ==========================================================================
+   GRUPOS DE BOTONES (CHECKBOX/RADIO COMO BOTONES)
+   ========================================================================== */
+
+.form-button-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+.form-button-option {
+    position: relative;
+}
+
+.form-button-input {
+    position: absolute;
+    opacity: 0;
+}
+
+.form-button-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 2px solid var(--form-border);
+    border-radius: 0.5rem;
+    background-color: var(--form-bg);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-button-label:hover {
+    border-color: #93c5fd;
+    background-color: #eff6ff;
+}
+
+.form-button-input:checked + .form-button-label {
+    border-color: #2563eb;
+    background-color: #eff6ff;
+    box-shadow: 0 0 0 2px #3b82f6;
+}
+
+.form-button-input:focus + .form-button-label {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #3b82f6;
+}
+
+.form-button-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--form-text-muted);
+}
+
+.form-button-input:checked + .form-button-label .form-button-icon {
+    color: #2563eb;
+}
+
+.form-button-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--form-text);
+    text-align: center;
+}
+
+.form-button-description {
+    font-size: 0.75rem;
+    color: var(--form-text-muted);
+    text-align: center;
+    margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   CAMPOS CON ICONOS
+   ========================================================================== */
+
+.form-input-with-icon {
+    position: relative;
+}
+
+.form-input-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding-left: 0.75rem;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.form-input-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--form-text-muted);
+}
+
+.form-input-with-icon .form-input {
+    padding-left: 2.5rem;
+}
+
+.form-input-with-icon-right {
+    position: relative;
+}
+
+.form-input-icon-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding-right: 0.75rem;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.form-input-with-icon-right .form-input {
+    padding-right: 2.5rem;
+}
+
+/* ==========================================================================
+   CAMPOS CON ACCIONES
+   ========================================================================== */
+
+.form-input-with-action {
+    position: relative;
+}
+
+.form-input-action {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding-right: 0.75rem;
+    display: flex;
+    align-items: center;
+}
+
+.form-input-with-action .form-input {
+    padding-right: 4rem;
+}
+
+/* ==========================================================================
+   GRUPOS DE CAMPOS (INPUT GROUPS)
+   ========================================================================== */
+
+.form-input-group {
+    display: flex;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.form-input-group .form-input {
+    border-radius: 0;
+    flex: 1 1 0%;
+    min-width: 0;
+}
+
+.form-input-group .form-input:first-child {
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+
+.form-input-group .form-input:last-child {
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.form-input-group-addon {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0.75rem;
+    border: 1px solid var(--form-border);
+    background-color: #f9fafb;
+    color: var(--form-text-muted);
+    font-size: 0.875rem;
+}
+
+.form-input-group-addon:first-child {
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-right: none;
+}
+
+.form-input-group-addon:last-child {
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    border-left: none;
+}
+
+/* ==========================================================================
+   CAMPOS DE ARCHIVO
+   ========================================================================== */
+
+.form-file-input {
+    position: absolute;
+    opacity: 0;
+}
+
+.form-file-label {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+    border: 2px dashed var(--form-border);
+    border-radius: 0.5rem;
+    background-color: var(--form-bg);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-file-label:hover {
+    border-color: #93c5fd;
+    background-color: #eff6ff;
+}
+
+.form-file-label.dragover {
+    border-color: #93c5fd;
+    background-color: #eff6ff;
+}
+
+.form-file-content {
+    text-align: center;
+}
+
+.form-file-icon {
+    margin: 0 auto 1rem auto;
+    width: 3rem;
+    height: 3rem;
+    color: var(--form-text-muted);
+}
+
+.form-file-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--form-text);
+    margin-bottom: 0.5rem;
+}
+
+.form-file-description {
+    font-size: 0.75rem;
+    color: var(--form-text-muted);
+}
+
+.form-file-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--form-border);
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--form-text);
+    background-color: var(--form-bg);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-file-button:hover {
+    background-color: #f9fafb;
+}
+
+.form-file-button:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* ==========================================================================
+   LISTA DE ARCHIVOS
+   ========================================================================== */
+
+.form-file-list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.form-file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+    border: 1px solid var(--form-border);
+}
+
+.form-file-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.form-file-icon-small {
+    width: 2rem;
+    height: 2rem;
+    color: var(--form-text-muted);
+}
+
+.form-file-details {
+    flex: 1 1 0%;
+    min-width: 0;
+}
+
+.form-file-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--form-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.form-file-meta {
+    font-size: 0.75rem;
+    color: var(--form-text-muted);
+}
+
+.form-file-remove {
+    color: var(--form-error);
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.form-file-remove:hover {
+    color: #dc2626;
+}
+
+/* ==========================================================================
+   RANGO (RANGE)
+   ========================================================================== */
+
+.form-range {
+    width: 100%;
+    height: 0.5rem;
+    background-color: var(--form-border);
+    border-radius: 0.5rem;
+    appearance: none;
+    cursor: pointer;
+}
+
+.form-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    background-color: #2563eb;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-range::-moz-range-thumb {
+    width: 1rem;
+    height: 1rem;
+    background-color: #2563eb;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #3b82f6;
+}
+
+.form-range:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #3b82f6;
+}
+
+/* ==========================================================================
+   CONTADORES Y MEDIDORES
+   ========================================================================== */
+
+.form-counter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: var(--form-text-muted);
+    margin-top: 0.25rem;
+}
+
+.form-counter-warning {
+    color: var(--form-warning);
+}
+
+.form-counter-error {
+    color: var(--form-error);
+}
+
+/* ==========================================================================
+   CAMPOS DE FECHA Y HORA
+   ========================================================================== */
+
+.form-date-input,
+.form-time-input {
+    composes: form-input;
+}
+
+.form-datetime-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+/* ==========================================================================
+   CAMPOS DE BÚSQUEDA
+   ========================================================================== */
+
+.form-search {
+    position: relative;
+}
+
+.form-search-input {
+    composes: form-input;
+    padding-left: 2.5rem;
+}
+
+.form-search-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding-left: 0.75rem;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.form-search-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--form-text-muted);
+}
+
+/* ==========================================================================
+   ESTADOS DE VALIDACIÓN
+   ========================================================================== */
+
+.form-validation {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.form-validation-error {
+    color: var(--form-error);
+}
+
+.form-validation-success {
+    color: var(--form-success);
+}
+
+.form-validation-warning {
+    color: var(--form-warning);
+}
+
+/* ==========================================================================
+   CAMPOS CON PREFIJO/SUFIJO
+   ========================================================================== */
+
+.form-input-prefix,
+.form-input-suffix {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0.75rem;
+    border: 1px solid var(--form-border);
+    background-color: #f9fafb;
+    color: var(--form-text-muted);
+    font-size: 0.875rem;
+}
+
+.form-input-prefix {
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-right: none;
+}
+
+.form-input-suffix {
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    border-left: none;
+}
+
+/* ==========================================================================
+   CAMPOS DE COLOR
+   ========================================================================== */
+
+.form-color-input {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--form-border);
+    border-radius: 0.375rem;
+    background-color: var(--form-bg);
+    cursor: pointer;
+}
+
+.form-color-input::-webkit-color-swatch {
+    border: none;
+    border-radius: 0.25rem;
+}
+
+.form-color-input::-moz-color-swatch {
+    border: none;
+    border-radius: 0.25rem;
+}
+
+/* ==========================================================================
+   CAMPOS DE RATING
+   ========================================================================== */
+
+.form-rating {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.form-rating-input {
+    position: absolute;
+    opacity: 0;
+}
+
+.form-rating-label {
+    cursor: pointer;
+    color: #d1d5db;
+    transition: color 0.2s ease-in-out;
+}
+
+.form-rating-label:hover {
+    color: #f59e0b;
+}
+
+.form-rating-input:checked ~ .form-rating-label {
+    color: #f59e0b;
+}
+
+.form-rating-label:hover ~ .form-rating-label {
+    color: #f59e0b;
+}
+
+.form-rating-star {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* ==========================================================================
+   STEPS Y PROGRESO DE FORMULARIO
+   ========================================================================== */
+
+.form-steps {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.form-step {
+    display: flex;
+    align-items: center;
+}
+
+.form-step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-step-active .form-step-number {
+    background-color: #2563eb;
+    color: white;
+}
+
+.form-step-completed .form-step-number {
+    background-color: #10b981;
+    color: white;
+}
+
+.form-step-pending .form-step-number {
+    background-color: #e5e7eb;
+    color: #6b7280;
+}
+
+.form-step-line {
+    flex: 1 1 0%;
+    height: 0.125rem;
+    background-color: #e5e7eb;
+    margin: 0 1rem;
+}
+
+.form-step-completed .form-step-line {
+    background-color: #10b981;
+}
+
+.form-step-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.form-step-active .form-step-label {
+    color: #2563eb;
+}
+
+.form-step-completed .form-step-label {
+    color: #10b981;
+}
+
+.form-step-pending .form-step-label {
+    color: #6b7280;
+}
+
+/* ==========================================================================
+   BARRAS DE PROGRESO
+   ========================================================================== */
+
+.form-progress {
+    width: 100%;
+    background-color: #e5e7eb;
+    border-radius: 0.5rem;
+    height: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-progress-bar {
+    height: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #2563eb;
+    transition: all 0.5s ease;
+}
+
+/* ==========================================================================
+   CAMPOS DINÁMICOS (ARRAY)
+   ========================================================================== */
+
+.form-array {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-array-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--form-border);
+    border-radius: 0.5rem;
+}
+
+.form-array-content {
+    flex: 1 1 0%;
+}
+
+.form-array-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-array-add {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    border: 2px dashed var(--form-border);
+    border-radius: 0.5rem;
+    background-color: var(--form-bg);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-array-add:hover {
+    border-color: #93c5fd;
+    background-color: #eff6ff;
+}
+
+/* ==========================================================================
+   CAMPOS CON AUTOCOMPLETADO
+   ========================================================================== */
+
+.form-autocomplete {
+    position: relative;
+}
+
+.form-autocomplete-list {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    margin-top: 0.25rem;
+    background-color: var(--form-bg);
+    border: 1px solid var(--form-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    max-height: 15rem;
+    overflow: auto;
+}
+
+.form-autocomplete-item {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.form-autocomplete-item:hover {
+    background-color: #f9fafb;
+}
+
+.form-autocomplete-item.active {
+    background-color: #eff6ff;
+    color: #1e40af;
+}
+
+/* ==========================================================================
+   CAMPOS CON TAGS
+   ========================================================================== */
+
+.form-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid var(--form-border);
+    border-radius: 0.5rem;
+    min-height: 3rem;
+    align-items: center;
+}
+
+.form-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    background-color: #dbeafe;
+    color: #1e40af;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+}
+
+.form-tag-remove {
+    margin-left: 0.25rem;
+    color: #2563eb;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.form-tag-remove:hover {
+    color: #1e40af;
+}
+
+.form-tags-input {
+    flex: 1 1 0%;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0.25rem;
+    font-size: 0.875rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (min-width: 768px) {
+    .form-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .form-button-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .form-datetime-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .form-array-item {
+        flex-direction: row;
+        gap: 1rem;
+    }
+    
+    .form-array-actions {
+        justify-content: flex-end;
+    }
+}
+
+@media (min-width: 1024px) {
+    .form-button-group {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-button-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-array-item {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .form-array-actions {
+        justify-content: flex-end;
+    }
+    
+    .form-steps {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .form-step {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .form-step-line {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   ESTADOS DE FOCUS MEJORADOS
+   ========================================================================== */
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ==========================================================================
+   ESTADOS DE HOVER
+   ========================================================================== */
+
+.form-input:not(:disabled):hover {
+    border-color: #9ca3af;
+}
+
+.form-checkbox-label:hover .form-checkbox-box,
+.form-radio-label:hover .form-radio-circle {
+    border-color: #9ca3af;
+}
+
+/* ==========================================================================
+   UTILIDADES DE FORMULARIO
+   ========================================================================== */
+
+.form-required {
+    color: var(--form-error);
+    margin-left: 0.25rem;
+}
+
+.form-optional {
+    color: var(--form-text-muted);
+    font-size: 0.875rem;
+    margin-left: 0.25rem;
+}
+
+.form-fieldset {
+    border: 1px solid var(--form-border);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.form-legend {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--form-text);
+    padding: 0 0.5rem;
+}
+
+/* ==========================================================================
+   SOPORTE PARA MODO OSCURO (OPCIONAL)
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+    .form-input,
+    .form-select,
+    .form-textarea {
+        background-color: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+    
+    .form-input::placeholder {
+        color: #9ca3af;
+    }
+    
+    .form-label {
+        color: #f9fafb;
+    }
+    
+    .form-checkbox-text,
+    .form-radio-text {
+        color: #f9fafb;
+    }
+    
+    .form-checkbox-description,
+    .form-radio-description {
+        color: #d1d5db;
+    }
+    
+    .form-button-label {
+        background-color: #374151;
+        border-color: #4b5563;
+        color: #d1d5db;
+    }
+    
+    .form-button-label:hover {
+        border-color: #60a5fa;
+        background-color: #1e3a8a;
+    }
+    
+    .form-file-label {
+        background-color: #374151;
+        border-color: #4b5563;
+    }
+    
+    .form-file-label:hover {
+        border-color: #60a5fa;
+        background-color: #1e3a8a;
+    }
+    
+    .form-file-item {
+        background-color: #374151;
+        border-color: #4b5563;
+    }
+    
+    .form-file-name {
+        color: #f9fafb;
+    }
+}
+
+/* ==========================================================================
+   ANIMACIONES DE FORMULARIO
+   ========================================================================== */
+
+@keyframes formShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.form-shake {
+    animation: formShake 0.5s ease-in-out;
+}
+
+@keyframes formPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.form-pulse {
+    animation: formPulse 2s infinite;
+}
+
+/* ==========================================================================
+   ESTADOS DE CARGA EN CAMPOS
+   ========================================================================== */
+
+.form-input-loading {
+    position: relative;
+}
+
+.form-input-loading::after {
+    content: '';
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #e5e7eb;
+    border-top: 2px solid #2563eb;
+    border-radius: 50%;
+    animation: form-spin 1s linear infinite;
+}
+
+@keyframes form-spin {
+    from {
+        transform: translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+/* ==========================================================================
+   CAMPOS CON VALIDACIÓN EN TIEMPO REAL
+   ========================================================================== */
+
+.form-input-validating {
+    border-color: #f59e0b;
+    background-color: #fffbeb;
+}
+
+/* ==========================================================================
+   UTILIDADES PARA FORMULARIOS LARGOS
+   ========================================================================== */
+
+.form-scroll-container {
+    max-height: 24rem;
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+.form-scroll-container::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.form-scroll-container::-webkit-scrollbar-track {
+    background-color: #f3f4f6;
+    border-radius: 0.25rem;
+}
+
+.form-scroll-container::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 0.25rem;
+}
+
+.form-scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: #9ca3af;
+}

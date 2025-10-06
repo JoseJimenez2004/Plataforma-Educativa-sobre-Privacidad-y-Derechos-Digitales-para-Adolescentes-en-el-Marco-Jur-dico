@@ -1,0 +1,887 @@
+/* ==========================================================================
+   ESTILOS RESPONSIVE
+   Media queries y utilidades para diseño adaptable
+   ========================================================================== */
+
+/* ==========================================================================
+   Breakpoints y Contenedores
+   ========================================================================== */
+
+/* Contenedores responsive */
+.container-responsive {
+    @apply w-full mx-auto px-4;
+}
+
+@media (min-width: 640px) {
+    .container-responsive {
+        @apply px-6;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container-responsive {
+        @apply px-8;
+    }
+}
+
+/* Utilidades de visibilidad */
+.sm-only {
+    @apply block;
+}
+
+@media (min-width: 640px) {
+    .sm-only {
+        @apply hidden;
+    }
+}
+
+.md-only {
+    @apply hidden;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .md-only {
+        @apply block;
+    }
+}
+
+.lg-only {
+    @apply hidden;
+}
+
+@media (min-width: 1024px) {
+    .lg-only {
+        @apply block;
+    }
+}
+
+/* Ocultar en breakpoints específicos */
+.hide-mobile {
+    @apply hidden;
+}
+
+@media (min-width: 768px) {
+    .hide-mobile {
+        @apply block;
+    }
+}
+
+.hide-tablet {
+    @apply block;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .hide-tablet {
+        @apply hidden;
+    }
+}
+
+.hide-desktop {
+    @apply block;
+}
+
+@media (min-width: 1024px) {
+    .hide-desktop {
+        @apply hidden;
+    }
+}
+
+/* ==========================================================================
+   Layout Responsive
+   ========================================================================== */
+
+/* Grid responsive */
+.grid-responsive {
+    @apply grid grid-cols-1 gap-4;
+}
+
+@media (min-width: 640px) {
+    .grid-responsive {
+        @apply grid-cols-2;
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-responsive {
+        @apply grid-cols-3;
+    }
+}
+
+@media (min-width: 1280px) {
+    .grid-responsive {
+        @apply grid-cols-4;
+    }
+}
+
+/* Flexbox responsive */
+.flex-responsive {
+    @apply flex flex-col;
+}
+
+@media (min-width: 768px) {
+    .flex-responsive {
+        @apply flex-row;
+    }
+}
+
+.flex-wrap-responsive {
+    @apply flex flex-wrap;
+}
+
+@media (min-width: 768px) {
+    .flex-wrap-responsive {
+        @apply flex-nowrap;
+    }
+}
+
+/* ==========================================================================
+   Navegación Responsive
+   ========================================================================== */
+
+/* Menú móvil */
+.mobile-menu {
+    @apply fixed inset-0 z-50 bg-white transform transition-transform duration-300 ease-in-out;
+}
+
+.mobile-menu-hidden {
+    @apply -translate-x-full;
+}
+
+.mobile-menu-visible {
+    @apply translate-x-0;
+}
+
+@media (min-width: 768px) {
+    .mobile-menu {
+        @apply relative transform-none bg-transparent;
+    }
+}
+
+/* Botón hamburguesa */
+.menu-toggle {
+    @apply md:hidden flex flex-col justify-center items-center w-8 h-8 cursor-pointer;
+}
+
+.menu-toggle-line {
+    @apply w-6 h-0.5 bg-gray-700 transition-all duration-300;
+}
+
+.menu-toggle-line:nth-child(2) {
+    @apply my-1.5;
+}
+
+.menu-toggle-active .menu-toggle-line:nth-child(1) {
+    @apply transform rotate-45 translate-y-2;
+}
+
+.menu-toggle-active .menu-toggle-line:nth-child(2) {
+    @apply opacity-0;
+}
+
+.menu-toggle-active .menu-toggle-line:nth-child(3) {
+    @apply transform -rotate-45 -translate-y-2;
+}
+
+/* Navegación desktop */
+.desktop-nav {
+    @apply hidden;
+}
+
+@media (min-width: 768px) {
+    .desktop-nav {
+        @apply flex;
+    }
+}
+
+/* ==========================================================================
+   Tablas Responsive
+   ========================================================================== */
+
+/* Tabla con scroll horizontal */
+.table-responsive {
+    @apply block w-full overflow-x-auto;
+}
+
+/* Tabla que se convierte en cards en móvil */
+.table-cards {
+    @apply block;
+}
+
+@media (min-width: 768px) {
+    .table-cards {
+        @apply table;
+    }
+}
+
+.table-cards thead {
+    @apply hidden;
+}
+
+@media (min-width: 768px) {
+    .table-cards thead {
+        @apply table-header-group;
+    }
+}
+
+.table-cards tbody {
+    @apply block;
+}
+
+@media (min-width: 768px) {
+    .table-cards tbody {
+        @apply table-row-group;
+    }
+}
+
+.table-cards tr {
+    @apply block mb-4 border rounded-lg;
+}
+
+@media (min-width: 768px) {
+    .table-cards tr {
+        @apply table-row border-none mb-0;
+    }
+}
+
+.table-cards td {
+    @apply block p-4 border-b last:border-b-0;
+}
+
+@media (min-width: 768px) {
+    .table-cards td {
+        @apply table-cell p-3 border-b;
+    }
+}
+
+.table-cards td::before {
+    @apply content-[attr(data-label)] font-semibold block mb-1;
+}
+
+@media (min-width: 768px) {
+    .table-cards td::before {
+        @apply hidden;
+    }
+}
+
+/* ==========================================================================
+   Formularios Responsive
+   ========================================================================== */
+
+/* Formularios en móvil */
+.form-mobile {
+    @apply space-y-4;
+}
+
+@media (min-width: 768px) {
+    .form-mobile {
+        @apply grid grid-cols-2 gap-6 space-y-0;
+    }
+}
+
+/* Campos de formulario responsive */
+.form-field-responsive {
+    @apply block w-full;
+}
+
+@media (min-width: 768px) {
+    .form-field-responsive {
+        @apply inline-block w-auto;
+    }
+}
+
+/* Grupos de botones responsive */
+.btn-group-responsive {
+    @apply flex flex-col space-y-2;
+}
+
+@media (min-width: 640px) {
+    .btn-group-responsive {
+        @apply flex-row space-y-0 space-x-2;
+    }
+}
+
+/* ==========================================================================
+   Cards Responsive
+   ========================================================================== */
+
+/* Cards en grid responsive */
+.cards-grid {
+    @apply grid grid-cols-1 gap-6;
+}
+
+@media (min-width: 640px) {
+    .cards-grid {
+        @apply grid-cols-2;
+    }
+}
+
+@media (min-width: 1024px) {
+    .cards-grid {
+        @apply grid-cols-3;
+    }
+}
+
+/* Card con layout cambiante */
+.card-responsive {
+    @apply flex flex-col;
+}
+
+@media (min-width: 768px) {
+    .card-responsive {
+        @apply flex-row;
+    }
+}
+
+.card-responsive-image {
+    @apply w-full;
+}
+
+@media (min-width: 768px) {
+    .card-responsive-image {
+        @apply w-48 flex-shrink-0;
+    }
+}
+
+.card-responsive-content {
+    @apply flex-1;
+}
+
+/* ==========================================================================
+   Tipografía Responsive
+   ========================================================================== */
+
+/* Títulos responsive */
+.text-responsive-xs {
+    @apply text-xs;
+}
+
+@media (min-width: 768px) {
+    .text-responsive-xs {
+        @apply text-sm;
+    }
+}
+
+.text-responsive-sm {
+    @apply text-sm;
+}
+
+@media (min-width: 768px) {
+    .text-responsive-sm {
+        @apply text-base;
+    }
+}
+
+.text-responsive-base {
+    @apply text-base;
+}
+
+@media (min-width: 768px) {
+    .text-responsive-base {
+        @apply text-lg;
+    }
+}
+
+.text-responsive-lg {
+    @apply text-lg;
+}
+
+@media (min-width: 768px) {
+    .text-responsive-lg {
+        @apply text-xl;
+    }
+}
+
+.text-responsive-xl {
+    @apply text-xl;
+}
+
+@media (min-width: 768px) {
+    .text-responsive-xl {
+        @apply text-2xl;
+    }
+}
+
+.text-responsive-2xl {
+    @apply text-2xl;
+}
+
+@media (min-width: 768px) {
+    .text-responsive-2xl {
+        @apply text-3xl;
+    }
+}
+
+.text-responsive-3xl {
+    @apply text-3xl;
+}
+
+@media (min-width: 768px) {
+    .text-responsive-3xl {
+        @apply text-4xl;
+    }
+}
+
+/* ==========================================================================
+   Espaciado Responsive
+   ========================================================================== */
+
+/* Padding responsive */
+.p-responsive {
+    @apply p-4;
+}
+
+@media (min-width: 768px) {
+    .p-responsive {
+        @apply p-6;
+    }
+}
+
+@media (min-width: 1024px) {
+    .p-responsive {
+        @apply p-8;
+    }
+}
+
+/* Margin responsive */
+.m-responsive {
+    @apply m-4;
+}
+
+@media (min-width: 768px) {
+    .m-responsive {
+        @apply m-6;
+    }
+}
+
+@media (min-width: 1024px) {
+    .m-responsive {
+        @apply m-8;
+    }
+}
+
+/* Gap responsive */
+.gap-responsive {
+    @apply gap-4;
+}
+
+@media (min-width: 768px) {
+    .gap-responsive {
+        @apply gap-6;
+    }
+}
+
+@media (min-width: 1024px) {
+    .gap-responsive {
+        @apply gap-8;
+    }
+}
+
+/* ==========================================================================
+   Utilidades de Orden Responsive
+   ========================================================================== */
+
+.order-mobile-first {
+    @apply order-first;
+}
+
+@media (min-width: 768px) {
+    .order-mobile-first {
+        @apply order-none;
+    }
+}
+
+.order-mobile-last {
+    @apply order-last;
+}
+
+@media (min-width: 768px) {
+    .order-mobile-last {
+        @apply order-none;
+    }
+}
+
+/* ==========================================================================
+   Modal y Overlay Responsive
+   ========================================================================== */
+
+/* Modal responsive */
+.modal-responsive {
+    @apply fixed inset-0 z-50 flex items-start justify-center p-4 overflow-auto;
+}
+
+.modal-content-responsive {
+    @apply w-full max-w-md mx-auto;
+}
+
+@media (min-width: 768px) {
+    .modal-content-responsive {
+        @apply max-w-2xl my-8;
+    }
+}
+
+@media (min-width: 1024px) {
+    .modal-content-responsive {
+        @apply max-w-4xl;
+    }
+}
+
+/* Drawer móvil */
+.drawer-mobile {
+    @apply fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white shadow-xl transform transition-transform duration-300 ease-in-out;
+}
+
+.drawer-mobile-hidden {
+    @apply translate-x-full;
+}
+
+.drawer-mobile-visible {
+    @apply translate-x-0;
+}
+
+@media (min-width: 768px) {
+    .drawer-mobile {
+        @apply hidden;
+    }
+}
+
+/* ==========================================================================
+   Galerías y Media Responsive
+   ========================================================================== */
+
+/* Galería de imágenes */
+.gallery-responsive {
+    @apply grid grid-cols-2 gap-2;
+}
+
+@media (min-width: 640px) {
+    .gallery-responsive {
+        @apply grid-cols-3;
+    }
+}
+
+@media (min-width: 1024px) {
+    .gallery-responsive {
+        @apply grid-cols-4;
+    }
+}
+
+/* Imágenes responsive */
+.img-responsive {
+    @apply w-full h-auto max-w-full;
+}
+
+/* Video responsive */
+.video-responsive {
+    @apply relative w-full h-0 pb-[56.25%]; /* 16:9 aspect ratio */
+}
+
+.video-responsive iframe,
+.video-responsive video {
+    @apply absolute top-0 left-0 w-full h-full;
+}
+
+/* ==========================================================================
+   Dashboard y Stats Responsive
+   ========================================================================== */
+
+/* Stats grid */
+.stats-grid-responsive {
+    @apply grid grid-cols-1 gap-4;
+}
+
+@media (min-width: 640px) {
+    .stats-grid-responsive {
+        @apply grid-cols-2;
+    }
+}
+
+@media (min-width: 1024px) {
+    .stats-grid-responsive {
+        @apply grid-cols-4;
+    }
+}
+
+/* Sidebar responsive */
+.sidebar-layout {
+    @apply flex flex-col;
+}
+
+@media (min-width: 1024px) {
+    .sidebar-layout {
+        @apply flex-row;
+    }
+}
+
+.sidebar-main {
+    @apply flex-1;
+}
+
+.sidebar-aside {
+    @apply w-full;
+}
+
+@media (min-width: 1024px) {
+    .sidebar-aside {
+        @apply w-80 ml-8;
+    }
+}
+
+/* ==========================================================================
+   Utilidades de Alto y Ancho Responsive
+   ========================================================================== */
+
+/* Altura responsive */
+.h-responsive {
+    @apply h-48;
+}
+
+@media (min-width: 768px) {
+    .h-responsive {
+        @apply h-64;
+    }
+}
+
+@media (min-width: 1024px) {
+    .h-responsive {
+        @apply h-96;
+    }
+}
+
+/* Ancho responsive */
+.w-responsive {
+    @apply w-full;
+}
+
+@media (min-width: 768px) {
+    .w-responsive {
+        @apply w-auto;
+    }
+}
+
+/* Min-height responsive */
+.min-h-responsive {
+    @apply min-h-64;
+}
+
+@media (min-width: 768px) {
+    .min-h-responsive {
+        @apply min-h-96;
+    }
+}
+
+/* ==========================================================================
+   Navegación por Tabs Responsive
+   ========================================================================== */
+
+/* Tabs horizontal en desktop, vertical en móvil */
+.tabs-responsive {
+    @apply flex flex-col;
+}
+
+@media (min-width: 768px) {
+    .tabs-responsive {
+        @apply flex-row;
+    }
+}
+
+.tabs-list-responsive {
+    @apply flex overflow-x-auto space-x-2 mb-4;
+}
+
+@media (min-width: 768px) {
+    .tabs-list-responsive {
+        @apply flex-col space-x-0 space-y-2 w-48 mb-0 mr-8;
+    }
+}
+
+.tabs-content-responsive {
+    @apply flex-1;
+}
+
+/* ==========================================================================
+   Form Steps Responsive
+   ========================================================================== */
+
+/* Steps horizontal en desktop, vertical en móvil */
+.steps-responsive {
+    @apply flex flex-col space-y-4;
+}
+
+@media (min-width: 768px) {
+    .steps-responsive {
+        @apply flex-row items-center justify-between space-y-0;
+    }
+}
+
+.step-responsive {
+    @apply flex items-center;
+}
+
+@media (min-width: 768px) {
+    .step-responsive {
+        @apply flex-col text-center;
+    }
+}
+
+.step-line-responsive {
+    @apply hidden;
+}
+
+@media (min-width: 768px) {
+    .step-line-responsive {
+        @apply block flex-1 h-0.5 bg-gray-200 mx-4;
+    }
+}
+
+/* ==========================================================================
+   Carousel Responsive
+   ========================================================================== */
+
+.carousel-responsive {
+    @apply flex overflow-x-auto snap-x snap-mandatory scrollbar-hide;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 768px) {
+    .carousel-responsive {
+        @apply grid grid-cols-2 gap-6 overflow-visible snap-none;
+    }
+}
+
+@media (min-width: 1024px) {
+    .carousel-responsive {
+        @apply grid-cols-3;
+    }
+}
+
+.carousel-item-responsive {
+    @apply flex-shrink-0 w-full snap-start;
+}
+
+@media (min-width: 768px) {
+    .carousel-item-responsive {
+        @apply w-auto snap-none;
+    }
+}
+
+/* ==========================================================================
+   Utilidades para Touch Devices
+   ========================================================================== */
+
+/* Mejoras para dispositivos táctiles */
+.touch-device .hover-effect {
+    @apply transition-none;
+}
+
+.touch-device .hover\:scale-105 {
+    transform: none;
+}
+
+/* Botones más grandes en móvil */
+.btn-touch {
+    @apply min-h-12 px-6;
+}
+
+@media (min-width: 768px) {
+    .btn-touch {
+        @apply min-h-10 px-4;
+    }
+}
+
+/* Inputs más grandes en móvil */
+.input-touch {
+    @apply min-h-12 text-base;
+}
+
+@media (min-width: 768px) {
+    .input-touch {
+        @apply min-h-10 text-sm;
+    }
+}
+
+/* ==========================================================================
+   Utilidades de Impresión
+   ========================================================================== */
+
+@media print {
+    .no-print {
+        @apply hidden;
+    }
+    
+    .print-break-before {
+        page-break-before: always;
+    }
+    
+    .print-break-after {
+        page-break-after: always;
+    }
+    
+    .print-break-inside-avoid {
+        page-break-inside: avoid;
+    }
+}
+
+/* ==========================================================================
+   Soporte para Orientación
+   ========================================================================== */
+
+/* Landscape en móvil */
+@media (max-height: 600px) and (orientation: landscape) {
+    .landscape\:h-auto {
+        height: auto !important;
+    }
+    
+    .landscape\:min-h-0 {
+        min-height: 0 !important;
+    }
+    
+    .landscape\:py-2 {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
+}
+
+/* ==========================================================================
+   Utilidades de Scroll Responsive
+   ========================================================================== */
+
+/* Scroll suave solo en desktop */
+@media (prefers-reduced-motion: no-preference) {
+    @media (min-width: 768px) {
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+    }
+}
+
+/* Hide scrollbar pero mantener funcionalidad */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* ==========================================================================
+   Utilidades de Performance
+   ========================================================================== */
+
+/* Mejoras de rendimiento en móvil */
+@media (max-width: 767px) {
+    .reduce-motion * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Optimizaciones para dispositivos lentos */
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+    .performance-optimize {
+        animation: none;
+        transition: none;
+    }
+}

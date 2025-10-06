@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipo de Denuncia - COSECOVI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/components/auth.css">
+    <link rel="stylesheet" href="../../css/components/dashboard.css">
+    <link rel="stylesheet" href="../../css/components/forms.css">
+    <link rel="stylesheet" href="../../css/components/responsive.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="../../index.html" class="flex items-center">
+                        <img src="../../assets/images/ipn.png" alt="IPN" class="h-10">
+                        <div class="ml-3">
+                            <h1 class="text-xl font-bold text-gray-900">COSECOVI</h1>
+                        </div>
+                    </a>
+                </div>
+                <nav class="flex items-center space-x-6">
+                    <span id="nombre-usuario" class="text-gray-700"></span>
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600">Inicio</a>
+                    <button id="cerrar-sesion" class="text-red-600 hover:text-red-700">Cerrar Sesión</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progreso -->
+    <div class="bg-white border-b">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-bold text-gray-900">Nueva Denuncia</h2>
+                <span class="text-sm text-gray-500">Paso 1 de 7</span>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 14%"></div>
+            </div>
+            
+            <div class="flex justify-between mt-2">
+                <span class="step-indicator">1</span>
+                <span class="step-indicator-inactive">2</span>
+                <span class="step-indicator-inactive">3</span>
+                <span class="step-indicator-inactive">4</span>
+                <span class="step-indicator-inactive">5</span>
+                <span class="step-indicator-inactive">6</span>
+                <span class="step-indicator-inactive">7</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <!-- Formulario Tipo de Denuncia -->
+        <form class="card form-step" data-step="1">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Tipo de Denuncia</h3>
+                <p class="text-gray-600">Selecciona el tipo de situación que deseas reportar</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Denuncia Personal -->
+                <label class="cursor-pointer group">
+                    <input type="radio" name="tipoDenuncia" value="personal" class="hidden" required>
+                    <div class="card h-full border-2 border-gray-200 group-hover:border-blue-300 group-hover:bg-blue-50 transition duration-200">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-2xl">👤</span>
+                            </div>
+                            <h4 class="text-xl font-semibold text-gray-900 mb-2">Denuncia Personal</h4>
+                            <p class="text-gray-600 text-sm">
+                                Situaciones que afectan directamente a personas como violencia, 
+                                acoso, discriminación, hostigamiento, etc.
+                            </p>
+                        </div>
+                    </div>
+                </label>
+
+                <!-- Denuncia de Infraestructura -->
+                <label class="cursor-pointer group">
+                    <input type="radio" name="tipoDenuncia" value="infraestructura" class="hidden" required>
+                    <div class="card h-full border-2 border-gray-200 group-hover:border-blue-300 group-hover:bg-blue-50 transition duration-200">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-2xl">🏢</span>
+                            </div>
+                            <h4 class="text-xl font-semibold text-gray-900 mb-2">Infraestructura</h4>
+                            <p class="text-gray-600 text-sm">
+                                Reportes sobre instalaciones, equipamiento, sanidad, mantenimiento, 
+                                seguridad física de espacios, etc.
+                            </p>
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+            <div class="flex justify-between mt-8 pt-6 border-t">
+                <a href="../../index.html" class="btn-secondary">
+                    Cancelar
+                </a>
+                <button type="button" data-next class="btn-primary">
+                    Siguiente
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <script src="../../js/denuncia/tipo-denuncia.js"></script>
+</body>
+</html>

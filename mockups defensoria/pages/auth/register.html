@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - COSECOVI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/components/auth.css">
+    <link rel="stylesheet" href="../../css/components/dashboard.css">
+    <link rel="stylesheet" href="../../css/components/forms.css">
+    <link rel="stylesheet" href="../../css/components/responsive.css">
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <!-- Header -->
+        <div class="text-center">
+            <a href="../../index.html" class="inline-block">
+                <div class="flex items-center justify-center">
+                    <img src="../../assets/images/ipn.png" alt="IPN" class="h-12">
+                    <div class="ml-3">
+                        <h1 class="text-2xl font-bold text-gray-900">COSECOVI</h1>
+                        <p class="text-sm text-gray-600">Crear Cuenta</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Formulario de Registro -->
+        <form id="formulario-registro" class="card mt-8 space-y-6">
+            <div>
+                <label class="form-label">Tipo de Persona *</label>
+                <div class="grid grid-cols-2 gap-4">
+                    <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                        <input type="radio" name="tipoPersona" value="estudiante" class="mr-3" data-validate="required" required>
+                        <span>Estudiante</span>
+                    </label>
+                    <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+                        <input type="radio" name="tipoPersona" value="trabajador" class="mr-3" data-validate="required" required>
+                        <span>Trabajador</span>
+                    </label>
+                </div>
+                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+            </div>
+
+            <div>
+                <label for="numeroIdentificacion" class="form-label">Número de Boleta/Trabajador *</label>
+                <input type="text" id="numeroIdentificacion" name="numeroIdentificacion" 
+                       class="form-input" data-validate="required" required
+                       placeholder="Ej: 2024678901">
+                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="nombre" class="form-label">Nombre(s) *</label>
+                    <input type="text" id="nombre" name="nombre" 
+                           class="form-input" data-validate="required" required>
+                    <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                </div>
+                <div>
+                    <label for="apellidos" class="form-label">Apellidos *</label>
+                    <input type="text" id="apellidos" name="apellidos" 
+                           class="form-input" data-validate="required" required>
+                    <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                </div>
+            </div>
+
+            <div>
+                <label for="email" class="form-label">Correo Electrónico *</label>
+                <input type="email" id="email" name="email" 
+                       class="form-input" data-validate="email" required
+                       placeholder="usuario@ipn.mx">
+                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+            </div>
+
+            <div>
+                <label for="password" class="form-label">Contraseña *</label>
+                <input type="password" id="password" name="password" 
+                       class="form-input" data-validate="password" required
+                       placeholder="Mínimo 8 caracteres">
+                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                <p class="text-xs text-gray-500 mt-1">
+                    Debe incluir mayúsculas, minúsculas, números y caracteres especiales
+                </p>
+            </div>
+
+            <div>
+                <label for="confirmarPassword" class="form-label">Confirmar Contraseña *</label>
+                <input type="password" id="confirmarPassword" name="confirmarPassword" 
+                       class="form-input" data-validate="required" required>
+                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+            </div>
+
+            <div class="flex items-center">
+                <input type="checkbox" id="terminos" name="terminos" 
+                       class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required>
+                <label for="terminos" class="ml-2 block text-sm text-gray-700">
+                    Acepto los <a href="#" class="text-blue-600 hover:text-blue-500">términos y condiciones</a>
+                </label>
+            </div>
+
+            <button type="submit" class="btn-primary w-full">
+                Crear Cuenta
+            </button>
+
+            <div class="text-center">
+                <p class="text-sm text-gray-600">
+                    ¿Ya tienes una cuenta?
+                    <a href="login.html" class="text-blue-600 hover:text-blue-500 font-medium">
+                        Iniciar Sesión
+                    </a>
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <script src="../../js/auth/register.js"></script>
+</body>
+</html>

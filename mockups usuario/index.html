@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSECOVI - Comité de Seguridad y Convivencia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../../css/components/auth.css">
+    <link rel="stylesheet" href="../../css/components/dashboard.css">
+    <link rel="stylesheet" href="../../css/components/forms.css">
+    <link rel="stylesheet" href="../../css/components/responsive.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <img src="assets/images/ipn.png" alt="IPN" class="h-12">
+                    <div class="ml-4">
+                        <h1 class="text-2xl font-bold text-gray-900">COSECOVI</h1>
+                        <p class="text-sm text-gray-600">Comité de Seguridad y Convivencia</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#informacion" class="text-gray-700 hover:text-blue-600">Información</a>
+                    <a href="#prevencion" class="text-gray-700 hover:text-blue-600">Prevención</a>
+                    <a href="#contacto" class="text-gray-700 hover:text-blue-600">Contacto</a>
+                </nav>
+                <div class="flex space-x-4">
+                    <a href="pages/auth/login.html" 
+                       class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                        Iniciar Sesión
+                    </a>
+                    <a href="pages/auth/register.html" 
+                       class="border border-blue-600 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition">
+                        Registrarse
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-blue-700 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center">
+                <h2 class="text-4xl font-bold mb-4">Tu Seguridad es Nuestra Prioridad</h2>
+                <p class="text-xl mb-8">Sistema de Denuncias del Comité de Seguridad y Convivencia</p>
+                <a href="pages/auth/register.html" 
+                   class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                    Realizar una Denuncia
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Información Pública -->
+    <section id="informacion" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-3xl font-bold text-center mb-12">Información de COSECOVI</h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-xl font-semibold mb-4">Misión</h4>
+                    <p class="text-gray-600">Garantizar un ambiente seguro y de convivencia armónica en toda la comunidad IPN.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-xl font-semibold mb-4">Valores</h4>
+                    <ul class="text-gray-600 list-disc list-inside">
+                        <li>Confidencialidad</li>
+                        <li>Imparcialidad</li>
+                        <li>Profesionalismo</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-xl font-semibold mb-4">Servicios</h4>
+                    <ul class="text-gray-600 list-disc list-inside">
+                        <li>Recepción de denuncias</li>
+                        <li>Acompañamiento psicológico</li>
+                        <li>Asesoría legal</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Directorio de Contactos -->
+    <section id="contacto" class="py-16 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-3xl font-bold text-center mb-12">Directorio de Contactos</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <h4 class="font-semibold mb-2">Emergencias</h4>
+                    <p class="text-blue-600 font-bold">555-123-4567</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <h4 class="font-semibold mb-2">Atención Psicológica</h4>
+                    <p class="text-blue-600 font-bold">555-123-4568</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <h4 class="font-semibold mb-2">Asesoría Legal</h4>
+                    <p class="text-blue-600 font-bold">555-123-4569</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <h4 class="font-semibold mb-2">Coordinación General</h4>
+                    <p class="text-blue-600 font-bold">555-123-4570</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2024 COSECOVI - Instituto Politécnico Nacional. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

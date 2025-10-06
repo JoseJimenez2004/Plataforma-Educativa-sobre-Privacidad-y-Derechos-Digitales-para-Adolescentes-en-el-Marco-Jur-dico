@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Denuncia - COSECOVI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/components/auth.css">
+    <link rel="stylesheet" href="../../css/components/dashboard.css">
+    <link rel="stylesheet" href="../../css/components/forms.css">
+    <link rel="stylesheet" href="../../css/components/responsive.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="../../index.html" class="flex items-center">
+                        <img src="../../assets/images/ipn.png" alt="IPN" class="h-10">
+                        <div class="ml-3">
+                            <h1 class="text-xl font-bold text-gray-900">COSECOVI</h1>
+                        </div>
+                    </a>
+                </div>
+                <nav class="flex items-center space-x-6">
+                    <span id="nombre-usuario" class="text-gray-700"></span>
+                    <a href="historial.html" class="text-gray-700 hover:text-blue-600">Mis Denuncias</a>
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600">Inicio</a>
+                    <button id="cerrar-sesion" class="text-red-600 hover:text-red-700">Cerrar Sesión</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <!-- Encabezado -->
+        <div class="flex justify-between items-start mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Detalle de Denuncia</h1>
+                <p class="text-gray-600 mt-2">Información completa del caso reportado</p>
+            </div>
+            <div class="flex space-x-3">
+                <button id="btn-descargar-pdf" class="btn-secondary inline-flex items-center">
+                    <span class="mr-2">📄</span>
+                    Descargar PDF
+                </button>
+                <a href="historial.html" class="btn-primary inline-flex items-center">
+                    <span class="mr-2">←</span>
+                    Volver al Historial
+                </a>
+            </div>
+        </div>
+
+        <!-- Contenido Principal -->
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Columna Principal -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Tarjeta de Información General -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Información General</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div>
+                                <span class="text-sm text-gray-500">Folio de Denuncia</span>
+                                <p id="folio-denuncia" class="font-mono font-bold text-lg text-blue-700"></p>
+                            </div>
+                            <div>
+                                <span class="text-sm text-gray-500">Fecha de Registro</span>
+                                <p id="fecha-registro" class="font-medium"></p>
+                            </div>
+                            <div>
+                                <span class="text-sm text-gray-500">Tipo de Denuncia</span>
+                                <p id="tipo-denuncia" class="font-medium"></p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <span class="text-sm text-gray-500">Estado Actual</span>
+                                <div id="estado-actual" class="inline-flex items-center"></div>
+                            </div>
+                            <div>
+                                <span class="text-sm text-gray-500">Prioridad</span>
+                                <div id="prioridad-denuncia" class="inline-flex items-center"></div>
+                            </div>
+                            <div>
+                                <span class="text-sm text-gray-500">Última Actualización</span>
+                                <p id="ultima-actualizacion" class="font-medium"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detalles del Incidente -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Detalles del Incidente</h2>
+                    <div class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <span class="text-sm text-gray-500">Fecha del Incidente</span>
+                                <p id="fecha-incidente" class="font-medium"></p>
+                            </div>
+                            <div>
+                                <span class="text-sm text-gray-500">Hora del Incidente</span>
+                                <p id="hora-incidente" class="font-medium"></p>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-sm text-gray-500">Lugar del Incidente</span>
+                            <p id="lugar-incidente" class="font-medium"></p>
+                        </div>
+                        <div>
+                            <span class="text-sm text-gray-500 block mb-2">Descripción de los Hechos</span>
+                            <div id="descripcion-hechos" class="bg-gray-50 rounded-lg p-4 whitespace-pre-line"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Involucrados -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Involucrados</h2>
+                    <div id="contenedor-involucrados" class="space-y-4">
+                        <!-- Los involucrados se cargarán dinámicamente -->
+                    </div>
+                    <div id="sin-involucrados" class="text-center py-8 text-gray-500 hidden">
+                        <div class="text-2xl mb-2">👤</div>
+                        <p>No se especificaron involucrados</p>
+                    </div>
+                </div>
+
+                <!-- Clasificación y Análisis -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Clasificación y Análisis</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <span class="text-sm text-gray-500">Clasificación Sugerida por Sistema</span>
+                            <p id="clasificacion-sugerida" class="font-medium"></p>
+                        </div>
+                        <div>
+                            <span class="text-sm text-gray-500">Clasificación Final</span>
+                            <p id="clasificacion-final" class="font-medium">-</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-sm text-gray-500">Observaciones del Analista</span>
+                        <div id="observaciones-analista" class="bg-blue-50 rounded-lg p-4 mt-2 text-sm text-blue-800">
+                            <p class="italic">Esta denuncia está en proceso de revisión. Un analista asignará la clasificación final y observaciones.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Archivos Adjuntos -->
+                <div class="card">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Archivos Adjuntos</h2>
+                    <div id="contenedor-archivos" class="grid gap-3">
+                        <!-- Los archivos se cargarán dinámicamente -->
+                    </div>
+                    <div id="sin-archivos" class="text-center py-8 text-gray-500">
+                        <div class="text-2xl mb-2">📎</div>
+                        <p>No se adjuntaron archivos</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barra Lateral -->
+            <div class="space-y-6">
+                <!-- Resumen de Estado -->
+                <div class="card">
+                    <h3 class="font-semibold text-gray-900 mb-4">Resumen del Estado</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600">Progreso del Caso</span>
+                            <span id="progreso-caso" class="text-sm font-medium">25%</span>
+                        </div>
+                        <div class="progress-bar bg-gray-200">
+                            <div id="barra-progreso-caso" class="progress-fill bg-blue-600" style="width: 25%"></div>
+                        </div>
+                    </div>
+                    <div class="mt-4 space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Tiempo Transcurrido</span>
+                            <span id="tiempo-transcurrido" class="font-medium">2 días</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Tiempo Estimado</span>
+                            <span id="tiempo-estimado" class="font-medium">10 días</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historial de Actualizaciones -->
+                <div class="card">
+                    <h3 class="font-semibold text-gray-900 mb-4">Historial de Actualizaciones</h3>
+                    <div id="historial-actualizaciones" class="space-y-3">
+                        <!-- Las actualizaciones se cargarán dinámicamente -->
+                        <div class="text-center py-4 text-gray-500">
+                            <p>No hay actualizaciones registradas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contacto de Soporte -->
+                <div class="card bg-blue-50 border-blue-200">
+                    <h3 class="font-semibold text-blue-900 mb-3">¿Necesitas ayuda?</h3>
+                    <div class="space-y-2 text-sm text-blue-800">
+                        <div class="flex items-center">
+                            <span class="mr-2">📞</span>
+                            <span>Soporte COSECOVI: <strong>555-123-4570</strong></span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="mr-2">✉️</span>
+                            <span>cosecovi@ipn.mx</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="mr-2">🕒</span>
+                            <span>Lun-Vie: 9:00 - 18:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Descarga -->
+    <div id="modal-descarga" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100">
+                    <span class="text-blue-600 text-xl">📥</span>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mt-2">Generando Reporte</h3>
+                <div class="mt-2 px-7 py-3">
+                    <p class="text-sm text-gray-500">
+                        Se está generando el reporte detallado en formato PDF...
+                    </p>
+                    <div class="mt-4">
+                        <div class="progress-bar bg-gray-200">
+                            <div id="barra-progreso-descarga" class="progress-fill bg-blue-600" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/seguimiento/detalle-denuncia.js"></script>
+</body>
+</html>
