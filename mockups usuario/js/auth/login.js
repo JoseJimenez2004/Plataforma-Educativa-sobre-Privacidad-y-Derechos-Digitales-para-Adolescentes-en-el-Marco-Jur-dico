@@ -1,6 +1,13 @@
-class LoginUsuario {
+// Sistema de Login para Defensoría Politécnica
+class LoginSistema {
     constructor() {
-        this.formulario = document.getElementById('formulario-login');
+        this.form = document.getElementById('login-form');
+        this.usuarioInput = document.getElementById('usuario');
+        this.passwordInput = document.getElementById('password');
+        this.rememberCheckbox = document.getElementById('remember');
+        this.loginBtn = document.getElementById('loginBtn');
+        this.togglePasswordBtn = document.getElementById('togglePassword');
+        
         this.init();
     }
 
@@ -8,65 +15,120 @@ class LoginUsuario {
         this.inicializarEventos();
         this.verificarRecordarme();
         this.verificarSesionActiva();
+        this.crearAccesosRapidos();
+        this.crearComandosConsola();
         
-        // Solo en entorno de desarrollo
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || true) {
-            this.crearAccesosMultiples();
-            this.crearAccesosConsola();
-        }
+        console.log('🚀 Sistema de Login - Defensoría Politécnica IPN');
+        console.log('🔑 Usuarios de prueba disponibles:');
+        console.log('   - Boleta: 2023630100');
+        console.log('   - Email: josebryanomar2004@gmail.com');
+        console.log('   - Usuario: JoseJimenez');
+        console.log('   - Contraseña para todos: 123456789');
     }
 
     inicializarEventos() {
-        this.formulario.addEventListener('submit', (e) => {
+        // Evento del formulario
+        this.form.addEventListener('submit', (e) => {
             e.preventDefault();
             this.iniciarSesion();
         });
+
+        // Mostrar/ocultar contraseña
+        this.togglePasswordBtn.addEventListener('click', () => {
+            this.togglePasswordVisibility();
+        });
+
+        // Validación en tiempo real
+        this.usuarioInput.addEventListener('input', () => {
+            this.limpiarError(this.usuarioInput);
+        });
+
+        this.passwordInput.addEventListener('input', () => {
+            this.limpiarError(this.passwordInput);
+        });
+
+        // Efectos visuales en focus
+        this.usuarioInput.addEventListener('focus', () => {
+            this.agregarEfectoFocus(this.usuarioInput);
+        });
+
+        this.passwordInput.addEventListener('focus', () => {
+            this.agregarEfectoFocus(this.passwordInput);
+        });
+
+        this.usuarioInput.addEventListener('blur', () => {
+            this.removerEfectoFocus(this.usuarioInput);
+        });
+
+        this.passwordInput.addEventListener('blur', () => {
+            this.removerEfectoFocus(this.passwordInput);
+        });
+    }
+
+    agregarEfectoFocus(input) {
+        input.parentElement.classList.add('focused');
+    }
+
+    removerEfectoFocus(input) {
+        input.parentElement.classList.remove('focused');
+    }
+
+    togglePasswordVisibility() {
+        const type = this.passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        this.passwordInput.setAttribute('type', type);
+        
+        const icon = this.togglePasswordBtn.querySelector('i');
+        icon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
     }
 
     verificarRecordarme() {
-        const credencialesGuardadas = localStorage.getItem('credenciales_recordadas');
-        if (credencialesGuardadas) {
-            const credenciales = JSON.parse(credencialesGuardadas);
-            document.getElementById('usuario').value = credenciales.usuario;
-            document.getElementById('password').value = credenciales.password;
-            document.getElementById('remember').checked = true;
+        const credenciales = localStorage.getItem('defensoria_credenciales');
+        if (credenciales) {
+            const { usuario, password } = JSON.parse(credenciales);
+            this.usuarioInput.value = usuario;
+            this.passwordInput.value = password;
+            this.rememberCheckbox.checked = true;
         }
     }
 
     verificarSesionActiva() {
-        const usuarioActivo = localStorage.getItem('usuario_cosecovi');
-        if (usuarioActivo) {
-            // Si ya hay una sesión activa, redirigir al dashboard
-            window.location.href = ' /mockups/pages/auth/tipo-denuncia.html';
+        const sesion = localStorage.getItem('defensoria_sesion');
+        if (sesion) {
+            const usuario = JSON.parse(sesion);
+            console.log('Sesión activa encontrada:', usuario);
+            // Podrías redirigir automáticamente si quieres
+            // this.redirigirDashboard();
         }
     }
 
     async iniciarSesion() {
         if (!this.validarFormulario()) {
-            this.mostrarError('Por favor completa todos los campos');
             return;
         }
 
         const datos = this.obtenerDatosFormulario();
-
+        
         try {
             this.mostrarCargando(true);
             
-            const resultado = await this.verificarCredenciales(datos);
+            // Simular delay de red
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            const resultado = await this.autenticarUsuario(datos);
             
             if (resultado.exito) {
+                this.mostrarExito('¡Inicio de sesión exitoso!');
                 this.guardarSesion(resultado.usuario, datos.remember);
-                this.mostrarExito('Inicio de sesión exitoso. Redirigiendo...');
                 
                 setTimeout(() => {
-                    this.redirigirUsuario();
-                }, 1500);
+                    this.redirigirDashboard();
+                }, 2000);
             } else {
-                this.mostrarError(resultado.error);
+                this.mostrarError(resultado.mensaje);
             }
         } catch (error) {
             console.error('Error en login:', error);
-            this.mostrarError('Error al iniciar sesión. Intenta nuevamente.');
+            this.mostrarError('Error al conectar con el servidor');
         } finally {
             this.mostrarCargando(false);
         }
@@ -74,100 +136,99 @@ class LoginUsuario {
 
     validarFormulario() {
         let valido = true;
-        const usuario = document.getElementById('usuario');
-        const password = document.getElementById('password');
 
-        // Validar que no estén vacíos
-        if (!usuario.value.trim()) {
-            this.mostrarErrorCampo(usuario, 'El usuario es requerido');
+        // Validar usuario
+        if (!this.usuarioInput.value.trim()) {
+            this.mostrarErrorCampo(this.usuarioInput, 'El usuario es requerido');
             valido = false;
-        } else {
-            this.limpiarErrorCampo(usuario);
         }
 
-        if (!password.value.trim()) {
-            this.mostrarErrorCampo(password, 'La contraseña es requerida');
+        // Validar contraseña
+        if (!this.passwordInput.value.trim()) {
+            this.mostrarErrorCampo(this.passwordInput, 'La contraseña es requerida');
             valido = false;
-        } else {
-            this.limpiarErrorCampo(password);
+        } else if (this.passwordInput.value.length < 6) {
+            this.mostrarErrorCampo(this.passwordInput, 'La contraseña debe tener al menos 6 caracteres');
+            valido = false;
         }
 
         return valido;
     }
 
-    mostrarErrorCampo(campo, mensaje) {
-        let errorDiv = campo.parentNode.querySelector('.error-message');
-        if (!errorDiv) {
-            errorDiv = document.createElement('div');
-            errorDiv.className = 'error-message text-red-600 text-sm mt-1';
-            campo.parentNode.appendChild(errorDiv);
-        }
+    mostrarErrorCampo(input, mensaje) {
+        const errorDiv = input.parentElement.querySelector('.error-message');
         errorDiv.textContent = mensaje;
-        errorDiv.style.display = 'block';
-        campo.classList.add('border-red-500');
+        errorDiv.classList.add('show');
+        input.classList.add('error');
+        
+        // Efecto de shake
+        input.style.animation = 'none';
+        setTimeout(() => {
+            input.style.animation = 'shake 0.5s ease-in-out';
+        }, 10);
     }
 
-    limpiarErrorCampo(campo) {
-        const errorDiv = campo.parentNode.querySelector('.error-message');
-        if (errorDiv) {
-            errorDiv.style.display = 'none';
-        }
-        campo.classList.remove('border-red-500');
+    limpiarError(input) {
+        const errorDiv = input.parentElement.querySelector('.error-message');
+        errorDiv.classList.remove('show');
+        input.classList.remove('error');
     }
 
     obtenerDatosFormulario() {
-        const formData = new FormData(this.formulario);
         return {
-            usuario: formData.get('usuario'),
-            password: formData.get('password'),
-            remember: document.getElementById('remember').checked
+            usuario: this.usuarioInput.value.trim(),
+            password: this.passwordInput.value,
+            remember: this.rememberCheckbox.checked
         };
     }
 
-    async verificarCredenciales(datos) {
+    async autenticarUsuario(datos) {
+        // Simulación de autenticación
         return new Promise((resolve) => {
             setTimeout(() => {
-                try {
-                    const usuarios = JSON.parse(localStorage.getItem('usuarios_cosecovi') || '[]');
-                    
-                    console.log('Usuarios en sistema:', usuarios);
-                    console.log('Buscando usuario:', datos.usuario);
+                // Usuarios de prueba predefinidos
+                const usuariosPrueba = [
+                    {
+                        id: 'USR-2023630100',
+                        tipo: 'estudiante',
+                        identificacion: '2023630100',
+                        email: 'josebryanomar2004@gmail.com',
+                        usuario: 'JoseJimenez',
+                        nombre: 'José Bryan',
+                        apellidos: 'Omar Jiménez',
+                        boleta: '2023630100',
+                        unidadAcademica: 'ESCOM',
+                        carrera: 'Ingeniería en Sistemas Computacionales',
+                        password: '123456789',
+                        activo: true,
+                        fechaRegistro: new Date().toISOString()
+                    }
+                ];
 
-                    const usuario = usuarios.find(u => {
-                        const coincideUsuario = u.numeroIdentificacion === datos.usuario || 
-                                              u.email === datos.usuario ||
-                                              u.id === datos.usuario;
-                        const coincidePassword = u.password === datos.password;
-                        const estaActivo = u.activo !== false;
+                // Buscar usuario por diferentes campos
+                const usuarioEncontrado = usuariosPrueba.find(u => 
+                    u.identificacion === datos.usuario ||
+                    u.email === datos.usuario ||
+                    u.usuario === datos.usuario
+                );
 
-                        console.log('Comparando:', {
-                            usuario: u.numeroIdentificacion,
-                            coincideUsuario,
-                            coincidePassword,
-                            estaActivo
-                        });
-
-                        return coincideUsuario && coincidePassword && estaActivo;
-                    });
-
-                    if (usuario) {
-                        console.log('Usuario encontrado:', usuario);
+                if (usuarioEncontrado && usuarioEncontrado.password === datos.password) {
+                    if (usuarioEncontrado.activo) {
                         resolve({
                             exito: true,
-                            usuario: usuario
+                            usuario: usuarioEncontrado,
+                            mensaje: 'Autenticación exitosa'
                         });
                     } else {
-                        console.log('Usuario no encontrado o credenciales incorrectas');
                         resolve({
                             exito: false,
-                            error: 'Usuario o contraseña incorrectos'
+                            mensaje: 'Usuario desactivado. Contacta a la administración.'
                         });
                     }
-                } catch (error) {
-                    console.error('Error al verificar credenciales:', error);
+                } else {
                     resolve({
                         exito: false,
-                        error: 'Error en el sistema. Intenta más tarde.'
+                        mensaje: 'Usuario o contraseña incorrectos'
                     });
                 }
             }, 1000);
@@ -175,327 +236,269 @@ class LoginUsuario {
     }
 
     guardarSesion(usuario, recordar) {
-        try {
-            // No guardar la contraseña en el objeto de sesión
-            const { password, ...usuarioSeguro } = usuario;
-            localStorage.setItem('usuario_cosecovi', JSON.stringify(usuarioSeguro));
-
-            if (recordar) {
-                localStorage.setItem('credenciales_recordadas', JSON.stringify({
-                    usuario: usuario.numeroIdentificacion,
-                    password: usuario.password
-                }));
-            } else {
-                localStorage.removeItem('credenciales_recordadas');
-            }
-
-            console.log('Sesión guardada:', usuarioSeguro);
-        } catch (error) {
-            console.error('Error al guardar sesión:', error);
+        // No guardar la contraseña en la sesión
+        const { password, ...usuarioSeguro } = usuario;
+        
+        localStorage.setItem('defensoria_sesion', JSON.stringify(usuarioSeguro));
+        
+        if (recordar) {
+            localStorage.setItem('defensoria_credenciales', JSON.stringify({
+                usuario: usuario.identificacion,
+                password: usuario.password
+            }));
+        } else {
+            localStorage.removeItem('defensoria_credenciales');
         }
+
+        console.log('Sesión guardada:', usuarioSeguro);
     }
 
-    redirigirUsuario() {
-        // Intentar diferentes rutas posibles
-        const rutasPosibles = [
-            'dashboard.html',
-            'index.html',
-            '../dashboard.html',
-            '../../dashboard.html',
-            '/dashboard.html',
-            './dashboard.html'
-        ];
-
-        // Verificar si existe alguna de las rutas
-        const rutaExistente = rutasPosibles.find(ruta => {
-            // Esta es una verificación básica, en un caso real deberías tener una lógica más robusta
-            return true; // Por ahora asumimos que dashboard.html existe
-        });
-
-        const rutaFinal = rutaExistente || 'dashboard.html';
-        console.log('Redirigiendo a:', rutaFinal);
+    redirigirDashboard() {
+        // Simular redirección al dashboard
+        this.mostrarNotificacion('Redirigiendo al dashboard...', 'info');
         
-        window.location.href = rutaFinal;
+        setTimeout(() => {
+            // En un entorno real, esto redirigiría al dashboard
+            // window.location.href = 'dashboard.html';
+            
+            // Por ahora, mostramos un mensaje
+            this.mostrarExito('¡Redirección exitosa! (Simulación)');
+            console.log('Redirigiendo al dashboard...');
+        }, 1000);
     }
 
     mostrarCargando(mostrar) {
-        const boton = this.formulario.querySelector('button[type="submit"]');
+        const btnText = this.loginBtn.querySelector('.btn-text');
+        const btnLoader = this.loginBtn.querySelector('.btn-loader');
+        
         if (mostrar) {
-            boton.innerHTML = `
-                <div class="flex items-center justify-center">
-                    <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
-                    Iniciando sesión...
-                </div>
-            `;
-            boton.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoader.classList.remove('hidden');
+            this.loginBtn.disabled = true;
         } else {
-            boton.innerHTML = 'Iniciar Sesión';
-            boton.disabled = false;
+            btnText.classList.remove('hidden');
+            btnLoader.classList.add('hidden');
+            this.loginBtn.disabled = false;
         }
+    }
+
+    // =========================================================================
+    // SISTEMA DE NOTIFICACIONES
+    // =========================================================================
+
+    mostrarExito(mensaje) {
+        this.mostrarNotificacion(mensaje, 'success', '¡Éxito!');
     }
 
     mostrarError(mensaje) {
-        this.mostrarNotificacion(mensaje, 'error');
+        this.mostrarNotificacion(mensaje, 'error', 'Error');
     }
 
-    mostrarExito(mensaje) {
-        this.mostrarNotificacion(mensaje, 'exito');
+    mostrarInfo(mensaje) {
+        this.mostrarNotificacion(mensaje, 'info', 'Información');
     }
 
-    mostrarNotificacion(mensaje, tipo) {
-        const notificacionAnterior = document.querySelector('.notificacion-flotante');
-        if (notificacionAnterior) {
-            notificacionAnterior.remove();
-        }
-
-        const estilos = {
-            exito: 'bg-green-50 border-green-200 text-green-800',
-            error: 'bg-red-50 border-red-200 text-red-800'
+    mostrarNotificacion(mensaje, tipo = 'info', titulo = '') {
+        const container = document.getElementById('notificationContainer');
+        const notification = document.createElement('div');
+        notification.className = `notification ${tipo}`;
+        
+        const iconos = {
+            success: 'fas fa-check-circle',
+            error: 'fas fa-exclamation-circle',
+            warning: 'fas fa-exclamation-triangle',
+            info: 'fas fa-info-circle'
         };
 
-        const notificacion = document.createElement('div');
-        notificacion.className = `notificacion-flotante fixed top-4 right-4 p-4 rounded-lg border ${estilos[tipo]} z-50 shadow-lg`;
-        notificacion.innerHTML = `
-            <div class="flex items-center">
-                <span class="mr-2">${tipo === 'exito' ? '✓' : '⚠'}</span>
-                <span>${mensaje}</span>
+        notification.innerHTML = `
+            <div class="notification-icon">
+                <i class="${iconos[tipo]}"></i>
             </div>
-        `;
-
-        document.body.appendChild(notificacion);
-
-        setTimeout(() => {
-            notificacion.remove();
-        }, 5000);
-    }
-
-    // MÉTODOS PARA ACCESOS DE SIMULACIÓN
-
-    crearAccesosMultiples() {
-        const usuariosPrueba = [
-            {
-                nombre: 'José Bryan',
-                email: 'josebryanomar2004@gmail.com',
-                password: '123456789',
-                identificacion: '2023630100',
-                tipo: 'natural'
-            },
-            {
-                nombre: 'Ana María López',
-                email: 'ana.lopez@test.com',
-                password: '123456789',
-                identificacion: '2023630101',
-                tipo: 'natural'
-            },
-            {
-                nombre: 'Empresa XYZ',
-                email: 'contacto@empresa.com',
-                password: '123456789',
-                identificacion: '2023630102',
-                tipo: 'juridica'
-            }
-        ];
-
-        const accesoContainer = document.createElement('div');
-        accesoContainer.className = 'fixed bottom-4 left-4 bg-white p-4 rounded-lg shadow-lg border z-40 max-w-xs';
-        accesoContainer.innerHTML = `
-            <h3 class="font-bold text-sm mb-2">Accesos Rápidos Login</h3>
-            <div class="space-y-2 max-h-40 overflow-y-auto">
-                ${usuariosPrueba.map((usuario, index) => `
-                    <button class="acceso-usuario block w-full bg-blue-500 text-white px-3 py-2 rounded text-xs hover:bg-blue-600 text-left" data-index="${index}">
-                        <div class="font-medium">${usuario.nombre}</div>
-                        <div class="text-xs opacity-80">Usuario: ${usuario.identificacion}</div>
-                        <div class="text-xs opacity-80">Contraseña: ${usuario.password}</div>
-                    </button>
-                `).join('')}
+            <div class="notification-content">
+                ${titulo ? `<div class="notification-title">${titulo}</div>` : ''}
+                <div class="notification-message">${mensaje}</div>
             </div>
-            <div class="grid grid-cols-2 gap-2 mt-2">
-                <button id="limpiar-login" class="bg-gray-500 text-white px-3 py-1 rounded text-xs hover:bg-gray-600">
-                    Limpiar
-                </button>
-                <button id="recordar-login" class="bg-green-500 text-white px-3 py-1 rounded text-xs hover:bg-green-600">
-                    Recordar
-                </button>
-            </div>
-            <button id="crear-usuarios" class="w-full bg-purple-500 text-white px-3 py-1 rounded text-xs hover:bg-purple-600 mt-2">
-                Crear Usuarios de Prueba
+            <button class="notification-close">
+                <i class="fas fa-times"></i>
             </button>
         `;
-        
-        document.body.appendChild(accesoContainer);
-        
-        // Eventos para los botones de usuarios
-        document.querySelectorAll('.acceso-usuario').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const index = e.currentTarget.getAttribute('data-index');
-                this.llenarConUsuario(usuariosPrueba[index]);
+
+        container.appendChild(notification);
+
+        // Auto-remover después de 5 segundos
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+                setTimeout(() => notification.remove(), 300);
+            }
+        }, 5000);
+
+        // Cerrar manualmente
+        const closeBtn = notification.querySelector('.notification-close');
+        closeBtn.addEventListener('click', () => {
+            notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+            setTimeout(() => notification.remove(), 300);
+        });
+    }
+
+    // =========================================================================
+    // ACCESOS RÁPIDOS PARA PRUEBAS
+    // =========================================================================
+
+    crearAccesosRapidos() {
+        // Eventos para botones de acceso rápido
+        document.querySelectorAll('.access-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const usuario = btn.getAttribute('data-user');
+                const password = btn.getAttribute('data-password');
+                
+                this.usuarioInput.value = usuario;
+                this.passwordInput.value = password;
+                this.rememberCheckbox.checked = true;
+                
+                this.mostrarInfo(`Credenciales de ${usuario} cargadas`);
+                
+                // Efecto visual
+                btn.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    btn.style.transform = '';
+                }, 150);
             });
         });
-        
-        // Evento para limpiar
-        document.getElementById('limpiar-login').addEventListener('click', () => {
-            this.limpiarFormulario();
-        });
-        
-        // Evento para recordar
-        document.getElementById('recordar-login').addEventListener('click', () => {
-            document.getElementById('remember').checked = true;
-            this.mostrarNotificacion('Opción "Recordarme" activada', 'exito');
+
+        // Limpiar formulario
+        document.getElementById('clearForm').addEventListener('click', () => {
+            this.form.reset();
+            this.limpiarErrores();
+            this.mostrarInfo('Formulario limpiado');
         });
 
-        // Evento para crear usuarios
-        document.getElementById('crear-usuarios').addEventListener('click', () => {
+        // Crear usuarios de prueba
+        document.getElementById('createUsers').addEventListener('click', () => {
             this.crearUsuariosPrueba();
         });
     }
 
-    llenarConUsuario(usuario) {
-        document.getElementById('usuario').value = usuario.identificacion;
-        document.getElementById('password').value = usuario.password;
-        document.getElementById('remember').checked = true;
+    limpiarErrores() {
+        document.querySelectorAll('.error-message').forEach(error => {
+            error.classList.remove('show');
+        });
         
-        this.mostrarNotificacion(`Credenciales de ${usuario.nombre} cargadas`, 'exito');
-    }
-
-    llenarConEmail(usuario) {
-        document.getElementById('usuario').value = usuario.email;
-        document.getElementById('password').value = usuario.password;
-        document.getElementById('remember').checked = true;
-        
-        this.mostrarNotificacion(`Credenciales de ${usuario.nombre} (email) cargadas`, 'exito');
-    }
-
-    limpiarFormulario() {
-        this.formulario.reset();
-        const errores = this.formulario.querySelectorAll('.error-message');
-        errores.forEach(error => error.style.display = 'none');
-        
-        const inputs = this.formulario.querySelectorAll('input');
-        inputs.forEach(input => input.classList.remove('border-red-500'));
-        
-        this.mostrarNotificacion('Formulario limpiado', 'exito');
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.classList.remove('error');
+        });
     }
 
     crearUsuariosPrueba() {
-        const usuariosPrueba = [
+        const usuarios = [
             {
-                id: 'USR-' + Date.now(),
-                tipoPersona: 'natural',
-                numeroIdentificacion: '2023630100',
-                nombre: 'José',
-                apellidos: 'Bryan Omar',
+                id: 'USR-2023630100',
+                tipo: 'estudiante',
+                identificacion: '2023630100',
                 email: 'josebryanomar2004@gmail.com',
+                usuario: 'JoseJimenez',
+                nombre: 'José Bryan',
+                apellidos: 'Omar Jiménez',
+                boleta: '2023630100',
+                unidadAcademica: 'ESCOM',
+                carrera: 'Ingeniería en Sistemas Computacionales',
                 password: '123456789',
-                fechaRegistro: new Date().toISOString(),
-                activo: true
-            },
-            {
-                id: 'USR-' + (Date.now() + 1),
-                tipoPersona: 'natural',
-                numeroIdentificacion: '2023630101',
-                nombre: 'Ana',
-                apellidos: 'María López',
-                email: 'ana.lopez@test.com',
-                password: '123456789',
-                fechaRegistro: new Date().toISOString(),
-                activo: true
-            },
-            {
-                id: 'USR-' + (Date.now() + 2),
-                tipoPersona: 'juridica',
-                numeroIdentificacion: '2023630102',
-                nombre: 'Empresa',
-                apellidos: 'XYZ',
-                email: 'contacto@empresa.com',
-                password: '123456789',
-                fechaRegistro: new Date().toISOString(),
-                activo: true
+                activo: true,
+                fechaRegistro: new Date().toISOString()
             }
         ];
 
-        const usuariosExistentes = JSON.parse(localStorage.getItem('usuarios_cosecovi') || '[]');
-        let usuariosCreados = 0;
-
-        usuariosPrueba.forEach(nuevoUsuario => {
-            const yaExiste = usuariosExistentes.find(u => 
-                u.numeroIdentificacion === nuevoUsuario.numeroIdentificacion || 
-                u.email === nuevoUsuario.email
-            );
-
-            if (!yaExiste) {
-                usuariosExistentes.push(nuevoUsuario);
-                usuariosCreados++;
-            }
-        });
-
-        localStorage.setItem('usuarios_cosecovi', JSON.stringify(usuariosExistentes));
-        
-        if (usuariosCreados > 0) {
-            this.mostrarExito(`${usuariosCreados} usuarios de prueba creados exitosamente`);
-        } else {
-            this.mostrarNotificacion('Todos los usuarios de prueba ya existen', 'exito');
-        }
+        localStorage.setItem('defensoria_usuarios', JSON.stringify(usuarios));
+        this.mostrarExito('Usuarios de prueba creados exitosamente');
     }
 
-    crearAccesosConsola() {
-        window.simulacionLogin = {
-            llenarJose: () => this.llenarConUsuario({
-                nombre: 'José Bryan',
-                email: 'josebryanomar2004@gmail.com',
-                password: '123456789',
-                identificacion: '2023630100',
-                tipo: 'natural'
-            }),
-            llenarJoseEmail: () => this.llenarConEmail({
-                nombre: 'José Bryan',
-                email: 'josebryanomar2004@gmail.com',
-                password: '123456789',
-                identificacion: '2023630100',
-                tipo: 'natural'
-            }),
-            llenarAna: () => this.llenarConUsuario({
-                nombre: 'Ana María López',
-                email: 'ana.lopez@test.com',
-                password: '123456789',
-                identificacion: '2023630101',
-                tipo: 'natural'
-            }),
-            llenarEmpresa: () => this.llenarConUsuario({
-                nombre: 'Empresa XYZ',
-                email: 'contacto@empresa.com',
-                password: '123456789',
-                identificacion: '2023630102',
-                tipo: 'juridica'
-            }),
-            limpiar: () => this.limpiarFormulario(),
-            login: () => this.iniciarSesion(),
-            recordar: () => {
-                document.getElementById('remember').checked = true;
-                console.log('Opción "Recordarme" activada');
+    // =========================================================================
+    // COMANDOS DE CONSOLA PARA DESARROLLO
+    // =========================================================================
+
+    crearComandosConsola() {
+        window.loginCommands = {
+            // Comandos de autenticación
+            loginJose: () => {
+                this.usuarioInput.value = '2023630100';
+                this.passwordInput.value = '123456789';
+                this.rememberCheckbox.checked = true;
+                this.mostrarInfo('Credenciales de José cargadas');
             },
-            crearUsuarios: () => this.crearUsuariosPrueba(),
+            
+            loginEmail: () => {
+                this.usuarioInput.value = 'josebryanomar2004@gmail.com';
+                this.passwordInput.value = '123456789';
+                this.rememberCheckbox.checked = true;
+                this.mostrarInfo('Credenciales por email cargadas');
+            },
+            
+            loginUsuario: () => {
+                this.usuarioInput.value = 'JoseJimenez';
+                this.passwordInput.value = '123456789';
+                this.rememberCheckbox.checked = true;
+                this.mostrarInfo('Credenciales por usuario cargadas');
+            },
+            
+            // Comandos de utilidad
+            clearForm: () => {
+                this.form.reset();
+                this.limpiarErrores();
+                this.mostrarInfo('Formulario limpiado');
+            },
+            
+            doLogin: () => {
+                this.iniciarSesion();
+            },
+            
+            // Comandos de debug
             debug: () => {
-                console.log('=== DEBUG SESSION ===');
-                console.log('Usuario en sesión:', localStorage.getItem('usuario_cosecovi'));
-                console.log('Usuarios registrados:', JSON.parse(localStorage.getItem('usuarios_cosecovi') || '[]'));
-            }
+                console.log('=== DEBUG INFO ===');
+                console.log('Usuario en sesión:', localStorage.getItem('defensoria_sesion'));
+                console.log('Credenciales guardadas:', localStorage.getItem('defensoria_credenciales'));
+                console.log('Usuarios en sistema:', localStorage.getItem('defensoria_usuarios'));
+            },
+            
+            // Comandos de notificación
+            testSuccess: () => this.mostrarExito('Esta es una notificación de éxito'),
+            testError: () => this.mostrarError('Esta es una notificación de error'),
+            testInfo: () => this.mostrarInfo('Esta es una notificación de información')
         };
-        
-        console.log('🔧 Accesos de simulación Login disponibles:');
-        console.log('- simulacionLogin.llenarJose() - José Bryan (2023630100)');
-        console.log('- simulacionLogin.llenarJoseEmail() - José Bryan (email)');
-        console.log('- simulacionLogin.llenarAna() - Ana María López (2023630101)');
-        console.log('- simulacionLogin.llenarEmpresa() - Empresa XYZ (2023630102)');
-        console.log('- simulacionLogin.limpiar() - Limpiar formulario');
-        console.log('- simulacionLogin.login() - Iniciar sesión');
-        console.log('- simulacionLogin.recordar() - Activar "Recordarme"');
-        console.log('- simulacionLogin.crearUsuarios() - Crear usuarios de prueba');
-        console.log('- simulacionLogin.debug() - Ver información de debug');
-        console.log('🔑 Contraseña para todos: 123456789');
+
+        console.log('🎮 Comandos de consola disponibles:');
+        console.log('   loginCommands.loginJose() - Cargar credenciales por boleta');
+        console.log('   loginCommands.loginEmail() - Cargar credenciales por email');
+        console.log('   loginCommands.loginUsuario() - Cargar credenciales por usuario');
+        console.log('   loginCommands.clearForm() - Limpiar formulario');
+        console.log('   loginCommands.doLogin() - Ejecutar login');
+        console.log('   loginCommands.debug() - Información de debug');
+        console.log('   loginCommands.testSuccess() - Probar notificación éxito');
+        console.log('   loginCommands.testError() - Probar notificación error');
+        console.log('   loginCommands.testInfo() - Probar notificación info');
     }
 }
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
-    new LoginUsuario();
+    new LoginSistema();
 });
+
+// Agregar animación de shake
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+    }
+    
+    .form-group.focused .form-label {
+        color: var(--color-primary);
+        transform: translateY(-2px);
+    }
+    
+    .password-container.focused .toggle-password {
+        color: var(--color-primary);
+    }
+`;
+document.head.appendChild(style);
