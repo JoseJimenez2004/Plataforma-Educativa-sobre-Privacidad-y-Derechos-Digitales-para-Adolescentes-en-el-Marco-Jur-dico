@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - COSECOVI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="../../index.html" class="flex items-center">
+                        <img src="../../assets/images/logo-ipn.png" alt="IPN" class="h-10">
+                        <div class="ml-3">
+                            <h1 class="text-xl font-bold text-gray-900">COSECOVI</h1>
+                        </div>
+                    </a>
+                </div>
+                <nav class="flex items-center space-x-6">
+                    <a href="../seguimiento/historial.html" class="text-gray-700 hover:text-blue-600">Mis Denuncias</a>
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600">Inicio</a>
+                    <button id="cerrar-sesion" class="text-red-600 hover:text-red-700">Cerrar Sesión</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Configuración de Cuenta</h1>
+            <p class="text-gray-600 mt-2">Gestiona tu información personal y seguridad</p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Menú Lateral -->
+            <div class="lg:col-span-1">
+                <div class="card">
+                    <nav class="space-y-2">
+                        <a href="#informacion" class="block px-4 py-2 bg-blue-50 text-blue-700 rounded-lg font-medium">
+                            Información Personal
+                        </a>
+                        <a href="#seguridad" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg">
+                            Seguridad
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Contenido Principal -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Información Personal -->
+                <div id="informacion" class="card">
+                    <h2 class="text-xl font-semibold mb-6">Información Personal</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="form-label">Tipo de Persona</label>
+                            <p class="text-gray-900 font-medium" id="tipo-persona">-</p>
+                        </div>
+                        <div>
+                            <label class="form-label">Número de Identificación</label>
+                            <p class="text-gray-900 font-medium" id="numero-identificacion">-</p>
+                        </div>
+                        <div>
+                            <label class="form-label">Nombre(s)</label>
+                            <p class="text-gray-900 font-medium" id="nombre-usuario">-</p>
+                        </div>
+                        <div>
+                            <label class="form-label">Apellidos</label>
+                            <p class="text-gray-900 font-medium" id="apellidos-usuario">-</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="form-label">Correo Electrónico</label>
+                            <p class="text-gray-900 font-medium" id="email-usuario">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cambio de Contraseña -->
+                <div id="seguridad" class="card">
+                    <h2 class="text-xl font-semibold mb-6">Cambiar Contraseña</h2>
+                    
+                    <form id="formulario-password" class="space-y-6">
+                        <div>
+                            <label for="password-actual" class="form-label">Contraseña Actual *</label>
+                            <input type="password" id="password-actual" name="passwordActual" 
+                                   class="form-input" data-validate="required" required>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <div>
+                            <label for="nueva-password" class="form-label">Nueva Contraseña *</label>
+                            <input type="password" id="nueva-password" name="nuevaPassword" 
+                                   class="form-input" data-validate="password" required
+                                   placeholder="Mínimo 8 caracteres con mayúsculas, minúsculas, números y especiales">
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <div>
+                            <label for="confirmar-password" class="form-label">Confirmar Nueva Contraseña *</label>
+                            <input type="password" id="confirmar-password" name="confirmarPassword" 
+                                   class="form-input" data-validate="required" required>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+
+                        <button type="submit" class="btn-primary">
+                            Actualizar Contraseña
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../js/auth/profile.js"></script>
+</body>
+</html>
