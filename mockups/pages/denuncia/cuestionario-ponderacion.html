@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario de Ponderación - COSECOVI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="../../index.html" class="flex items-center">
+                        <img src="../../assets/images/logo-ipn.png" alt="IPN" class="h-10">
+                        <div class="ml-3">
+                            <h1 class="text-xl font-bold text-gray-900">COSECOVI</h1>
+                        </div>
+                    </a>
+                </div>
+                <nav class="flex items-center space-x-6">
+                    <span id="nombre-usuario" class="text-gray-700"></span>
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600">Inicio</a>
+                    <button id="cerrar-sesion" class="text-red-600 hover:text-red-700">Cerrar Sesión</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progreso -->
+    <div class="bg-white border-b">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-bold text-gray-900">Nueva Denuncia</h2>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-500">Paso 5 de 7</span>
+                    <div class="flex items-center space-x-2">
+                        <span id="pregunta-actual" class="text-sm font-medium text-blue-600">1</span>
+                        <span class="text-sm text-gray-500">de</span>
+                        <span id="total-preguntas" class="text-sm font-medium text-gray-900">79</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 71%"></div>
+            </div>
+            
+            <div class="flex justify-between mt-2">
+                <span class="step-indicator">✓</span>
+                <span class="step-indicator">✓</span>
+                <span class="step-indicator">✓</span>
+                <span class="step-indicator">✓</span>
+                <span class="step-indicator">5</span>
+                <span class="step-indicator-inactive">6</span>
+                <span class="step-indicator-inactive">7</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <!-- Cuestionario de Ponderación -->
+        <form class="card form-step" data-step="5">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Cuestionario de Ponderación</h3>
+                <p class="text-gray-600">Segundo filtro de clasificación - Evalúa cada aspecto del incidente</p>
+            </div>
+
+            <!-- Información Importante -->
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <span class="text-yellow-600 text-lg">📊</span>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-yellow-800">
+                            <strong>Instrucciones:</strong> Para cada afirmación, selecciona un valor del 0 al 5 donde:<br>
+                            <strong>0 = No aplica / No ocurrió</strong> • 
+                            <strong>1 = Muy leve</strong> • 
+                            <strong>2 = Leve</strong> • 
+                            <strong>3 = Moderado</strong> • 
+                            <strong>4 = Grave</strong> • 
+                            <strong>5 = Muy grave</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barra de Progreso del Cuestionario -->
+            <div class="mb-6">
+                <div class="flex justify-between text-sm text-gray-600 mb-2">
+                    <span>Progreso del cuestionario</span>
+                    <span id="porcentaje-progreso">0%</span>
+                </div>
+                <div class="progress-bar bg-gray-200">
+                    <div id="barra-progreso-cuestionario" class="progress-fill bg-green-600" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Contenedor de Preguntas -->
+            <div id="contenedor-preguntas" class="space-y-8">
+                <!-- Las preguntas se cargarán dinámicamente aquí -->
+            </div>
+
+            <!-- Navegación entre preguntas -->
+            <div class="flex justify-between items-center mt-8 pt-6 border-t">
+                <button type="button" id="btn-pregunta-anterior" class="btn-secondary opacity-50 cursor-not-allowed" disabled>
+                    ← Pregunta Anterior
+                </button>
+                
+                <div class="text-center">
+                    <button type="button" id="btn-guardar-progreso" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                        💾 Guardar progreso
+                    </button>
+                </div>
+
+                <button type="button" id="btn-pregunta-siguiente" class="btn-primary">
+                    Siguiente Pregunta →
+                </button>
+            </div>
+
+            <!-- Navegación Principal -->
+            <div class="flex justify-between mt-6 pt-6 border-t">
+                <button type="button" data-prev class="btn-secondary">
+                    ← Anterior Paso
+                </button>
+                <button type="button" id="btn-finalizar-cuestionario" class="btn-primary hidden">
+                    ✅ Finalizar Cuestionario
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Modal de Confirmación Final -->
+    <div id="modal-confirmacion-final" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100">
+                    <span class="text-blue-600 text-xl">📝</span>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mt-2">¿Finalizar cuestionario?</h3>
+                <div class="mt-2 px-7 py-3">
+                    <p class="text-sm text-gray-500">
+                        Has completado <span id="preguntas-respondidas-modal">0</span> de 79 preguntas.<br>
+                        ¿Deseas finalizar el cuestionario y continuar?
+                    </p>
+                </div>
+                <div class="flex justify-center space-x-4 mt-4">
+                    <button id="btn-continuar-cuestionario" 
+                            class="btn-secondary px-4 py-2">
+                        Continuar
+                    </button>
+                    <button id="btn-confirmar-finalizar" 
+                            class="btn-primary px-4 py-2">
+                        Finalizar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/denuncia/cuestionario-ponderacion.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Incidente - COSECOVI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="../../index.html" class="flex items-center">
+                        <img src="../../assets/images/logo-ipn.png" alt="IPN" class="h-10">
+                        <div class="ml-3">
+                            <h1 class="text-xl font-bold text-gray-900">COSECOVI</h1>
+                        </div>
+                    </a>
+                </div>
+                <nav class="flex items-center space-x-6">
+                    <span id="nombre-usuario" class="text-gray-700"></span>
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600">Inicio</a>
+                    <button id="cerrar-sesion" class="text-red-600 hover:text-red-700">Cerrar Sesión</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progreso -->
+    <div class="bg-white border-b">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-bold text-gray-900">Nueva Denuncia</h2>
+                <span class="text-sm text-gray-500">Paso 2 de 7</span>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 29%"></div>
+            </div>
+            
+            <div class="flex justify-between mt-2">
+                <span class="step-indicator">✓</span>
+                <span class="step-indicator">2</span>
+                <span class="step-indicator-inactive">3</span>
+                <span class="step-indicator-inactive">4</span>
+                <span class="step-indicator-inactive">5</span>
+                <span class="step-indicator-inactive">6</span>
+                <span class="step-indicator-inactive">7</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <!-- Formulario Detalles del Incidente -->
+        <form class="card form-step" data-step="2">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Detalles del Incidente</h3>
+                <p class="text-gray-600">Proporciona información específica sobre lo ocurrido</p>
+            </div>
+
+            <!-- Fecha y Hora -->
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label for="fecha-incidente" class="form-label">Fecha del Incidente *</label>
+                    <input type="date" id="fecha-incidente" name="fechaIncidente" 
+                           class="form-input" data-validate="required" required
+                           max="">
+                    <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                    <p class="text-xs text-gray-500 mt-1">Selecciona la fecha cuando ocurrió el incidente</p>
+                </div>
+
+                <div>
+                    <label for="hora-incidente" class="form-label">Hora Aproximada *</label>
+                    <input type="time" id="hora-incidente" name="horaIncidente" 
+                           class="form-input" data-validate="required" required>
+                    <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                    <p class="text-xs text-gray-500 mt-1">Hora en que ocurrió o comenzó el incidente</p>
+                </div>
+            </div>
+
+            <!-- Lugar del Incidente -->
+            <div class="mb-6">
+                <label for="lugar-incidente" class="form-label">Lugar del Incidente *</label>
+                <select id="lugar-incidente" name="lugarIncidente" 
+                        class="form-input" data-validate="required" required>
+                    <option value="">Selecciona el lugar donde ocurrió</option>
+                    <optgroup label="Unidades Académicas">
+                        <option value="escom">ESCOM - Escuela Superior de Cómputo</option>
+                        <option value="esime">ESIME - Escuela Superior de Ingeniería Mecánica y Eléctrica</option>
+                        <option value="esca">ESCA - Escuela Superior de Comercio y Administración</option>
+                        <option value="upiita">UPIITA - Unidad Profesional Interdisciplinaria en Ingeniería</option>
+                        <option value="cic">CIC - Centro de Investigación en Computación</option>
+                        <option value="cecyt">CECyT - Centro de Estudios Científicos y Tecnológicos</option>
+                    </optgroup>
+                    <optgroup label="Áreas Comunes">
+                        <option value="biblioteca">Biblioteca</option>
+                        <option value="cafeteria">Cafetería</option>
+                        <option value="estacionamiento">Estacionamiento</option>
+                        <option value="canchas">Canchas Deportivas</option>
+                        <option value="jardin">Jardines</option>
+                        <option value="baños">Baños</option>
+                    </optgroup>
+                    <optgroup label="Oficinas Administrativas">
+                        <option value="direccion">Dirección</option>
+                        <option value="servicios_escolares">Servicios Escolares</option>
+                        <option value="recursos_humanos">Recursos Humanos</option>
+                        <option value="finanzas">Finanzas</option>
+                    </optgroup>
+                    <optgroup label="Otros">
+                        <option value="transporte">Transporte Escolar</option>
+                        <option value="entrada_principal">Entrada Principal</option>
+                        <option value="exterior">Exterior de las Instalaciones</option>
+                        <option value="online">En Línea / Plataformas Digitales</option>
+                        <option value="otro">Otro Lugar</option>
+                    </optgroup>
+                </select>
+                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+            </div>
+
+            <!-- Lugar específico (si selecciona "otro") -->
+            <div id="lugar-especifico-container" class="mb-6 hidden">
+                <label for="lugar-especifico" class="form-label">Especifica el lugar *</label>
+                <input type="text" id="lugar-especifico" name="lugarEspecifico" 
+                       class="form-input" placeholder="Describe detalladamente el lugar del incidente">
+                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+            </div>
+
+            <!-- Descripción de los Hechos -->
+            <div class="mb-6">
+                <label for="descripcion-hechos" class="form-label">Descripción de los Hechos *</label>
+                <textarea id="descripcion-hechos" name="descripcionHechos" 
+                          class="form-input" rows="6" 
+                          placeholder="Describe detalladamente lo que ocurrió, incluyendo:
+- Qué sucedió exactamente
+- Cómo comenzó la situación
+- Qué acciones específicas se llevaron a cabo
+- Cómo terminó el incidente
+- Cualquier otro detalle relevante"
+                          data-validate="required" required></textarea>
+                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                <div class="flex justify-between items-center mt-2">
+                    <p class="text-xs text-gray-500">
+                        Sé lo más específico posible. Esta información es crucial para el análisis del caso.
+                    </p>
+                    <span id="contador-caracteres" class="text-xs text-gray-500">0/5000 caracteres</span>
+                </div>
+            </div>
+
+            <!-- Información Adicional -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <span class="text-blue-600 text-lg">💡</span>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-800">
+                            <strong>Consejo:</strong> Incluye todos los detalles que recuerdes, incluso aquellos 
+                            que puedan parecer insignificantes. La información sobre el contexto, 
+                            testigos presentes, y secuencia de eventos ayuda significativamente 
+                            en la investigación.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de Navegación -->
+            <div class="flex justify-between mt-8 pt-6 border-t">
+                <button type="button" data-prev class="btn-secondary">
+                    ← Anterior
+                </button>
+                <button type="button" data-next class="btn-primary">
+                    Siguiente
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <script src="../../js/denuncia/detalles-incidente.js"></script>
+</body>
+</html>

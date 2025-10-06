@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carga de Pruebas - COSECOVI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="../../index.html" class="flex items-center">
+                        <img src="../../assets/images/logo-ipn.png" alt="IPN" class="h-10">
+                        <div class="ml-3">
+                            <h1 class="text-xl font-bold text-gray-900">COSECOVI</h1>
+                        </div>
+                    </a>
+                </div>
+                <nav class="flex items-center space-x-6">
+                    <span id="nombre-usuario" class="text-gray-700"></span>
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600">Inicio</a>
+                    <button id="cerrar-sesion" class="text-red-600 hover:text-red-700">Cerrar Sesión</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progreso -->
+    <div class="bg-white border-b">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-bold text-gray-900">Nueva Denuncia</h2>
+                <span class="text-sm text-gray-500">Paso 6 de 7</span>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 86%"></div>
+            </div>
+            
+            <div class="flex justify-between mt-2">
+                <span class="step-indicator">✓</span>
+                <span class="step-indicator">✓</span>
+                <span class="step-indicator">✓</span>
+                <span class="step-indicator">✓</span>
+                <span class="step-indicator">✓</span>
+                <span class="step-indicator">6</span>
+                <span class="step-indicator-inactive">7</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <!-- Formulario Carga de Pruebas -->
+        <form class="card form-step" data-step="6">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Carga de Pruebas</h3>
+                <p class="text-gray-600">Adjunta archivos de evidencia que respalden tu denuncia (opcional)</p>
+            </div>
+
+            <!-- Información sobre pruebas -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <span class="text-blue-600 text-lg">📎</span>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-800">
+                            <strong>Información importante:</strong> La carga de pruebas es opcional pero altamente recomendada. 
+                            Las pruebas fortalecen tu denuncia y facilitan la investigación.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Especificaciones de archivos -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="bg-gray-50 rounded-lg p-4 text-center">
+                    <div class="text-2xl mb-2">🖼️</div>
+                    <h4 class="font-semibold text-sm">Imágenes</h4>
+                    <p class="text-xs text-gray-600">JPG, PNG</p>
+                    <p class="text-xs text-gray-500">Máx. 1MB</p>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-4 text-center">
+                    <div class="text-2xl mb-2">🎬</div>
+                    <h4 class="font-semibold text-sm">Videos</h4>
+                    <p class="text-xs text-gray-600">MP4, MOV</p>
+                    <p class="text-xs text-gray-500">Máx. 10MB</p>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-4 text-center">
+                    <div class="text-2xl mb-2">🎵</div>
+                    <h4 class="font-semibold text-sm">Audios</h4>
+                    <p class="text-xs text-gray-600">MP3, WAV</p>
+                    <p class="text-xs text-gray-500">Máx. 5MB</p>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-4 text-center">
+                    <div class="text-2xl mb-2">📄</div>
+                    <h4 class="font-semibold text-sm">Documentos</h4>
+                    <p class="text-xs text-gray-600">PDF, DOC</p>
+                    <p class="text-xs text-gray-500">Máx. 1MB</p>
+                </div>
+            </div>
+
+            <!-- Área de Carga -->
+            <div class="mb-6">
+                <div id="drop-zone" class="file-upload-area">
+                    <input type="file" id="input-archivos" multiple class="hidden" 
+                           accept=".jpg,.jpeg,.png,.mp4,.mov,.mp3,.wav,.pdf,.doc,.docx">
+                    
+                    <div class="text-center">
+                        <div class="text-4xl mb-4">📤</div>
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Arrastra tus archivos aquí</h4>
+                        <p class="text-gray-600 mb-4">o haz clic para seleccionar archivos</p>
+                        <button type="button" id="btn-seleccionar-archivos" class="btn-primary">
+                            Seleccionar Archivos
+                        </button>
+                        <p class="text-xs text-gray-500 mt-3">
+                            Puedes seleccionar múltiples archivos. Límite total: 20MB
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de Archivos Cargados -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h4 class="font-semibold text-gray-900">Archivos seleccionados</h4>
+                    <span id="contador-archivos" class="text-sm text-gray-500">0 archivos</span>
+                </div>
+                
+                <div id="lista-archivos" class="space-y-3 max-h-64 overflow-y-auto">
+                    <!-- Los archivos se mostrarán aquí dinámicamente -->
+                    <div id="sin-archivos" class="text-center py-8 text-gray-500">
+                        <div class="text-2xl mb-2">📁</div>
+                        <p>No se han seleccionado archivos</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información de Privacidad -->
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <span class="text-green-600 text-lg">🔒</span>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-green-800">
+                            <strong>Tu privacidad está protegida:</strong> Todos los archivos se almacenan de forma 
+                            segura y confidencial. Solo el personal autorizado de COSECOVI tendrá acceso a esta información.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de Navegación -->
+            <div class="flex justify-between mt-8 pt-6 border-t">
+                <button type="button" data-prev class="btn-secondary">
+                    ← Anterior
+                </button>
+                <div class="space-x-4">
+                    <button type="button" id="btn-sin-pruebas" class="btn-secondary">
+                        Continuar sin pruebas
+                    </button>
+                    <button type="button" data-next class="btn-primary">
+                        Siguiente
+                    </button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <!-- Modal de Advertencia -->
+    <div id="modal-advertencia" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100">
+                    <span class="text-yellow-600 text-xl">⚠️</span>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mt-2">Continuar sin pruebas</h3>
+                <div class="mt-2 px-7 py-3">
+                    <p class="text-sm text-gray-500">
+                        ¿Estás seguro de que deseas continuar sin adjuntar pruebas?<br>
+                        Las pruebas fortalecen significativamente tu denuncia.
+                    </p>
+                </div>
+                <div class="flex justify-center space-x-4 mt-4">
+                    <button id="btn-cancelar-advertencia" 
+                            class="btn-secondary px-4 py-2">
+                        Cancelar
+                    </button>
+                    <button id="btn-confirmar-sin-pruebas" 
+                            class="btn-primary px-4 py-2">
+                        Sí, Continuar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/denuncia/carga-pruebas.js"></script>
+</body>
+</html>
