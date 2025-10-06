@@ -1,0 +1,745 @@
+/* ==========================================================================
+   VARIABLES Y RESET
+   ========================================================================== */
+
+:root {
+    /* Colores institucionales IPN */
+    --color-ipn-rojo: #B22234;
+    --color-ipn-rojo-oscuro: #8A1B2A;
+    --color-ipn-rojo-claro: #D32F2F;
+    --color-ipn-dorado: #FFD700;
+    
+    /* Colores del sistema */
+    --color-primary: var(--color-ipn-rojo);
+    --color-primary-dark: var(--color-ipn-rojo-oscuro);
+    --color-primary-light: var(--color-ipn-rojo-claro);
+    
+    /* Colores neutros */
+    --color-white: #FFFFFF;
+    --color-gray-50: #F9FAFB;
+    --color-gray-100: #F3F4F6;
+    --color-gray-200: #E5E7EB;
+    --color-gray-300: #D1D5DB;
+    --color-gray-400: #9CA3AF;
+    --color-gray-500: #6B7280;
+    --color-gray-600: #4B5563;
+    --color-gray-700: #374151;
+    --color-gray-800: #1F2937;
+    --color-gray-900: #111827;
+    
+    /* Colores de estado */
+    --color-success: #10B981;
+    --color-warning: #F59E0B;
+    --color-error: #EF4444;
+    --color-info: #3B82F6;
+    
+    /* Colores para tipos de denuncia */
+    --color-personal: #EF4444;
+    --color-infraestructura: #10B981;
+    
+    /* Tipografía */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    
+    /* Espaciado */
+    --spacing-1: 0.25rem;
+    --spacing-2: 0.5rem;
+    --spacing-3: 0.75rem;
+    --spacing-4: 1rem;
+    --spacing-5: 1.25rem;
+    --spacing-6: 1.5rem;
+    --spacing-8: 2rem;
+    --spacing-10: 2.5rem;
+    --spacing-12: 3rem;
+    --spacing-16: 4rem;
+    
+    /* Bordes */
+    --border-radius: 0.5rem;
+    --border-radius-lg: 0.75rem;
+    --border-radius-xl: 1rem;
+    --border-radius-2xl: 1.5rem;
+    
+    /* Sombras */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    
+    /* Transiciones */
+    --transition: all 0.3s ease;
+    --transition-slow: all 0.5s ease;
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ==========================================================================
+   RESET Y BASE
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: var(--font-family);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-gray-100) 100%);
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   LAYOUT
+   ========================================================================== */
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-4);
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.header {
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    border-bottom: 4px solid var(--color-primary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-4) 0;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: var(--spacing-3);
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.logo-text h1 {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-1);
+}
+
+.logo-text p {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-600);
+}
+
+.nav-section {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-6);
+}
+
+.user-name {
+    font-weight: 500;
+    color: var(--color-gray-700);
+    padding: var(--spacing-2) var(--spacing-3);
+    background: var(--color-gray-100);
+    border-radius: var(--border-radius);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    color: var(--color-gray-700);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--border-radius);
+}
+
+.nav-link:hover {
+    color: var(--color-primary);
+    background: var(--color-gray-50);
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    background: none;
+    border: none;
+    color: var(--color-error);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--border-radius);
+}
+
+.logout-btn:hover {
+    background: var(--color-red-50);
+    color: var(--color-red-700);
+}
+
+/* ==========================================================================
+   SECCIÓN DE PROGRESO
+   ========================================================================== */
+
+.progress-section {
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-gray-200);
+    padding: var(--spacing-6) 0;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-4);
+}
+
+.progress-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+}
+
+.progress-step {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-600);
+    font-weight: 500;
+}
+
+.progress-bar {
+    height: 6px;
+    background: var(--color-gray-200);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: var(--spacing-6);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: 3px;
+    transition: var(--transition-slow);
+    width: 14.28%;
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.progress-steps::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-gray-200);
+    z-index: 1;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+}
+
+.step-indicator {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-gray-200);
+    color: var(--color-gray-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-bottom: var(--spacing-2);
+    transition: var(--transition);
+    border: 3px solid var(--color-white);
+}
+
+.step.active .step-indicator {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: scale(1.1);
+}
+
+.step.completed .step-indicator {
+    background: var(--color-success);
+    color: var(--color-white);
+}
+
+.step-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-600);
+    text-align: center;
+    font-weight: 500;
+}
+
+.step.active .step-label {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   CONTENIDO PRINCIPAL
+   ========================================================================== */
+
+.main-content {
+    padding: var(--spacing-8) 0;
+}
+
+.denuncia-form {
+    background: var(--color-white);
+    border-radius: var(--border-radius-2xl);
+    box-shadow: var(--shadow-xl);
+    padding: var(--spacing-8);
+    border-top: 4px solid var(--color-primary);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: var(--spacing-8);
+}
+
+.form-title {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-3);
+}
+
+.form-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   OPCIONES DE DENUNCIA
+   ========================================================================== */
+
+.denuncia-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--spacing-6);
+    margin-bottom: var(--spacing-8);
+}
+
+.denuncia-option {
+    cursor: pointer;
+}
+
+.denuncia-radio {
+    display: none;
+}
+
+.option-card {
+    background: var(--color-white);
+    border: 3px solid var(--color-gray-200);
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-6);
+    transition: var(--transition);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.denuncia-radio:checked + .option-card {
+    border-color: var(--color-primary);
+    background: linear-gradient(135deg, var(--color-white) 0%, var(--color-gray-50) 100%);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.denuncia-option:hover .option-card {
+    border-color: var(--color-primary-light);
+    transform: translateY(-2px);
+}
+
+.option-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-4);
+    font-size: var(--font-size-2xl);
+    color: var(--color-white);
+    transition: var(--transition);
+}
+
+.personal-icon {
+    background: linear-gradient(135deg, var(--color-personal), #DC2626);
+}
+
+.infraestructura-icon {
+    background: linear-gradient(135deg, var(--color-infraestructura), #059669);
+}
+
+.denuncia-radio:checked + .option-card .option-icon {
+    transform: scale(1.1);
+}
+
+.option-content {
+    text-align: center;
+}
+
+.option-title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-3);
+}
+
+.option-description {
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-4);
+    line-height: 1.6;
+}
+
+.option-examples {
+    list-style: none;
+    text-align: left;
+    margin-bottom: var(--spacing-4);
+}
+
+.option-examples li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) 0;
+    color: var(--color-gray-700);
+    font-size: var(--font-size-sm);
+}
+
+.option-examples i {
+    width: 16px;
+    color: var(--color-primary);
+}
+
+.option-badge {
+    position: absolute;
+    top: var(--spacing-4);
+    right: var(--spacing-4);
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   ACCIONES DEL FORMULARIO
+   ========================================================================== */
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--spacing-6);
+    border-top: 1px solid var(--color-gray-200);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3) var(--spacing-6);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    min-width: 120px;
+}
+
+.btn-secondary {
+    background: var(--color-gray-200);
+    color: var(--color-gray-700);
+}
+
+.btn-secondary:hover {
+    background: var(--color-gray-300);
+    transform: translateX(-2px);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: var(--color-white);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* ==========================================================================
+   NOTIFICACIONES
+   ========================================================================== */
+
+.notification-container {
+    position: fixed;
+    top: var(--spacing-4);
+    right: var(--spacing-4);
+    z-index: 1000;
+}
+
+.notification {
+    background: var(--color-white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-4);
+    margin-bottom: var(--spacing-2);
+    box-shadow: var(--shadow-lg);
+    border-left: 4px solid;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    min-width: 300px;
+    animation: slideInRight 0.3s ease-out;
+}
+
+.notification.success {
+    border-left-color: var(--color-success);
+}
+
+.notification.error {
+    border-left-color: var(--color-error);
+}
+
+.notification.warning {
+    border-left-color: var(--color-warning);
+}
+
+.notification.info {
+    border-left-color: var(--color-info);
+}
+
+.notification-icon {
+    font-size: var(--font-size-xl);
+}
+
+.notification.success .notification-icon {
+    color: var(--color-success);
+}
+
+.notification.error .notification-icon {
+    color: var(--color-error);
+}
+
+.notification.warning .notification-icon {
+    color: var(--color-warning);
+}
+
+.notification.info .notification-icon {
+    color: var(--color-info);
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-title {
+    font-weight: 600;
+    margin-bottom: var(--spacing-1);
+}
+
+.notification-message {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-600);
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: var(--color-gray-400);
+    cursor: pointer;
+    padding: var(--spacing-1);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.notification-close:hover {
+    color: var(--color-gray-600);
+    background: var(--color-gray-100);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+   ANIMACIONES
+   ========================================================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--spacing-3);
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: var(--spacing-3);
+        text-align: center;
+    }
+    
+    .nav-section {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--spacing-3);
+    }
+    
+    .progress-header {
+        flex-direction: column;
+        gap: var(--spacing-2);
+        text-align: center;
+    }
+    
+    .progress-steps {
+        flex-direction: column;
+        gap: var(--spacing-3);
+    }
+    
+    .progress-steps::before {
+        display: none;
+    }
+    
+    .step {
+        flex-direction: row;
+        gap: var(--spacing-3);
+    }
+    
+    .step-label {
+        text-align: left;
+    }
+    
+    .denuncia-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .denuncia-form {
+        padding: var(--spacing-6);
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: var(--spacing-3);
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .denuncia-form {
+        padding: var(--spacing-4);
+    }
+    
+    .option-card {
+        padding: var(--spacing-4);
+    }
+    
+    .notification {
+        min-width: auto;
+        max-width: calc(100vw - var(--spacing-8));
+    }
+}
+
+/* ==========================================================================
+   UTILIDADES
+   ========================================================================== */
+
+.hidden {
+    display: none !important;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}

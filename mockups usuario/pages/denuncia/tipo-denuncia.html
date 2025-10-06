@@ -3,115 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tipo de Denuncia - COSECOVI</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="../../css/components/auth.css">
-    <link rel="stylesheet" href="../../css/components/dashboard.css">
-    <link rel="stylesheet" href="../../css/components/forms.css">
-    <link rel="stylesheet" href="../../css/components/responsive.css">
+    <title>Tipo de Denuncia - Defensoría Politécnica</title>
+    <link rel="stylesheet" href="css/tipo-denuncia.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-50">
+<body>
     <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <a href="../../index.html" class="flex items-center">
-                        <img src="../../assets/images/ipn.png" alt="IPN" class="h-10">
-                        <div class="ml-3">
-                            <h1 class="text-xl font-bold text-gray-900">COSECOVI</h1>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <a href="index.html" class="logo-link">
+                        <img src="assets/images/logo-ipn.png" alt="IPN" class="logo">
+                        <div class="logo-text">
+                            <h1>Defensoría Politécnica</h1>
+                            <p>Instituto Politécnico Nacional</p>
                         </div>
                     </a>
                 </div>
-                <nav class="flex items-center space-x-6">
-                    <span id="nombre-usuario" class="text-gray-700"></span>
-                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600">Inicio</a>
-                    <button id="cerrar-sesion" class="text-red-600 hover:text-red-700">Cerrar Sesión</button>
+                <nav class="nav-section">
+                    <span id="nombre-usuario" class="user-name"></span>
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        Inicio
+                    </a>
+                    <button id="cerrar-sesion" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Cerrar Sesión
+                    </button>
                 </nav>
             </div>
         </div>
     </header>
 
-    <!-- Progreso -->
-    <div class="bg-white border-b">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-2xl font-bold text-gray-900">Nueva Denuncia</h2>
-                <span class="text-sm text-gray-500">Paso 1 de 7</span>
+    <!-- Progress Section -->
+    <section class="progress-section">
+        <div class="container">
+            <div class="progress-header">
+                <h2 class="progress-title">Nueva Denuncia</h2>
+                <span class="progress-step">Paso 1 de 7</span>
             </div>
             
             <div class="progress-bar">
-                <div class="progress-fill" style="width: 14%"></div>
+                <div class="progress-fill" id="progressFill"></div>
             </div>
             
-            <div class="flex justify-between mt-2">
-                <span class="step-indicator">1</span>
-                <span class="step-indicator-inactive">2</span>
-                <span class="step-indicator-inactive">3</span>
-                <span class="step-indicator-inactive">4</span>
-                <span class="step-indicator-inactive">5</span>
-                <span class="step-indicator-inactive">6</span>
-                <span class="step-indicator-inactive">7</span>
+            <div class="progress-steps">
+                <div class="step active">
+                    <div class="step-indicator">1</div>
+                    <span class="step-label">Tipo</span>
+                </div>
+                <div class="step">
+                    <div class="step-indicator">2</div>
+                    <span class="step-label">Detalles</span>
+                </div>
+                <div class="step">
+                    <div class="step-indicator">3</div>
+                    <span class="step-label">Ubicación</span>
+                </div>
+                <div class="step">
+                    <div class="step-indicator">4</div>
+                    <span class="step-label">Involucrados</span>
+                </div>
+                <div class="step">
+                    <div class="step-indicator">5</div>
+                    <span class="step-label">Evidencias</span>
+                </div>
+                <div class="step">
+                    <div class="step-indicator">6</div>
+                    <span class="step-label">Revisión</span>
+                </div>
+                <div class="step">
+                    <div class="step-indicator">7</div>
+                    <span class="step-label">Confirmación</span>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <main class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <!-- Formulario Tipo de Denuncia -->
-        <form class="card form-step" data-step="1">
-            <div class="text-center mb-8">
-                <h3 class="text-2xl font-bold text-gray-900 mb-2">Tipo de Denuncia</h3>
-                <p class="text-gray-600">Selecciona el tipo de situación que deseas reportar</p>
-            </div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Formulario Tipo de Denuncia -->
+            <form class="denuncia-form" id="tipoDenunciaForm">
+                <div class="form-header">
+                    <h3 class="form-title">Tipo de Denuncia</h3>
+                    <p class="form-subtitle">Selecciona el tipo de situación que deseas reportar</p>
+                </div>
 
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Denuncia Personal -->
-                <label class="cursor-pointer group">
-                    <input type="radio" name="tipoDenuncia" value="personal" class="hidden" required>
-                    <div class="card h-full border-2 border-gray-200 group-hover:border-blue-300 group-hover:bg-blue-50 transition duration-200">
-                        <div class="text-center">
-                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-2xl">👤</span>
+                <div class="denuncia-options">
+                    <!-- Denuncia Personal -->
+                    <label class="denuncia-option">
+                        <input type="radio" name="tipoDenuncia" value="personal" class="denuncia-radio" required>
+                        <div class="option-card">
+                            <div class="option-icon personal-icon">
+                                <i class="fas fa-user-shield"></i>
                             </div>
-                            <h4 class="text-xl font-semibold text-gray-900 mb-2">Denuncia Personal</h4>
-                            <p class="text-gray-600 text-sm">
-                                Situaciones que afectan directamente a personas como violencia, 
-                                acoso, discriminación, hostigamiento, etc.
-                            </p>
-                        </div>
-                    </div>
-                </label>
-
-                <!-- Denuncia de Infraestructura -->
-                <label class="cursor-pointer group">
-                    <input type="radio" name="tipoDenuncia" value="infraestructura" class="hidden" required>
-                    <div class="card h-full border-2 border-gray-200 group-hover:border-blue-300 group-hover:bg-blue-50 transition duration-200">
-                        <div class="text-center">
-                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="text-2xl">🏢</span>
+                            <div class="option-content">
+                                <h4 class="option-title">Denuncia Personal</h4>
+                                <p class="option-description">
+                                    Situaciones que afectan directamente a personas como violencia, 
+                                    acoso, discriminación, hostigamiento, etc.
+                                </p>
+                                <ul class="option-examples">
+                                    <li><i class="fas fa-ban"></i> Acoso sexual</li>
+                                    <li><i class="fas fa-exclamation-triangle"></i> Violencia psicológica</li>
+                                    <li><i class="fas fa-times-circle"></i> Discriminación</li>
+                                </ul>
                             </div>
-                            <h4 class="text-xl font-semibold text-gray-900 mb-2">Infraestructura</h4>
-                            <p class="text-gray-600 text-sm">
-                                Reportes sobre instalaciones, equipamiento, sanidad, mantenimiento, 
-                                seguridad física de espacios, etc.
-                            </p>
+                            <div class="option-badge">
+                                <span>Protección de Derechos</span>
+                            </div>
                         </div>
-                    </div>
-                </label>
-            </div>
+                    </label>
 
-            <div class="flex justify-between mt-8 pt-6 border-t">
-                <a href="../../index.html" class="btn-secondary">
-                    Cancelar
-                </a>
-                <button type="button" data-next class="btn-primary">
-                    Siguiente
-                </button>
-            </div>
-        </form>
+                    <!-- Denuncia de Infraestructura -->
+                    <label class="denuncia-option">
+                        <input type="radio" name="tipoDenuncia" value="infraestructura" class="denuncia-radio" required>
+                        <div class="option-card">
+                            <div class="option-icon infraestructura-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="option-content">
+                                <h4 class="option-title">Infraestructura y Servicios</h4>
+                                <p class="option-description">
+                                    Reportes sobre instalaciones, equipamiento, sanidad, mantenimiento, 
+                                    seguridad física de espacios, etc.
+                                </p>
+                                <ul class="option-examples">
+                                    <li><i class="fas fa-tools"></i> Mantenimiento de instalaciones</li>
+                                    <li><i class="fas fa-shield-alt"></i> Seguridad física</li>
+                                    <li><i class="fas fa-hand-holding-water"></i> Servicios básicos</li>
+                                </ul>
+                            </div>
+                            <div class="option-badge">
+                                <span>Calidad de Instalaciones</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <a href="index.html" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                        Cancelar
+                    </a>
+                    <button type="button" class="btn btn-primary" id="siguienteBtn">
+                        Siguiente
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
     </main>
 
-    <script src="../../js/denuncia/tipo-denuncia.js"></script>
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <script src="js/tipo-denuncia.js"></script>
 </body>
 </html>

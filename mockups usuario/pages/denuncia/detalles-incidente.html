@@ -3,185 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Incidente - COSECOVI</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="../../css/components/auth.css">
-    <link rel="stylesheet" href="../../css/components/dashboard.css">
-    <link rel="stylesheet" href="../../css/components/forms.css">
-    <link rel="stylesheet" href="../../css/components/responsive.css">
+    <title>Detalles del Incidente - Defensoría Politécnica</title>
+    <link rel="stylesheet" href="/mockups usuario/css/denuncia/detalles-incidente.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-50">
+<body>
     <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <a href="../../index.html" class="flex items-center">
-                        <img src="../../assets/images/ipn.png" alt="IPN" class="h-10">
-                        <div class="ml-3">
-                            <h1 class="text-xl font-bold text-gray-900">COSECOVI</h1>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <a href="index.html" class="logo-link">
+                        <img src="/mockups usuario/assets/images/ipn.png" alt="IPN" class="logo">
+                        <div class="logo-text">
+                            <h1>Defensoría Politécnica</h1>
+                            <p>Instituto Politécnico Nacional</p>
                         </div>
                     </a>
                 </div>
-                <nav class="flex items-center space-x-6">
-                    <span id="nombre-usuario" class="text-gray-700"></span>
-                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600">Inicio</a>
-                    <button id="cerrar-sesion" class="text-red-600 hover:text-red-700">Cerrar Sesión</button>
+                <nav class="nav-section">
+                    <span id="nombre-usuario" class="user-name"></span>
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        Inicio
+                    </a>
+                    <button id="cerrar-sesion" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Cerrar Sesión
+                    </button>
                 </nav>
             </div>
         </div>
     </header>
 
-    <!-- Progreso -->
-    <div class="bg-white border-b">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-2xl font-bold text-gray-900">Nueva Denuncia</h2>
-                <span class="text-sm text-gray-500">Paso 2 de 7</span>
+    <!-- Progress Section -->
+    <section class="progress-section">
+        <div class="container">
+            <div class="progress-header">
+                <h2 class="progress-title">Nueva Denuncia</h2>
+                <span class="progress-step">Paso 2 de 7</span>
             </div>
             
             <div class="progress-bar">
-                <div class="progress-fill" style="width: 29%"></div>
+                <div class="progress-fill" id="progressFill"></div>
             </div>
             
-            <div class="flex justify-between mt-2">
-                <span class="step-indicator">✓</span>
-                <span class="step-indicator">2</span>
-                <span class="step-indicator-inactive">3</span>
-                <span class="step-indicator-inactive">4</span>
-                <span class="step-indicator-inactive">5</span>
-                <span class="step-indicator-inactive">6</span>
-                <span class="step-indicator-inactive">7</span>
+            <div class="progress-steps">
+                <div class="step completed">
+                    <div class="step-indicator">✓</div>
+                    <span class="step-label">Tipo</span>
+                </div>
+                <div class="step active">
+                    <div class="step-indicator">2</div>
+                    <span class="step-label">Detalles</span>
+                </div>
+                <div class="step">
+                    <div class="step-indicator">3</div>
+                    <span class="step-label">Ubicación</span>
+                </div>
+                <div class="step">
+                    <div class="step-indicator">4</div>
+                    <span class="step-label">Involucrados</span>
+                </div>
+                <div class="step">
+                    <div class="step-indicator">5</div>
+                    <span class="step-label">Evidencias</span>
+                </div>
+                <div class="step">
+                    <div class="step-indicator">6</div>
+                    <span class="step-label">Revisión</span>
+                </div>
+                <div class="step">
+                    <div class="step-indicator">7</div>
+                    <span class="step-label">Confirmación</span>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <main class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <!-- Formulario Detalles del Incidente -->
-        <form class="card form-step" data-step="2">
-            <div class="text-center mb-8">
-                <h3 class="text-2xl font-bold text-gray-900 mb-2">Detalles del Incidente</h3>
-                <p class="text-gray-600">Proporciona información específica sobre lo ocurrido</p>
-            </div>
-
-            <!-- Fecha y Hora -->
-            <div class="grid md:grid-cols-2 gap-6 mb-6">
-                <div>
-                    <label for="fecha-incidente" class="form-label">Fecha del Incidente *</label>
-                    <input type="date" id="fecha-incidente" name="fechaIncidente" 
-                           class="form-input" data-validate="required" required
-                           max="">
-                    <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                    <p class="text-xs text-gray-500 mt-1">Selecciona la fecha cuando ocurrió el incidente</p>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Formulario Detalles del Incidente -->
+            <form class="incidente-form" id="detallesIncidenteForm">
+                <div class="form-header">
+                    <h3 class="form-title">Detalles del Incidente</h3>
+                    <p class="form-subtitle">Proporciona información específica sobre lo ocurrido</p>
                 </div>
 
-                <div>
-                    <label for="hora-incidente" class="form-label">Hora Aproximada *</label>
-                    <input type="time" id="hora-incidente" name="horaIncidente" 
-                           class="form-input" data-validate="required" required>
-                    <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                    <p class="text-xs text-gray-500 mt-1">Hora en que ocurrió o comenzó el incidente</p>
+                <!-- Fecha y Hora -->
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fecha-incidente" class="form-label">
+                            <i class="fas fa-calendar-day"></i>
+                            Fecha del Incidente *
+                        </label>
+                        <input type="date" id="fecha-incidente" name="fechaIncidente" 
+                               class="form-input" required>
+                        <div class="error-message"></div>
+                        <p class="helper-text">Selecciona la fecha cuando ocurrió el incidente</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hora-incidente" class="form-label">
+                            <i class="fas fa-clock"></i>
+                            Hora Aproximada *
+                        </label>
+                        <input type="time" id="hora-incidente" name="horaIncidente" 
+                               class="form-input" required>
+                        <div class="error-message"></div>
+                        <p class="helper-text">Hora en que ocurrió o comenzó el incidente</p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Lugar del Incidente -->
-            <div class="mb-6">
-                <label for="lugar-incidente" class="form-label">Lugar del Incidente *</label>
-                <select id="lugar-incidente" name="lugarIncidente" 
-                        class="form-input" data-validate="required" required>
-                    <option value="">Selecciona el lugar donde ocurrió</option>
-                    <optgroup label="Unidades Académicas">
-                        <option value="escom">ESCOM - Escuela Superior de Cómputo</option>
-                        <option value="esime">ESIME - Escuela Superior de Ingeniería Mecánica y Eléctrica</option>
-                        <option value="esca">ESCA - Escuela Superior de Comercio y Administración</option>
-                        <option value="upiita">UPIITA - Unidad Profesional Interdisciplinaria en Ingeniería</option>
-                        <option value="cic">CIC - Centro de Investigación en Computación</option>
-                        <option value="cecyt">CECyT - Centro de Estudios Científicos y Tecnológicos</option>
-                    </optgroup>
-                    <optgroup label="Áreas Comunes">
-                        <option value="biblioteca">Biblioteca</option>
-                        <option value="cafeteria">Cafetería</option>
-                        <option value="estacionamiento">Estacionamiento</option>
-                        <option value="canchas">Canchas Deportivas</option>
-                        <option value="jardin">Jardines</option>
-                        <option value="baños">Baños</option>
-                    </optgroup>
-                    <optgroup label="Oficinas Administrativas">
-                        <option value="direccion">Dirección</option>
-                        <option value="servicios_escolares">Servicios Escolares</option>
-                        <option value="recursos_humanos">Recursos Humanos</option>
-                        <option value="finanzas">Finanzas</option>
-                    </optgroup>
-                    <optgroup label="Otros">
-                        <option value="transporte">Transporte Escolar</option>
-                        <option value="entrada_principal">Entrada Principal</option>
-                        <option value="exterior">Exterior de las Instalaciones</option>
-                        <option value="online">En Línea / Plataformas Digitales</option>
-                        <option value="otro">Otro Lugar</option>
-                    </optgroup>
-                </select>
-                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
-            </div>
+                <!-- Lugar del Incidente -->
+                <div class="form-group">
+                    <label for="lugar-incidente" class="form-label">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Lugar del Incidente *
+                    </label>
+                    <select id="lugar-incidente" name="lugarIncidente" class="form-input" required>
+                        <option value="">Selecciona el lugar donde ocurrió</option>
+                        <optgroup label="Unidades Académicas">
+                            <option value="escom">ESCOM - Escuela Superior de Cómputo</option>
+                            <option value="esime">ESIME - Escuela Superior de Ingeniería Mecánica y Eléctrica</option>
+                            <option value="esca">ESCA - Escuela Superior de Comercio y Administración</option>
+                            <option value="upiita">UPIITA - Unidad Profesional Interdisciplinaria en Ingeniería</option>
+                            <option value="cic">CIC - Centro de Investigación en Computación</option>
+                            <option value="cecyt">CECyT - Centro de Estudios Científicos y Tecnológicos</option>
+                        </optgroup>
+                        <optgroup label="Áreas Comunes">
+                            <option value="biblioteca">Biblioteca</option>
+                            <option value="cafeteria">Cafetería</option>
+                            <option value="estacionamiento">Estacionamiento</option>
+                            <option value="canchas">Canchas Deportivas</option>
+                            <option value="jardin">Jardines</option>
+                            <option value="baños">Baños</option>
+                        </optgroup>
+                        <optgroup label="Oficinas Administrativas">
+                            <option value="direccion">Dirección</option>
+                            <option value="servicios_escolares">Servicios Escolares</option>
+                            <option value="recursos_humanos">Recursos Humanos</option>
+                            <option value="finanzas">Finanzas</option>
+                        </optgroup>
+                        <optgroup label="Otros">
+                            <option value="transporte">Transporte Escolar</option>
+                            <option value="entrada_principal">Entrada Principal</option>
+                            <option value="exterior">Exterior de las Instalaciones</option>
+                            <option value="online">En Línea / Plataformas Digitales</option>
+                            <option value="otro">Otro Lugar</option>
+                        </optgroup>
+                    </select>
+                    <div class="error-message"></div>
+                </div>
 
-            <!-- Lugar específico (si selecciona "otro") -->
-            <div id="lugar-especifico-container" class="mb-6 hidden">
-                <label for="lugar-especifico" class="form-label">Especifica el lugar *</label>
-                <input type="text" id="lugar-especifico" name="lugarEspecifico" 
-                       class="form-input" placeholder="Describe detalladamente el lugar del incidente">
-                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
-            </div>
+                <!-- Lugar específico (si selecciona "otro") -->
+                <div id="lugar-especifico-container" class="form-group hidden">
+                    <label for="lugar-especifico" class="form-label">
+                        <i class="fas fa-map-pin"></i>
+                        Especifica el lugar *
+                    </label>
+                    <input type="text" id="lugar-especifico" name="lugarEspecifico" 
+                           class="form-input" placeholder="Describe detalladamente el lugar del incidente">
+                    <div class="error-message"></div>
+                </div>
 
-            <!-- Descripción de los Hechos -->
-            <div class="mb-6">
-                <label for="descripcion-hechos" class="form-label">Descripción de los Hechos *</label>
-                <textarea id="descripcion-hechos" name="descripcionHechos" 
-                          class="form-input" rows="6" 
-                          placeholder="Describe detalladamente lo que ocurrió, incluyendo:
+                <!-- Descripción de los Hechos con Violentómetro -->
+                <div class="descripcion-container">
+                    <div class="descripcion-section">
+                        <label for="descripcion-hechos" class="form-label">
+                            <i class="fas fa-file-alt"></i>
+                            Descripción de los Hechos *
+                        </label>
+                        <textarea id="descripcion-hechos" name="descripcionHechos" 
+                                  class="form-input" rows="6" 
+                                  placeholder="Describe detalladamente lo que ocurrió, incluyendo:
 - Qué sucedió exactamente
 - Cómo comenzó la situación
 - Qué acciones específicas se llevaron a cabo
 - Cómo terminó el incidente
 - Cualquier otro detalle relevante"
-                          data-validate="required" required></textarea>
-                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                <div class="flex justify-between items-center mt-2">
-                    <p class="text-xs text-gray-500">
-                        Sé lo más específico posible. Esta información es crucial para el análisis del caso.
-                    </p>
-                    <span id="contador-caracteres" class="text-xs text-gray-500">0/5000 caracteres</span>
-                </div>
-            </div>
-
-            <!-- Información Adicional -->
-            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                <div class="flex">
-                    <div class="flex-shrink-0">
-                        <span class="text-blue-600 text-lg">💡</span>
+                                  required></textarea>
+                        <div class="error-message"></div>
+                        <div class="textarea-footer">
+                            <p class="helper-text">
+                                Sé lo más específico posible. Esta información es crucial para el análisis del caso.
+                            </p>
+                            <span id="contador-caracteres" class="char-counter">0/5000 caracteres</span>
+                        </div>
                     </div>
-                    <div class="ml-3">
-                        <p class="text-sm text-blue-800">
-                            <strong>Consejo:</strong> Incluye todos los detalles que recuerdes, incluso aquellos 
-                            que puedan parecer insignificantes. La información sobre el contexto, 
-                            testigos presentes, y secuencia de eventos ayuda significativamente 
-                            en la investigación.
+
+                    <!-- Violentómetro -->
+                    <div class="violentometro-section">
+                        <div class="violentometro-header">
+                            <h4 class="violentometro-title">
+                                <i class="fas fa-temperature-high"></i>
+                                Violentómetro IPN
+                            </h4>
+                            <p class="violentometro-subtitle">Identifica el nivel de violencia</p>
+                        </div>
+                        
+                        <div class="violentometro">
+                            <!-- Nivel 3 - Alto -->
+                            <div class="nivel-violencia nivel-3" data-nivel="3">
+                                <div class="nivel-header">
+                                    <span class="nivel-indicador">3</span>
+                                    <span class="nivel-titulo">¡Necesitas ayuda profesional!</span>
+                                </div>
+                                <div class="nivel-conductas">
+                                    <div class="conducta" data-conducta="violar">Violar</div>
+                                    <div class="conducta" data-conducta="abuso sexual">Abuso sexual</div>
+                                    <div class="conducta" data-conducta="mutilar">Mutilar</div>
+                                    <div class="conducta" data-conducta="asesinar">Asesinar</div>
+                                    <div class="conducta" data-conducta="homicidio">Homicidio</div>
+                                    <div class="conducta" data-conducta="feminicidio">Feminicidio</div>
+                                </div>
+                            </div>
+
+                            <!-- Nivel 2 - Medio -->
+                            <div class="nivel-violencia nivel-2" data-nivel="2">
+                                <div class="nivel-header">
+                                    <span class="nivel-indicador">2</span>
+                                    <span class="nivel-titulo">¡Reacciona! ¡No te dejes destruir!</span>
+                                </div>
+                                <div class="nivel-conductas">
+                                    <div class="conducta" data-conducta="golpear">Golpear "jugando"</div>
+                                    <div class="conducta" data-conducta="pellizcar">Pellizcar</div>
+                                    <div class="conducta" data-conducta="arañar">Arañar</div>
+                                    <div class="conducta" data-conducta="empujar">Empujar</div>
+                                    <div class="conducta" data-conducta="jalonear">Jalonear</div>
+                                    <div class="conducta" data-conducta="cachetear">Cachetear</div>
+                                    <div class="conducta" data-conducta="patear">Patear</div>
+                                    <div class="conducta" data-conducta="encerrar">Encerrar</div>
+                                    <div class="conducta" data-conducta="aislar">Aislar</div>
+                                    <div class="conducta" data-conducta="sextorsión">Sextorsión</div>
+                                    <div class="conducta" data-conducta="amenazar">Amenazar con objetos o armas</div>
+                                    <div class="conducta" data-conducta="difundir">Difundir contenido íntimo</div>
+                                    <div class="conducta" data-conducta="forzar">Forzar relación sexual</div>
+                                    <div class="conducta" data-conducta="amenaza de muerte">Amenaza de muerte</div>
+                                </div>
+                            </div>
+
+                            <!-- Nivel 1 - Bajo -->
+                            <div class="nivel-violencia nivel-1" data-nivel="1">
+                                <div class="nivel-header">
+                                    <span class="nivel-indicador">1</span>
+                                    <span class="nivel-titulo">¡Ten cuidado! ¡La violencia aumentará!</span>
+                                </div>
+                                <div class="nivel-conductas">
+                                    <div class="conducta" data-conducta="bromas hirientes">Bromas hirientes</div>
+                                    <div class="conducta" data-conducta="chantajear">Chantajear</div>
+                                    <div class="conducta" data-conducta="mentir">Mentir</div>
+                                    <div class="conducta" data-conducta="engañar">Engañar</div>
+                                    <div class="conducta" data-conducta="ignorar">Ignorar</div>
+                                    <div class="conducta" data-conducta="ley del hielo">Ley del hielo</div>
+                                    <div class="conducta" data-conducta="celar">Celar</div>
+                                    <div class="conducta" data-conducta="acechar">Acechar</div>
+                                    <div class="conducta" data-conducta="stalkear">Stalkear redes</div>
+                                    <div class="conducta" data-conducta="culpabilizar">Culpabilizar</div>
+                                    <div class="conducta" data-conducta="descalificar">Descalificar</div>
+                                    <div class="conducta" data-conducta="ridiculizar">Ridiculizar</div>
+                                    <div class="conducta" data-conducta="ofender">Ofender</div>
+                                    <div class="conducta" data-conducta="humillar">Humillar en público</div>
+                                    <div class="conducta" data-conducta="intimidar">Intimidar</div>
+                                    <div class="conducta" data-conducta="controlar">Controlar</div>
+                                    <div class="conducta" data-conducta="destruir">Destruir artículos</div>
+                                    <div class="conducta" data-conducta="manosear">Manosear</div>
+                                    <div class="conducta" data-conducta="caricias agresivas">Caricias agresivas</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Indicador de nivel detectado -->
+                        <div class="nivel-detector">
+                            <div class="detector-header">
+                                <h5>Nivel de violencia detectado</h5>
+                                <div class="nivel-actual" id="nivelActual">
+                                    <span class="nivel-text">Sin detección</span>
+                                    <span class="nivel-badge" id="nivelBadge">-</span>
+                                </div>
+                            </div>
+                            <div class="conductas-detectadas" id="conductasDetectadas">
+                                <p class="sin-deteccion">Escribe tu descripción para detectar conductas violentas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información Adicional -->
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4 class="info-title">Consejo para una buena descripción</h4>
+                        <p class="info-text">
+                            Incluye todos los detalles que recuerdes, incluso aquellos que puedan parecer 
+                            insignificantes. El Violentómetro te ayudará a identificar conductas violentas 
+                            según la clasificación del IPN.
                         </p>
+                        <ul class="info-tips">
+                            <li>Describe los hechos en orden cronológico</li>
+                            <li>Menciona a todas las personas involucradas</li>
+                            <li>Incluye conversaciones específicas si las recuerdas</li>
+                            <li>El Violentómetro resaltará automáticamente las conductas violentas</li>
+                        </ul>
                     </div>
                 </div>
-            </div>
 
-            <!-- Botones de Navegación -->
-            <div class="flex justify-between mt-8 pt-6 border-t">
-                <button type="button" data-prev class="btn-secondary">
-                    ← Anterior
-                </button>
-                <button type="button" data-next class="btn-primary">
-                    Siguiente
-                </button>
-            </div>
-        </form>
+                <!-- Botones de Navegación -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="btnAnterior">
+                        <i class="fas fa-arrow-left"></i>
+                        Anterior
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnSiguiente">
+                        Siguiente
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
     </main>
 
-    <script src="../../js/denuncia/detalles-incidente.js"></script>
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <script src="/mockups usuario/js/denuncia/detalles-indicente.js"></script>
 </body>
 </html>

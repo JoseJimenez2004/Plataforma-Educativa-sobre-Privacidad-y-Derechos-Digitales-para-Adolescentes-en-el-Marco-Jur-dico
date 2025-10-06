@@ -5,161 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Identificación del Agresor - COSECOVI</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="../../css/components/auth.css">
-    <link rel="stylesheet" href="../../css/components/dashboard.css">
-    <link rel="stylesheet" href="../../css/components/forms.css">
-    <link rel="stylesheet" href="../../css/components/responsive.css">
+    <link rel="stylesheet" href="/mockups usuario/css/denuncia/identificacion-agresor.css">
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <a href="../../index.html" class="flex items-center">
-                        <img src="../../assets/images/ipn.png" alt="IPN" class="h-10">
-                        <div class="ml-3">
-                            <h1 class="text-xl font-bold text-gray-900">COSECOVI</h1>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <a href="../../index.html" class="logo-link">
+                        <img src="../../assets/images/ipn.png" alt="IPN" class="logo">
+                        <div class="logo-text">
+                            <h1>COSECOVI</h1>
                         </div>
                     </a>
                 </div>
-                <nav class="flex items-center space-x-6">
-                    <span id="nombre-usuario" class="text-gray-700"></span>
-                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600">Inicio</a>
-                    <button id="cerrar-sesion" class="text-red-600 hover:text-red-700">Cerrar Sesión</button>
+                <nav class="nav-section">
+                    <span id="nombre-usuario" class="user-name"></span>
+                    <a href="../../index.html" class="nav-link">Inicio</a>
+                    <button id="cerrar-sesion" class="logout-btn">Cerrar Sesión</button>
                 </nav>
             </div>
         </div>
     </header>
 
     <!-- Progreso -->
-    <div class="bg-white border-b">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-2xl font-bold text-gray-900">Nueva Denuncia</h2>
-                <span class="text-sm text-gray-500">Paso 3 de 7</span>
+    <div class="progress-section">
+        <div class="container">
+            <div class="progress-header">
+                <h2 class="progress-title">Nueva Denuncia</h2>
+                <span class="progress-step">Paso 3 de 7</span>
             </div>
             
             <div class="progress-bar">
                 <div class="progress-fill" style="width: 43%"></div>
             </div>
             
-            <div class="flex justify-between mt-2">
-                <span class="step-indicator">✓</span>
-                <span class="step-indicator">✓</span>
-                <span class="step-indicator">3</span>
-                <span class="step-indicator-inactive">4</span>
-                <span class="step-indicator-inactive">5</span>
-                <span class="step-indicator-inactive">6</span>
-                <span class="step-indicator-inactive">7</span>
+            <div class="progress-steps">
+                <div class="step completed">
+                    <span class="step-indicator">✓</span>
+                    <span class="step-label">Tipo de Denuncia</span>
+                </div>
+                <div class="step completed">
+                    <span class="step-indicator">✓</span>
+                    <span class="step-label">Detalles del Incidente</span>
+                </div>
+                <div class="step active">
+                    <span class="step-indicator">3</span>
+                    <span class="step-label">Identificación del Involucrado</span>
+                </div>
+                <div class="step">
+                    <span class="step-indicator">4</span>
+                    <span class="step-label">Evidencias</span>
+                </div>
+                <div class="step">
+                    <span class="step-indicator">5</span>
+                    <span class="step-label">Información de Contacto</span>
+                </div>
+                <div class="step">
+                    <span class="step-indicator">6</span>
+                    <span class="step-label">Revisión</span>
+                </div>
+                <div class="step">
+                    <span class="step-indicator">7</span>
+                    <span class="step-label">Confirmación</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <main class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <!-- Formulario Identificación del Agresor -->
-        <form class="card form-step" data-step="3">
-            <div class="text-center mb-8">
-                <h3 class="text-2xl font-bold text-gray-900 mb-2">Identificación del Involucrado</h3>
-                <p class="text-gray-600">Proporciona información sobre la(s) persona(s) involucrada(s) en el incidente</p>
-            </div>
+    <main class="main-content">
+        <div class="container">
+            <!-- Formulario Identificación del Agresor -->
+            <form class="denuncia-form form-step" data-step="3">
+                <div class="form-header">
+                    <h3 class="form-title">Identificación del Involucrado</h3>
+                    <p class="form-subtitle">Proporciona información sobre la(s) persona(s) involucrada(s) en el incidente</p>
+                </div>
 
-            <!-- Información sobre anonimato -->
-            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                <div class="flex">
-                    <div class="flex-shrink-0">
-                        <span class="text-blue-600 text-lg">ℹ️</span>
-                    </div>
-                    <div class="ml-3">
-                        <p class="text-sm text-blue-800">
+                <!-- Información sobre anonimato -->
+                <div class="notification info">
+                    <div class="notification-icon">ℹ️</div>
+                    <div class="notification-content">
+                        <p class="notification-message">
                             <strong>Recordatorio:</strong> Puedes realizar denuncias anónimas. 
                             Si no conoces o no deseas proporcionar información del involucrado, 
                             puedes continuar con el siguiente paso.
                         </p>
                     </div>
                 </div>
-            </div>
 
-            <!-- Lista de Agresores -->
-            <div id="lista-agresores" class="space-y-4 mb-6">
-                <!-- Los agresores se agregarán dinámicamente aquí -->
-                <div class="agresor-item border rounded-lg p-4 bg-white">
-                    <div class="flex justify-between items-start mb-4">
-                        <h4 class="font-semibold text-gray-900">Involucrado #1</h4>
-                        <button type="button" class="btn-eliminar-agresor text-red-600 hover:text-red-800 text-sm">
-                            Eliminar
-                        </button>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="agresor-nombre-1" class="form-label">Nombre o Descripción</label>
-                            <input type="text" id="agresor-nombre-1" name="agresores[0][nombre]" 
-                                   class="form-input" placeholder="Nombre completo o descripción física"
-                                   data-validate="required">
-                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                <!-- Lista de Agresores -->
+                <div id="lista-agresores" class="space-y-4 mb-6">
+                    <!-- Los agresores se agregarán dinámicamente aquí -->
+                    <div class="agresor-item border border-gray-200 rounded-lg p-4 bg-white">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="font-semibold text-gray-900">Involucrado #1</h4>
+                            <button type="button" class="text-red-600 hover:text-red-800 text-sm">
+                                Eliminar
+                            </button>
                         </div>
                         
-                        <div>
-                            <label for="agresor-rol-1" class="form-label">Rol o Cargo</label>
-                            <select id="agresor-rol-1" name="agresores[0][rol]" class="form-input">
-                                <option value="">Selecciona un rol</option>
-                                <option value="estudiante">Estudiante</option>
-                                <option value="docente">Docente</option>
-                                <option value="administrativo">Personal Administrativo</option>
-                                <option value="directivo">Personal Directivo</option>
-                                <option value="seguridad">Personal de Seguridad</option>
-                                <option value="mantenimiento">Personal de Mantenimiento</option>
-                                <option value="externo">Persona Externa</option>
-                                <option value="otro">Otro</option>
-                            </select>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="agresor-nombre-1" class="form-label">Nombre o Descripción</label>
+                                <input type="text" id="agresor-nombre-1" name="agresores[0][nombre]" 
+                                       class="form-input" placeholder="Nombre completo o descripción física"
+                                       data-validate="required">
+                                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                            </div>
+                            
+                            <div>
+                                <label for="agresor-rol-1" class="form-label">Rol o Cargo</label>
+                                <select id="agresor-rol-1" name="agresores[0][rol]" class="form-input">
+                                    <option value="">Selecciona un rol</option>
+                                    <option value="estudiante">Estudiante</option>
+                                    <option value="docente">Docente</option>
+                                    <option value="administrativo">Personal Administrativo</option>
+                                    <option value="directivo">Personal Directivo</option>
+                                    <option value="seguridad">Personal de Seguridad</option>
+                                    <option value="mantenimiento">Personal de Mantenimiento</option>
+                                    <option value="externo">Persona Externa</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="agresor-descripcion-1" class="form-label">Descripción Adicional</label>
+                            <textarea id="agresor-descripcion-1" name="agresores[0][descripcion]" 
+                                      class="form-input" rows="3" 
+                                      placeholder="Características físicas, comportamiento, ubicación, etc."></textarea>
                         </div>
                     </div>
-                    
-                    <div class="mt-4">
-                        <label for="agresor-descripcion-1" class="form-label">Descripción Adicional</label>
-                        <textarea id="agresor-descripcion-1" name="agresores[0][descripcion]" 
-                                  class="form-input" rows="3" 
-                                  placeholder="Características físicas, comportamiento, ubicación, etc."></textarea>
+                </div>
+
+                <!-- Botón Agregar otro agresor -->
+                <div class="text-center mb-6">
+                    <button type="button" id="btn-agregar-agresor" 
+                            class="btn btn-secondary">
+                        <span>➕</span>
+                        Agregar otro involucrado
+                    </button>
+                    <p class="text-xs text-gray-500 mt-2">Máximo 10 involucrados</p>
+                </div>
+
+                <!-- Opción para continuar sin agregar agresores -->
+                <div class="border-t border-gray-200 pt-6 mt-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">
+                                Si no deseas identificar involucrados, puedes continuar al siguiente paso.
+                            </p>
+                        </div>
+                        <button type="button" id="btn-sin-agresores" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                            Continuar sin identificar
+                        </button>
                     </div>
                 </div>
-            </div>
 
-            <!-- Botón Agregar otro agresor -->
-            <div class="text-center mb-6">
-                <button type="button" id="btn-agregar-agresor" 
-                        class="btn-secondary inline-flex items-center">
-                    <span class="mr-2">➕</span>
-                    Agregar otro involucrado
-                </button>
-                <p class="text-xs text-gray-500 mt-2">Máximo 10 involucrados</p>
-            </div>
-
-            <!-- Opción para continuar sin agregar agresores -->
-            <div class="border-t pt-6 mt-6">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm text-gray-600">
-                            Si no deseas identificar involucrados, puedes continuar al siguiente paso.
-                        </p>
-                    </div>
-                    <button type="button" id="btn-sin-agresores" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                        Continuar sin identificar
+                <!-- Botones de Navegación -->
+                <div class="form-actions">
+                    <button type="button" data-prev class="btn btn-secondary">
+                        ← Anterior
+                    </button>
+                    <button type="button" data-next class="btn btn-primary">
+                        Siguiente
                     </button>
                 </div>
-            </div>
-
-            <!-- Botones de Navegación -->
-            <div class="flex justify-between mt-8 pt-6 border-t">
-                <button type="button" data-prev class="btn-secondary">
-                    ← Anterior
-                </button>
-                <button type="button" data-next class="btn-primary">
-                    Siguiente
-                </button>
-            </div>
-        </form>
+            </form>
+        </div>
     </main>
 
     <script src="../../js/denuncia/identificacion-agresor.js"></script>
