@@ -3,215 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revisión y Envío - COSECOVI</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="../../css/components/auth.css">
-    <link rel="stylesheet" href="../../css/components/dashboard.css">
-    <link rel="stylesheet" href="../../css/components/forms.css">
-    <link rel="stylesheet" href="../../css/components/responsive.css">
+    <title>Revisión y Envío - Defensoría Politécnica</title>
+    <link rel="stylesheet" href="/mockups usuario/css/denuncia/revision-envio.css">
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <a href="../../index.html" class="flex items-center">
-                        <img src="../../assets/images/ipn.png" alt="IPN" class="h-10">
-                        <div class="ml-3">
-                            <h1 class="text-xl font-bold text-gray-900">COSECOVI</h1>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <a href="../../index.html" class="logo-link">
+                        <img src="../../assets/images/ipn.png" alt="IPN" class="logo">
+                        <div class="logo-text">
+                            <h1>Defensoría Politécnica</h1>
+                            <p>Comité de Seguridad y Convivencia</p>
                         </div>
                     </a>
                 </div>
-                <nav class="flex items-center space-x-6">
-                    <span id="nombre-usuario" class="text-gray-700"></span>
-                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600">Inicio</a>
-                    <button id="cerrar-sesion" class="text-red-600 hover:text-red-700">Cerrar Sesión</button>
+                <nav class="nav-section">
+                    <span class="user-name" id="nombre-usuario"></span>
+                    <a href="../../index.html" class="nav-link">
+                        <span>🏠</span>
+                        Inicio
+                    </a>
+                    <button id="cerrar-sesion" class="logout-btn">
+                        <span>🚪</span>
+                        Cerrar Sesión
+                    </button>
                 </nav>
             </div>
         </div>
     </header>
 
     <!-- Progreso -->
-    <div class="bg-white border-b">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-2xl font-bold text-gray-900">Nueva Denuncia</h2>
-                <span class="text-sm text-gray-500">Paso 7 de 7</span>
+    <div class="progress-section">
+        <div class="container">
+            <div class="progress-header">
+                <h2 class="progress-title">Nueva Denuncia</h2>
+                <div class="progress-step">
+                    <span>Paso 7 de 7</span>
+                </div>
             </div>
             
             <div class="progress-bar">
                 <div class="progress-fill" style="width: 100%"></div>
             </div>
             
-            <div class="flex justify-between mt-2">
-                <span class="step-indicator">✓</span>
-                <span class="step-indicator">✓</span>
-                <span class="step-indicator">✓</span>
-                <span class="step-indicator">✓</span>
-                <span class="step-indicator">✓</span>
-                <span class="step-indicator">✓</span>
-                <span class="step-indicator">7</span>
+            <div class="progress-steps">
+                <div class="step completed">
+                    <span class="step-indicator">✓</span>
+                    <span class="step-label">Tipo</span>
+                </div>
+                <div class="step completed">
+                    <span class="step-indicator">✓</span>
+                    <span class="step-label">Datos</span>
+                </div>
+                <div class="step completed">
+                    <span class="step-indicator">✓</span>
+                    <span class="step-label">Agresor</span>
+                </div>
+                <div class="step completed">
+                    <span class="step-indicator">✓</span>
+                    <span class="step-label">Filtro 1</span>
+                </div>
+                <div class="step completed">
+                    <span class="step-indicator">✓</span>
+                    <span class="step-label">Filtro 2</span>
+                </div>
+                <div class="step completed">
+                    <span class="step-indicator">✓</span>
+                    <span class="step-label">Pruebas</span>
+                </div>
+                <div class="step active">
+                    <span class="step-indicator">7</span>
+                    <span class="step-label">Revisión</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <main class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <!-- Resumen de la Denuncia -->
-        <div class="card form-step" data-step="7">
-            <div class="text-center mb-8">
-                <h3 class="text-2xl font-bold text-gray-900 mb-2">Revisión y Envío</h3>
-                <p class="text-gray-600">Verifica que toda la información sea correcta antes de enviar tu denuncia</p>
-            </div>
-
-            <!-- Resumen por Secciones -->
-            <div class="space-y-6">
-                <!-- Tipo de Denuncia -->
-                <div class="border rounded-lg">
-                    <div class="bg-gray-50 px-4 py-3 border-b">
-                        <h4 class="font-semibold text-gray-900">Tipo de Denuncia</h4>
-                    </div>
-                    <div class="p-4">
-                        <p id="resumen-tipo" class="text-gray-700">-</p>
-                    </div>
+    <main class="main-content">
+        <div class="container">
+            <!-- Resumen de la Denuncia -->
+            <form class="denuncia-form form-step" data-step="7">
+                <div class="form-header">
+                    <h3 class="form-title">Revisión y Envío</h3>
+                    <p class="form-subtitle">Verifica que toda la información sea correcta antes de enviar tu denuncia</p>
                 </div>
 
-                <!-- Detalles del Incidente -->
-                <div class="border rounded-lg">
-                    <div class="bg-gray-50 px-4 py-3 border-b">
-                        <h4 class="font-semibold text-gray-900">Detalles del Incidente</h4>
-                    </div>
-                    <div class="p-4 space-y-3">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <span class="text-sm text-gray-500">Fecha:</span>
-                                <p id="resumen-fecha" class="font-medium">-</p>
-                            </div>
-                            <div>
-                                <span class="text-sm text-gray-500">Hora:</span>
-                                <p id="resumen-hora" class="font-medium">-</p>
+                <!-- Resumen por Secciones -->
+                <div class="summary-sections">
+                    <!-- Tipo de Denuncia -->
+                    <div class="summary-section slide-in">
+                        <div class="summary-header">
+                            <div class="summary-icon">📋</div>
+                            <h4 class="summary-title">Tipo de Denuncia</h4>
+                        </div>
+                        <div class="summary-content">
+                            <div class="summary-grid">
+                                <div class="summary-item">
+                                    <span class="summary-label">Categoría Principal</span>
+                                    <span id="resumen-tipo" class="summary-value">-</span>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <span class="text-sm text-gray-500">Lugar:</span>
-                            <p id="resumen-lugar" class="font-medium">-</p>
-                        </div>
-                        <div>
-                            <span class="text-sm text-gray-500">Descripción:</span>
-                            <p id="resumen-descripcion" class="font-medium whitespace-pre-line">-</p>
-                        </div>
                     </div>
-                </div>
 
-                <!-- Identificación del Agresor -->
-                <div class="border rounded-lg">
-                    <div class="bg-gray-50 px-4 py-3 border-b">
-                        <h4 class="font-semibold text-gray-900">Involucrado(s)</h4>
-                    </div>
-                    <div class="p-4">
-                        <div id="resumen-agresores" class="space-y-3">
-                            <!-- Los agresores se insertarán dinámicamente -->
+                    <!-- Detalles del Incidente -->
+                    <div class="summary-section slide-in">
+                        <div class="summary-header">
+                            <div class="summary-icon">📝</div>
+                            <h4 class="summary-title">Detalles del Incidente</h4>
+                        </div>
+                        <div class="summary-content">
+                            <div class="summary-grid">
+                                <div class="summary-item">
+                                    <span class="summary-label">Fecha del Incidente</span>
+                                    <span id="resumen-fecha" class="summary-value">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Hora del Incidente</span>
+                                    <span id="resumen-hora" class="summary-value">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Lugar del Incidente</span>
+                                    <span id="resumen-lugar" class="summary-value">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Descripción Detallada</span>
+                                    <span id="resumen-descripcion" class="summary-value multiline">-</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Resultados de Cuestionarios -->
-                <div class="border rounded-lg">
-                    <div class="bg-gray-50 px-4 py-3 border-b">
-                        <h4 class="font-semibold text-gray-900">Clasificación del Incidente</h4>
-                    </div>
-                    <div class="p-4">
-                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                            <p class="text-sm text-blue-800">
-                                <span class="font-semibold">Clasificación sugerida por el sistema:</span>
-                                <span id="resumen-clasificacion" class="ml-2">-</span>
-                            </p>
+                    <!-- Identificación del Agresor -->
+                    <div class="summary-section slide-in">
+                        <div class="summary-header">
+                            <div class="summary-icon">👤</div>
+                            <h4 class="summary-title">Involucrado(s)</h4>
+                        </div>
+                        <div class="summary-content">
+                            <div id="resumen-agresores" class="space-y-4">
+                                <!-- Los agresores se insertarán dinámicamente -->
+                                <div class="agresor-card">
+                                    <div class="agresor-header">
+                                        <div class="agresor-avatar">JD</div>
+                                        <div class="agresor-info">
+                                            <h5 class="agresor-name">Juan Díaz Martínez</h5>
+                                            <span class="agresor-relation">Compañero de clase</span>
+                                        </div>
+                                    </div>
+                                    <div class="agresor-details">
+                                        <div class="agresor-detail">
+                                            <span class="detail-label">Unidad Académica</span>
+                                            <span class="detail-value">ESIME Zacatenco</span>
+                                        </div>
+                                        <div class="agresor-detail">
+                                            <span class="detail-label">Identificación</span>
+                                            <span class="detail-value">Boleta: 20246789012</span>
+                                        </div>
+                                        <div class="agresor-detail">
+                                            <span class="detail-label">Contacto</span>
+                                            <span class="detail-value">juan.diaz@ipn.mx</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Archivos Adjuntos -->
-                <div class="border rounded-lg">
-                    <div class="bg-gray-50 px-4 py-3 border-b">
-                        <h4 class="font-semibold text-gray-900">Archivos Adjuntos</h4>
-                    </div>
-                    <div class="p-4">
-                        <div id="resumen-archivos" class="space-y-2">
-                            <!-- Los archivos se insertarán dinámicamente -->
+                    <!-- Resultados de Cuestionarios -->
+                    <div class="summary-section slide-in">
+                        <div class="summary-header">
+                            <div class="summary-icon">🎯</div>
+                            <h4 class="summary-title">Clasificación del Incidente</h4>
                         </div>
-                        <p id="sin-archivos" class="text-gray-500 text-sm">No se adjuntaron archivos</p>
+                        <div class="summary-content">
+                            <div class="classification-badge" id="resumen-clasificacion">
+                                Violencia Psicológica
+                            </div>
+                            <div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                <p class="text-sm text-blue-800">
+                                    <strong>Análisis del sistema:</strong> Basado en tus respuestas, el incidente 
+                                    ha sido clasificado como <strong>Violencia Psicológica</strong>. Esta clasificación 
+                                    ayuda a dirigir tu caso al área especializada correspondiente.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Declaración de Veracidad -->
-                <div class="border border-yellow-200 rounded-lg bg-yellow-50">
-                    <div class="px-4 py-3 border-b border-yellow-200">
-                        <h4 class="font-semibold text-yellow-800">Declaración de Veracidad</h4>
+                    <!-- Archivos Adjuntos -->
+                    <div class="summary-section slide-in">
+                        <div class="summary-header">
+                            <div class="summary-icon">📎</div>
+                            <h4 class="summary-title">Archivos Adjuntos</h4>
+                        </div>
+                        <div class="summary-content">
+                            <div id="resumen-archivos" class="files-grid">
+                                <!-- Los archivos se insertarán dinámicamente -->
+                                <div class="file-card">
+                                    <div class="file-icon">🖼️</div>
+                                    <div class="file-info">
+                                        <div class="file-name">evidencia_foto_1.jpg</div>
+                                        <div class="file-size">2.4 MB</div>
+                                    </div>
+                                </div>
+                                <div class="file-card">
+                                    <div class="file-icon">📄</div>
+                                    <div class="file-info">
+                                        <div class="file-name">testigo_declaracion.pdf</div>
+                                        <div class="file-size">1.1 MB</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sin-archivos" class="no-files hidden">
+                                <div class="no-files-icon">📁</div>
+                                <p class="no-files-text">No se adjuntaron archivos</p>
+                                <p class="text-gray-500">Puedes continuar sin evidencia adjunta</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-4">
-                        <div class="flex items-start">
-                            <input type="checkbox" id="declaracion-veracidad" 
-                                   class="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                            <label for="declaracion-veracidad" class="ml-3 text-sm text-yellow-800">
-                                Declaro bajo protesta de decir verdad que la información proporcionada 
-                                en esta denuncia es verídica y completa. Entiendo que proporcionar 
-                                información falsa puede tener consecuencias legales según las 
-                                disposiciones aplicables del Instituto Politécnico Nacional.
+
+                    <!-- Declaración de Veracidad -->
+                    <div class="declaration-section slide-in">
+                        <div class="declaration-header">
+                            <div class="declaration-icon">⚖️</div>
+                            <h4 class="declaration-title">Declaración de Veracidad</h4>
+                        </div>
+                        <div class="declaration-content">
+                            <label class="declaration-checkbox">
+                                <input type="checkbox" id="declaracion-veracidad">
+                                <span class="declaration-text">
+                                    Declaro bajo protesta de decir verdad que la información proporcionada 
+                                    en esta denuncia es verídica y completa. Entiendo que proporcionar 
+                                    información falsa puede tener consecuencias legales según las 
+                                    disposiciones aplicables del Instituto Politécnico Nacional y 
+                                    la legislación mexicana vigente.
+                                </span>
                             </label>
-                        </div>
-                        <div class="error-message text-red-500 text-sm mt-2 hidden" id="error-declaracion">
-                            Debes aceptar la declaración de veracidad para enviar la denuncia
+                            <div class="error-message hidden" id="error-declaracion">
+                                <span>⚠️</span>
+                                Debes aceptar la declaración de veracidad para enviar la denuncia
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Botones de Acción -->
-            <div class="flex justify-between mt-8 pt-6 border-t">
-                <button type="button" data-prev class="btn-secondary">
-                    ← Anterior
-                </button>
-                <div class="space-x-4">
-                    <button type="button" id="btn-guardar-borrador" class="btn-secondary">
-                        Guardar Borrador
+                <!-- Botones de Acción -->
+                <div class="form-actions">
+                    <button type="button" data-prev class="btn btn-secondary">
+                        <span>←</span>
+                        Anterior Paso
                     </button>
-                    <button type="button" id="btn-enviar-denuncia" class="btn-primary">
-                        ✅ Enviar Denuncia
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal de Confirmación -->
-        <div id="modal-confirmacion" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
-            <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-                <div class="mt-3 text-center">
-                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100">
-                        <span class="text-blue-600 text-xl">⚠️</span>
-                    </div>
-                    <h3 class="text-lg font-medium text-gray-900 mt-2">Confirmar Envío</h3>
-                    <div class="mt-2 px-7 py-3">
-                        <p class="text-sm text-gray-500">
-                            ¿Estás seguro de que deseas enviar esta denuncia? 
-                            Una vez enviada no podrás modificarla.
-                        </p>
-                    </div>
-                    <div class="flex justify-center space-x-4 mt-4">
-                        <button id="btn-cancelar-envio" 
-                                class="btn-secondary px-4 py-2">
-                            Cancelar
+                    <div class="action-buttons">
+                        <button type="button" id="btn-guardar-borrador" class="btn btn-secondary">
+                            <span>💾</span>
+                            Guardar Borrador
                         </button>
-                        <button id="btn-confirmar-envio" 
-                                class="btn-primary px-4 py-2">
-                            Sí, Enviar
+                        <button type="button" id="btn-enviar-denuncia" class="btn btn-success">
+                            <span>✅</span>
+                            Enviar Denuncia
                         </button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </main>
 
-    <script src="../../js/denuncia/revision-envio.js"></script>
+    <!-- Modal de Confirmación -->
+    <div id="modal-confirmacion" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="btn-cerrar-modal">×</button>
+            <div class="modal-header">
+                <div class="modal-icon">⚠️</div>
+                <h3 class="modal-title">Confirmar Envío</h3>
+            </div>
+            <div class="modal-body">
+                <p class="modal-message">
+                    ¿Estás seguro de que deseas enviar esta denuncia?<br>
+                    Una vez enviada no podrás modificarla y será procesada 
+                    por el Comité de Seguridad y Convivencia.
+                </p>
+            </div>
+            <div class="modal-actions">
+                <button id="btn-cancelar-envio" class="btn btn-secondary">
+                    Cancelar
+                </button>
+                <button id="btn-confirmar-envio" class="btn btn-success">
+                    Sí, Enviar Denuncia
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src=""></script>
 </body>
 </html>
