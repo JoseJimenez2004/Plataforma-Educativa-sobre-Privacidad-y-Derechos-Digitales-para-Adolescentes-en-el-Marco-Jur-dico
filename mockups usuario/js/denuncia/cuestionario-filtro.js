@@ -8,6 +8,8 @@ class CuestionarioFiltro {
     }
 
     init() {
+        console.log('✅ Iniciando cuestionario filtro...');
+        
         this.verificarAutenticacion();
         this.cargarPreguntas();
         this.cargarProgresoAnterior();
@@ -17,17 +19,33 @@ class CuestionarioFiltro {
     }
 
     verificarAutenticacion() {
-        const usuario = JSON.parse(localStorage.getItem('usuario_cosecovi'));
+        console.log('🔍 Verificando autenticación...');
+        
+        let usuario = JSON.parse(localStorage.getItem('usuario_cosecovi'));
+        
         if (!usuario) {
-            window.location.href = '../../pages/auth/login.html';
-            return;
+            console.warn('⚠️ No hay usuario, usando usuario de prueba');
+            usuario = {
+                nombre: 'Usuario Demo',
+                email: 'demo@ipn.mx',
+                id: 'demo123'
+            };
+            localStorage.setItem('usuario_cosecovi', JSON.stringify(usuario));
         }
         
-        document.getElementById('nombre-usuario').textContent = usuario.nombre;
+        const nombreElemento = document.getElementById('nombre-usuario');
+        if (nombreElemento) {
+            nombreElemento.textContent = usuario.nombre;
+        } else {
+            console.error('❌ No se encontró el elemento nombre-usuario');
+        }
+        
+        console.log('✅ Autenticación verificada:', usuario.nombre);
     }
 
     cargarPreguntas() {
-        // Las 8 preguntas del primer filtro según requisitos
+        console.log('📝 Cargando preguntas...');
+        
         this.preguntas = [
             {
                 id: 1,
@@ -78,52 +96,80 @@ class CuestionarioFiltro {
                 categoria: "seguridad_personal"
             }
         ];
+        
+        console.log('✅ Preguntas cargadas:', this.preguntas.length);
     }
 
     cargarProgresoAnterior() {
-        const denunciaTemp = JSON.parse(localStorage.getItem('denuncia_temporal') || '{}');
-        
-        if (denunciaTemp.respuestasFiltro) {
-            this.respuestas = denunciaTemp.respuestasFiltro;
-        }
-        
-        if (denunciaTemp.progresoFiltro) {
-            this.preguntaActual = denunciaTemp.progresoFiltro;
+        try {
+            const denunciaTemp = JSON.parse(localStorage.getItem('denuncia_temporal') || '{}');
+            
+            if (denunciaTemp.respuestasFiltro) {
+                this.respuestas = denunciaTemp.respuestasFiltro;
+                console.log('📊 Respuestas anteriores cargadas:', this.respuestas);
+            }
+            
+            if (denunciaTemp.progresoFiltro) {
+                this.preguntaActual = denunciaTemp.progresoFiltro;
+                console.log('🎯 Progreso anterior cargado:', this.preguntaActual);
+            }
+        } catch (error) {
+            console.error('❌ Error cargando progreso anterior:', error);
         }
     }
 
     inicializarEventos() {
-        // Navegación entre preguntas
-        document.getElementById('btn-pregunta-anterior').addEventListener('click', () => {
-            this.preguntaAnterior();
-        });
+        console.log('🎮 Inicializando eventos...');
+        
+        try {
+            document.getElementById('btn-pregunta-anterior').addEventListener('click', () => {
+                this.preguntaAnterior();
+            });
 
-        document.getElementById('btn-pregunta-siguiente').addEventListener('click', () => {
-            this.preguntaSiguiente();
-        });
+            document.getElementById('btn-pregunta-siguiente').addEventListener('click', () => {
+                this.preguntaSiguiente();
+            });
 
-        // Botón finalizar cuestionario
-        document.getElementById('btn-finalizar-cuestionario').addEventListener('click', () => {
-            this.finalizarCuestionario();
-        });
+            document.getElementById('btn-finalizar-cuestionario').addEventListener('click', () => {
+                this.finalizarCuestionario();
+            });
 
-        // Navegación principal anterior
-        document.querySelector('[data-prev]').addEventListener('click', () => {
-            window.location.href = 'identificacion-agresor.html';
-        });
+            const btnAnterior = document.querySelector('[data-prev]');
+            if (btnAnterior) {
+                btnAnterior.addEventListener('click', () => {
+                    window.location.href = 'identificacion-agresor.html';
+                });
+            }
+            
+            console.log('✅ Eventos inicializados correctamente');
+        } catch (error) {
+            console.error('❌ Error inicializando eventos:', error);
+        }
     }
 
     mostrarPregunta(indice) {
+        console.log('🔍 Mostrando pregunta:', indice);
+        
+        if (indice < 0 || indice >= this.preguntas.length) {
+            console.error('❌ Índice de pregunta inválido:', indice);
+            return;
+        }
+        
         this.preguntaActual = indice;
         const pregunta = this.preguntas[indice];
         
         const contenedor = document.getElementById('contenedor-preguntas');
+        if (!contenedor) {
+            console.error('❌ No se encontró el contenedor de preguntas');
+            return;
+        }
+        
+        console.log('📋 Renderizando pregunta:', pregunta.texto);
         contenedor.innerHTML = this.generarHTMLPregunta(pregunta);
         
         this.actualizarNavegacion();
-        this.actualizarContadores();
+        this.actualizarProgreso();
         
-        // Restaurar respuesta si existe
         if (this.respuestas[pregunta.id] !== undefined) {
             const radio = document.querySelector(`input[name="pregunta_${pregunta.id}"][value="${this.respuestas[pregunta.id]}"]`);
             if (radio) {
@@ -131,9 +177,13 @@ class CuestionarioFiltro {
                 this.aplicarEstiloSeleccionado(pregunta.id, this.respuestas[pregunta.id]);
             }
         }
+        
+        console.log('✅ Pregunta mostrada correctamente');
     }
 
     generarHTMLPregunta(pregunta) {
+        console.log('🛠️ Generando HTML para pregunta:', pregunta.id);
+        
         return `
             <div class="pregunta-item border rounded-lg p-6 bg-white" data-pregunta-id="${pregunta.id}">
                 <div class="mb-4">
@@ -170,7 +220,7 @@ class CuestionarioFiltro {
                 <input type="radio" name="pregunta_${preguntaId}" value="${opcion.valor}" 
                        class="hidden" 
                        onchange="cuestionarioFiltro.guardarRespuesta(${preguntaId}, '${opcion.valor}')">
-                <div class="${opcion.color} border-2 rounded-lg p-4 text-center transition duration-200 hover:shadow-md">
+                <div class="${opcion.color} border-2 rounded-lg p-4 text-center transition duration-200 hover:shadow-md respuesta-option">
                     <div class="font-semibold text-gray-900 text-lg">${opcion.texto}</div>
                 </div>
             </label>
@@ -198,7 +248,6 @@ class CuestionarioFiltro {
     }
 
     aplicarEstiloSeleccionado(preguntaId, valor) {
-        // Remover estilos de todas las opciones
         const labels = document.querySelectorAll(`input[name="pregunta_${preguntaId}"]`);
         labels.forEach(input => {
             const label = input.closest('label');
@@ -206,7 +255,6 @@ class CuestionarioFiltro {
             div.classList.remove('ring-2', 'ring-blue-500', 'border-blue-500', 'bg-blue-50');
         });
 
-        // Aplicar estilo a la opción seleccionada
         const inputSeleccionado = document.querySelector(`input[name="pregunta_${preguntaId}"][value="${valor}"]`);
         if (inputSeleccionado) {
             const label = inputSeleccionado.closest('label');
@@ -221,10 +269,8 @@ class CuestionarioFiltro {
         const btnFinalizar = document.getElementById('btn-finalizar-cuestionario');
         const estadoPregunta = document.getElementById('estado-pregunta');
 
-        // Actualizar estado
         estadoPregunta.textContent = `Pregunta ${this.preguntaActual + 1} de ${this.totalPreguntas}`;
 
-        // Botón anterior
         if (this.preguntaActual === 0) {
             btnAnterior.disabled = true;
             btnAnterior.classList.add('opacity-50', 'cursor-not-allowed');
@@ -233,7 +279,6 @@ class CuestionarioFiltro {
             btnAnterior.classList.remove('opacity-50', 'cursor-not-allowed');
         }
 
-        // Botón siguiente/finalizar
         if (this.preguntaActual === this.totalPreguntas - 1) {
             btnSiguiente.classList.add('hidden');
             btnFinalizar.classList.remove('hidden');
@@ -263,7 +308,6 @@ class CuestionarioFiltro {
     }
 
     preguntaSiguiente() {
-        // Validar que la pregunta actual esté respondida
         if (!this.respuestas[this.preguntaActual + 1]) {
             this.mostrarError('Por favor responde esta pregunta antes de continuar');
             return;
@@ -275,25 +319,21 @@ class CuestionarioFiltro {
     }
 
     finalizarCuestionario() {
-        // Validar que todas las preguntas estén respondidas
         const preguntasRespondidas = Object.keys(this.respuestas).length;
         if (preguntasRespondidas < this.totalPreguntas) {
             this.mostrarError(`Por favor responde todas las preguntas. Te faltan ${this.totalPreguntas - preguntasRespondidas} preguntas.`);
             return;
         }
 
-        // Guardar respuestas y calcular clasificación preliminar
         const denunciaTemp = JSON.parse(localStorage.getItem('denuncia_temporal') || '{}');
         denunciaTemp.respuestasFiltro = this.respuestas;
         denunciaTemp.clasificacionPreliminar = this.calcularClasificacionPreliminar();
         localStorage.setItem('denuncia_temporal', JSON.stringify(denunciaTemp));
         
-        // Redirigir al siguiente paso
         window.location.href = 'cuestionario-ponderacion.html';
     }
 
     calcularClasificacionPreliminar() {
-        // Lógica simple de clasificación basada en las respuestas
         const puntuaciones = {
             'violencia_fisica': 0,
             'violencia_psicologica': 0,
@@ -301,7 +341,6 @@ class CuestionarioFiltro {
             'discriminacion': 0
         };
 
-        // Asignar puntuaciones basadas en respuestas "Sí"
         this.preguntas.forEach(pregunta => {
             if (this.respuestas[pregunta.id] === 'si') {
                 switch(pregunta.categoria) {
@@ -336,7 +375,6 @@ class CuestionarioFiltro {
             }
         });
 
-        // Determinar clasificación principal
         const maxPuntuacion = Math.max(...Object.values(puntuaciones));
         if (maxPuntuacion === 0) return 'Por determinar';
 
@@ -350,6 +388,7 @@ class CuestionarioFiltro {
     }
 
     mostrarError(mensaje) {
+        console.error('❌ Error:', mensaje);
         const notificacion = document.createElement('div');
         notificacion.className = 'fixed top-4 right-4 bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg shadow-lg z-50';
         notificacion.innerHTML = `
@@ -363,6 +402,7 @@ class CuestionarioFiltro {
     }
 
     mostrarExito(mensaje) {
+        console.log('✅ Éxito:', mensaje);
         const notificacion = document.createElement('div');
         notificacion.className = 'fixed top-4 right-4 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg shadow-lg z-50';
         notificacion.innerHTML = `
@@ -376,5 +416,21 @@ class CuestionarioFiltro {
     }
 }
 
-// Instancia global
-window.cuestionarioFiltro = new CuestionarioFiltro();
+// Instancia global con manejo de errores
+try {
+    console.log('🚀 Creando instancia de CuestionarioFiltro...');
+    window.cuestionarioFiltro = new CuestionarioFiltro();
+    console.log('✅ CuestionarioFiltro inicializado correctamente');
+} catch (error) {
+    console.error('💥 Error crítico al inicializar CuestionarioFiltro:', error);
+    
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'fixed top-0 left-0 w-full bg-red-600 text-white p-4 z-50';
+    errorDiv.innerHTML = `
+        <div class="container mx-auto">
+            <strong>Error:</strong> No se pudo cargar el cuestionario. 
+            <span class="text-sm">Ver la consola para más detalles.</span>
+        </div>
+    `;
+    document.body.appendChild(errorDiv);
+}

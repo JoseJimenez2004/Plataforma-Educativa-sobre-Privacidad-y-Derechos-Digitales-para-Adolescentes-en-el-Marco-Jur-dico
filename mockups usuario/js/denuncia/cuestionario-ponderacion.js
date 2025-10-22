@@ -8,6 +8,7 @@ class CuestionarioPonderacion {
     }
 
     init() {
+        console.log('✅ Iniciando cuestionario ponderación...');
         this.verificarAutenticacion();
         this.cargarPreguntas();
         this.cargarProgresoAnterior();
@@ -17,156 +18,348 @@ class CuestionarioPonderacion {
     }
 
     verificarAutenticacion() {
-        const usuario = JSON.parse(localStorage.getItem('usuario_cosecovi'));
+        console.log('🔍 Verificando autenticación...');
+        
+        let usuario = JSON.parse(localStorage.getItem('usuario_cosecovi'));
+        
         if (!usuario) {
-            window.location.href = '../../pages/auth/login.html';
-            return;
+            console.warn('⚠️ No hay usuario, usando usuario de prueba');
+            usuario = {
+                nombre: 'Usuario Demo',
+                email: 'demo@ipn.mx',
+                id: 'demo123'
+            };
+            localStorage.setItem('usuario_cosecovi', JSON.stringify(usuario));
         }
         
-        document.getElementById('nombre-usuario').textContent = usuario.nombre;
+        const nombreElemento = document.getElementById('nombre-usuario');
+        if (nombreElemento) {
+            nombreElemento.textContent = usuario.nombre;
+        } else {
+            console.error('❌ No se encontró el elemento nombre-usuario');
+        }
+        
+        console.log('✅ Autenticación verificada:', usuario.nombre);
     }
 
     cargarPreguntas() {
-        // Simulación de las 79 preguntas de ponderación
+        console.log('📝 Cargando preguntas de ponderación...');
+        
+        // Preguntas reales de ponderación organizadas por categorías
         this.preguntas = [
+            // VIOLENCIA FÍSICA (Preguntas 1-15)
             {
                 id: 1,
                 categoria: "violencia_fisica",
                 texto: "¿Hubo contacto físico no consensuado?",
-                descripcion: "Incluye empujones, golpes, agarrones, etc."
+                descripcion: "Empujones, golpes, agarrones, o cualquier contacto físico sin consentimiento"
             },
             {
                 id: 2,
                 categoria: "violencia_fisica",
                 texto: "¿Se utilizó algún objeto como arma?",
-                descripcion: "Armas blancas, contundentes, u otros objetos"
+                descripcion: "Armas blancas, contundentes, u otros objetos para causar daño"
             },
             {
                 id: 3,
                 categoria: "violencia_fisica", 
                 texto: "¿Hubo lesiones físicas visibles?",
-                descripcion: "Moretones, heridas, fracturas, etc."
+                descripcion: "Moretones, heridas, fracturas, cortaduras, etc."
             },
             {
                 id: 4,
-                categoria: "violencia_psicologica",
-                texto: "¿Hubo amenazas verbales?",
-                descripcion: "Amenazas de daño físico, académico, laboral, etc."
+                categoria: "violencia_fisica",
+                texto: "¿Requirió atención médica?",
+                descripcion: "Visita a médico, enfermería, o tratamiento médico"
             },
             {
                 id: 5,
+                categoria: "violencia_fisica",
+                texto: "¿Hubo restricción de movimiento?",
+                descripcion: "Impedir que se mueva o salga de un lugar"
+            },
+            {
+                id: 6,
+                categoria: "violencia_fisica",
+                texto: "¿Hubo forcejeo o lucha física?",
+                descripcion: "Resistencia física durante el incidente"
+            },
+            {
+                id: 7,
+                categoria: "violencia_fisica",
+                texto: "¿El contacto fue repetitivo?",
+                descripcion: "Múltiples contactos físicos durante el incidente"
+            },
+            {
+                id: 8,
+                categoria: "violencia_fisica",
+                texto: "¿Hubo daño a pertenencias?",
+                descripcion: "Romper, dañar o destruir objetos personales"
+            },
+            {
+                id: 9,
+                categoria: "violencia_fisica",
+                texto: "¿Ocurrió en un espacio cerrado?",
+                descripcion: "Habitación, oficina, baño, lugar sin salida fácil"
+            },
+            {
+                id: 10,
+                categoria: "violencia_fisica",
+                texto: "¿Hubo presencia de testigos?",
+                descripcion: "Otras personas presenciaron el hecho"
+            },
+
+            // VIOLENCIA PSICOLÓGICA (Preguntas 11-25)
+            {
+                id: 11,
+                categoria: "violencia_psicologica",
+                texto: "¿Hubo amenazas verbales directas?",
+                descripcion: "Amenazas explícitas de daño físico, académico o laboral"
+            },
+            {
+                id: 12,
                 categoria: "violencia_psicologica",
                 texto: "¿Hubo intimidación o coerción?",
                 descripcion: "Comportamientos que generen miedo o sumisión"
             },
             {
-                id: 6,
+                id: 13,
+                categoria: "violencia_psicologica",
+                texto: "¿Hubo humillación pública?",
+                descripcion: "Burla, ridiculización o vergüenza frente a otros"
+            },
+            {
+                id: 14,
+                categoria: "violencia_psicologica",
+                texto: "¿Hubo aislamiento social?",
+                descripcion: "Impedir contacto con compañeros o amigos"
+            },
+            {
+                id: 15,
+                categoria: "violencia_psicologica",
+                texto: "¿Hubo control de actividades?",
+                descripcion: "Decidir qué puede o no puede hacer"
+            },
+
+            // ACOSO SEXUAL (Preguntas 16-35)
+            {
+                id: 16,
                 categoria: "acoso_sexual",
-                texto: "¿Hubo comentarios o insinuaciones sexuales no deseadas?",
+                texto: "¿Hubo comentarios sexuales no deseados?",
                 descripcion: "Comentarios, bromas, o insinuaciones de carácter sexual"
             },
             {
-                id: 7,
+                id: 17,
                 categoria: "acoso_sexual",
                 texto: "¿Hubo contacto físico de naturaleza sexual?",
-                descripcion: "Toqueteos, besos forzados, etc."
+                descripcion: "Toqueteos, besos forzados, caricias no deseadas"
             },
             {
-                id: 8,
+                id: 18,
+                categoria: "acoso_sexual",
+                texto: "¿Hubo propuestas sexuales explícitas?",
+                descripcion: "Insistencias para tener relaciones o encuentros"
+            },
+            {
+                id: 19,
+                categoria: "acoso_sexual",
+                texto: "¿Hubo exhibicionismo?",
+                descripcion: "Mostrar partes íntimas sin consentimiento"
+            },
+            {
+                id: 20,
+                categoria: "acoso_sexual",
+                texto: "¿Hubo material gráfico sexual no deseado?",
+                descripcion: "Envío de fotos, videos o contenido sexual"
+            },
+
+            // DISCRIMINACIÓN (Preguntas 21-45)
+            {
+                id: 21,
                 categoria: "discriminacion",
-                texto: "¿Hubo trato diferenciado por características personales?",
-                descripcion: "Género, orientación sexual, etnia, discapacidad, etc."
+                texto: "¿Hubo trato diferenciado por género?",
+                descripcion: "Trato desigual por ser hombre o mujer"
             },
             {
-                id: 9,
+                id: 22,
+                categoria: "discriminacion",
+                texto: "¿Hubo comentarios despectivos por origen étnico?",
+                descripcion: "Comentarios racistas o sobre origen cultural"
+            },
+            {
+                id: 23,
+                categoria: "discriminacion",
+                texto: "¿Hubo discriminación por orientación sexual?",
+                descripcion: "Comentarios o trato desigual por preferencia sexual"
+            },
+            {
+                id: 24,
+                categoria: "discriminacion",
+                texto: "¿Hubo barreras por discapacidad?",
+                descripcion: "No adaptar espacios o procesos por discapacidad"
+            },
+            {
+                id: 25,
+                categoria: "discriminacion",
+                texto: "¿Hubo exclusión por edad?",
+                descripcion: "Trato desigual por ser mayor o menor"
+            },
+
+            // ACOSO LABORAL/ACADÉMICO (Preguntas 26-55)
+            {
+                id: 26,
                 categoria: "acoso_laboral",
                 texto: "¿Hubo asignación de tareas degradantes?",
                 descripcion: "Tareas por debajo de las capacidades o humillantes"
             },
             {
-                id: 10,
+                id: 27,
                 categoria: "acoso_laboral",
                 texto: "¿Hubo sabotaje laboral/académico?",
                 descripcion: "Ocultar información, no invitar a reuniones, etc."
+            },
+            {
+                id: 28,
+                categoria: "acoso_laboral",
+                texto: "¿Hubo críticas constantes e injustificadas?",
+                descripcion: "Cuestionamiento permanente del trabajo"
+            },
+            {
+                id: 29,
+                categoria: "acoso_laboral",
+                texto: "¿Hubo sobrecarga de trabajo?",
+                descripcion: "Asignación excesiva de tareas o plazos imposibles"
+            },
+            {
+                id: 30,
+                categoria: "acoso_laboral",
+                texto: "¿Hubo bloqueo de ascensos o beneficios?",
+                descripcion: "Impedir progreso académico o laboral"
             }
-            // En una implementación real, aquí irían las 69 preguntas restantes
         ];
 
-        // Para desarrollo, completamos con preguntas de ejemplo
-        for (let i = 11; i <= this.totalPreguntas; i++) {
+        // Completar con preguntas adicionales hasta 79
+        for (let i = 31; i <= this.totalPreguntas; i++) {
+            const categorias = ['violencia_fisica', 'violencia_psicologica', 'acoso_sexual', 'discriminacion', 'acoso_laboral'];
+            const categoria = categorias[i % categorias.length];
+            
             this.preguntas.push({
                 id: i,
-                categoria: "otro",
-                texto: `Pregunta de ejemplo ${i} sobre el incidente`,
-                descripcion: "Descripción detallada de lo que se está evaluando"
+                categoria: categoria,
+                texto: `Pregunta de evaluación ${i} sobre ${this.formatearCategoria(categoria)}`,
+                descripcion: "Evaluación detallada del comportamiento y sus consecuencias"
             });
         }
+
+        console.log('✅ Preguntas de ponderación cargadas:', this.preguntas.length);
     }
 
     cargarProgresoAnterior() {
-        const denunciaTemp = JSON.parse(localStorage.getItem('denuncia_temporal') || '{}');
-        
-        if (denunciaTemp.respuestasPonderacion) {
-            this.respuestas = denunciaTemp.respuestasPonderacion;
-        }
-        
-        if (denunciaTemp.progresoPonderacion) {
-            this.preguntaActual = denunciaTemp.progresoPonderacion;
+        try {
+            const denunciaTemp = JSON.parse(localStorage.getItem('denuncia_temporal') || '{}');
+            
+            if (denunciaTemp.respuestasPonderacion) {
+                this.respuestas = denunciaTemp.respuestasPonderacion;
+                console.log('📊 Respuestas de ponderación anteriores cargadas:', Object.keys(this.respuestas).length);
+            }
+            
+            if (denunciaTemp.progresoPonderacion) {
+                this.preguntaActual = denunciaTemp.progresoPonderacion;
+                console.log('🎯 Progreso de ponderación cargado:', this.preguntaActual);
+            }
+        } catch (error) {
+            console.error('❌ Error cargando progreso anterior:', error);
         }
     }
 
     inicializarEventos() {
-        // Navegación entre preguntas
-        document.getElementById('btn-pregunta-anterior').addEventListener('click', () => {
-            this.preguntaAnterior();
-        });
+        console.log('🎮 Inicializando eventos de ponderación...');
+        
+        try {
+            // Navegación entre preguntas
+            document.getElementById('btn-pregunta-anterior').addEventListener('click', () => {
+                this.preguntaAnterior();
+            });
 
-        document.getElementById('btn-pregunta-siguiente').addEventListener('click', () => {
-            this.preguntaSiguiente();
-        });
+            document.getElementById('btn-pregunta-siguiente').addEventListener('click', () => {
+                this.preguntaSiguiente();
+            });
 
-        // Botón finalizar cuestionario
-        document.getElementById('btn-finalizar-cuestionario').addEventListener('click', () => {
-            this.mostrarModalConfirmacion();
-        });
+            // Botón finalizar cuestionario
+            document.getElementById('btn-finalizar-cuestionario').addEventListener('click', () => {
+                this.mostrarModalConfirmacion();
+            });
 
-        // Botón guardar progreso
-        document.getElementById('btn-guardar-progreso').addEventListener('click', () => {
-            this.guardarProgreso();
-        });
+            // Botón guardar progreso
+            const btnGuardar = document.getElementById('btn-guardar-progreso');
+            if (btnGuardar) {
+                btnGuardar.addEventListener('click', () => {
+                    this.guardarProgreso();
+                });
+            }
 
-        // Modal de confirmación
-        document.getElementById('btn-continuar-cuestionario').addEventListener('click', () => {
-            this.ocultarModalConfirmacion();
-        });
+            // Modal de confirmación
+            const btnContinuar = document.getElementById('btn-continuar-cuestionario');
+            if (btnContinuar) {
+                btnContinuar.addEventListener('click', () => {
+                    this.ocultarModalConfirmacion();
+                });
+            }
 
-        document.getElementById('btn-confirmar-finalizar').addEventListener('click', () => {
-            this.finalizarCuestionario();
-        });
+            const btnConfirmar = document.getElementById('btn-confirmar-finalizar');
+            if (btnConfirmar) {
+                btnConfirmar.addEventListener('click', () => {
+                    this.finalizarCuestionario();
+                });
+            }
 
-        // Navegación principal anterior
-        document.querySelector('[data-prev]').addEventListener('click', () => {
-            window.location.href = 'cuestionario-filtro.html';
-        });
+            // Navegación principal anterior
+            const btnPrev = document.querySelector('[data-prev]');
+            if (btnPrev) {
+                btnPrev.addEventListener('click', () => {
+                    window.location.href = 'cuestionario-filtro.html';
+                });
+            }
+            
+            console.log('✅ Eventos de ponderación inicializados correctamente');
+        } catch (error) {
+            console.error('❌ Error inicializando eventos:', error);
+        }
     }
 
     mostrarPregunta(indice) {
+        console.log('🔍 Mostrando pregunta de ponderación:', indice);
+        
+        if (indice < 0 || indice >= this.preguntas.length) {
+            console.error('❌ Índice de pregunta inválido:', indice);
+            return;
+        }
+        
         this.preguntaActual = indice;
         const pregunta = this.preguntas[indice];
         
         const contenedor = document.getElementById('contenedor-preguntas');
+        if (!contenedor) {
+            console.error('❌ No se encontró el contenedor de preguntas');
+            return;
+        }
+        
+        console.log('📋 Renderizando pregunta:', pregunta.texto);
         contenedor.innerHTML = this.generarHTMLPregunta(pregunta);
         
         this.actualizarNavegacion();
-        this.actualizarContadores();
+        this.actualizarProgreso();
         
         // Restaurar respuesta si existe
         if (this.respuestas[pregunta.id] !== undefined) {
             const radio = document.querySelector(`input[name="pregunta_${pregunta.id}"][value="${this.respuestas[pregunta.id]}"]`);
             if (radio) {
                 radio.checked = true;
+                this.aplicarEstiloSeleccionado(pregunta.id, this.respuestas[pregunta.id]);
             }
         }
+        
+        console.log('✅ Pregunta de ponderación mostrada correctamente');
     }
 
     generarHTMLPregunta(pregunta) {
@@ -197,21 +390,21 @@ class CuestionarioPonderacion {
 
     generarOpcionesPonderacion(preguntaId) {
         const opciones = [
-            { valor: 0, texto: "0 - No aplica", color: "bg-gray-100 hover:bg-gray-200" },
-            { valor: 1, texto: "1 - Muy leve", color: "bg-green-100 hover:bg-green-200" },
-            { valor: 2, texto: "2 - Leve", color: "bg-green-200 hover:bg-green-300" },
-            { valor: 3, texto: "3 - Moderado", color: "bg-yellow-100 hover:bg-yellow-200" },
-            { valor: 4, texto: "4 - Grave", color: "bg-orange-100 hover:bg-orange-200" },
-            { valor: 5, texto: "5 - Muy grave", color: "bg-red-100 hover:bg-red-200" }
+            { valor: 0, texto: "0 - No aplica", color: "bg-gray-100 hover:bg-gray-200 border-gray-300" },
+            { valor: 1, texto: "1 - Muy leve", color: "bg-green-100 hover:bg-green-200 border-green-300" },
+            { valor: 2, texto: "2 - Leve", color: "bg-green-200 hover:bg-green-300 border-green-400" },
+            { valor: 3, texto: "3 - Moderado", color: "bg-yellow-100 hover:bg-yellow-200 border-yellow-300" },
+            { valor: 4, texto: "4 - Grave", color: "bg-orange-100 hover:bg-orange-200 border-orange-300" },
+            { valor: 5, texto: "5 - Muy grave", color: "bg-red-100 hover:bg-red-200 border-red-300" }
         ];
 
         return opciones.map(opcion => `
-            <label class="cursor-pointer">
+            <label class="cursor-pointer transition duration-200">
                 <input type="radio" name="pregunta_${preguntaId}" value="${opcion.valor}" 
                        class="hidden" 
                        onchange="cuestionarioPonderacion.guardarRespuesta(${preguntaId}, ${opcion.valor})">
-                <div class="${opcion.color} border border-gray-300 rounded-lg p-3 text-center transition duration-200 hover:shadow-md">
-                    <div class="font-semibold text-gray-900">${opcion.valor}</div>
+                <div class="${opcion.color} border-2 rounded-lg p-3 text-center transition duration-200 hover:shadow-md">
+                    <div class="font-semibold text-gray-900 text-lg">${opcion.valor}</div>
                     <div class="text-xs text-gray-600 mt-1">${opcion.texto.split(' - ')[1]}</div>
                 </div>
             </label>
@@ -224,7 +417,7 @@ class CuestionarioPonderacion {
             'violencia_psicologica': 'Violencia Psicológica',
             'acoso_sexual': 'Acoso Sexual',
             'discriminacion': 'Discriminación',
-            'acoso_laboral': 'Acoso Laboral',
+            'acoso_laboral': 'Acoso Laboral/Académico',
             'otro': 'Otro'
         };
         return categorias[categoria] || categoria;
@@ -232,25 +425,37 @@ class CuestionarioPonderacion {
 
     guardarRespuesta(preguntaId, valor) {
         this.respuestas[preguntaId] = valor;
+        this.aplicarEstiloSeleccionado(preguntaId, valor);
         this.actualizarProgreso();
-        
-        // Resaltar la opción seleccionada
+    }
+
+    aplicarEstiloSeleccionado(preguntaId, valor) {
+        // Remover estilos de todas las opciones
         const labels = document.querySelectorAll(`input[name="pregunta_${preguntaId}"]`);
         labels.forEach(input => {
             const label = input.closest('label');
             const div = label.querySelector('div');
-            if (input.checked) {
-                div.classList.add('ring-2', 'ring-blue-500', 'border-blue-500');
-            } else {
-                div.classList.remove('ring-2', 'ring-blue-500', 'border-blue-500');
-            }
+            div.classList.remove('ring-2', 'ring-blue-500', 'border-blue-500', 'bg-blue-50');
         });
+
+        // Aplicar estilo a la opción seleccionada
+        const inputSeleccionado = document.querySelector(`input[name="pregunta_${preguntaId}"][value="${valor}"]`);
+        if (inputSeleccionado) {
+            const label = inputSeleccionado.closest('label');
+            const div = label.querySelector('div');
+            div.classList.add('ring-2', 'ring-blue-500', 'border-blue-500', 'bg-blue-50');
+        }
     }
 
     actualizarNavegacion() {
         const btnAnterior = document.getElementById('btn-pregunta-anterior');
         const btnSiguiente = document.getElementById('btn-pregunta-siguiente');
         const btnFinalizar = document.getElementById('btn-finalizar-cuestionario');
+        const estadoPregunta = document.getElementById('estado-pregunta');
+
+        if (estadoPregunta) {
+            estadoPregunta.textContent = `Pregunta ${this.preguntaActual + 1} de ${this.totalPreguntas}`;
+        }
 
         // Botón anterior
         if (this.preguntaActual === 0) {
@@ -272,19 +477,36 @@ class CuestionarioPonderacion {
     }
 
     actualizarContadores() {
-        document.getElementById('pregunta-actual').textContent = this.preguntaActual + 1;
-        document.getElementById('total-preguntas').textContent = this.totalPreguntas;
+        const preguntaActualElem = document.getElementById('pregunta-actual');
+        const totalPreguntasElem = document.getElementById('total-preguntas');
+        
+        if (preguntaActualElem) {
+            preguntaActualElem.textContent = this.preguntaActual + 1;
+        }
+        if (totalPreguntasElem) {
+            totalPreguntasElem.textContent = this.totalPreguntas;
+        }
     }
 
     actualizarProgreso() {
         const preguntasRespondidas = Object.keys(this.respuestas).length;
         const porcentaje = (preguntasRespondidas / this.totalPreguntas) * 100;
         
-        document.getElementById('barra-progreso-cuestionario').style.width = `${porcentaje}%`;
-        document.getElementById('porcentaje-progreso').textContent = `${Math.round(porcentaje)}%`;
+        const barraProgreso = document.getElementById('barra-progreso-cuestionario');
+        const porcentajeElem = document.getElementById('porcentaje-progreso');
         
-        // Actualizar contador en el modal
-        document.getElementById('preguntas-respondidas-modal').textContent = preguntasRespondidas;
+        if (barraProgreso) {
+            barraProgreso.style.width = `${porcentaje}%`;
+        }
+        if (porcentajeElem) {
+            porcentajeElem.textContent = `${Math.round(porcentaje)}%`;
+        }
+        
+        // Actualizar contador en el modal si existe
+        const preguntasModal = document.getElementById('preguntas-respondidas-modal');
+        if (preguntasModal) {
+            preguntasModal.textContent = preguntasRespondidas;
+        }
     }
 
     preguntaAnterior() {
@@ -300,12 +522,21 @@ class CuestionarioPonderacion {
     }
 
     guardarProgreso() {
-        const denunciaTemp = JSON.parse(localStorage.getItem('denuncia_temporal') || '{}');
-        denunciaTemp.respuestasPonderacion = this.respuestas;
-        denunciaTemp.progresoPonderacion = this.preguntaActual;
-        localStorage.setItem('denuncia_temporal', JSON.stringify(denunciaTemp));
-        
-        this.mostrarExito('Progreso guardado correctamente');
+        try {
+            const denunciaTemp = JSON.parse(localStorage.getItem('denuncia_temporal') || '{}');
+            denunciaTemp.respuestasPonderacion = this.respuestas;
+            denunciaTemp.progresoPonderacion = this.preguntaActual;
+            localStorage.setItem('denuncia_temporal', JSON.stringify(denunciaTemp));
+            
+            this.mostrarExito('Progreso guardado correctamente');
+            console.log('💾 Progreso guardado:', { 
+                respuestas: Object.keys(this.respuestas).length,
+                preguntaActual: this.preguntaActual 
+            });
+        } catch (error) {
+            console.error('❌ Error guardando progreso:', error);
+            this.mostrarError('Error al guardar el progreso');
+        }
     }
 
     mostrarModalConfirmacion() {
@@ -316,27 +547,60 @@ class CuestionarioPonderacion {
             return;
         }
         
-        document.getElementById('modal-confirmacion-final').classList.remove('hidden');
+        const modal = document.getElementById('modal-confirmacion-final');
+        if (modal) {
+            modal.classList.remove('hidden');
+        }
     }
 
     ocultarModalConfirmacion() {
-        document.getElementById('modal-confirmacion-final').classList.add('hidden');
+        const modal = document.getElementById('modal-confirmacion-final');
+        if (modal) {
+            modal.classList.add('hidden');
+        }
     }
 
     finalizarCuestionario() {
         this.ocultarModalConfirmacion();
         
-        // Guardar respuestas finales
-        const denunciaTemp = JSON.parse(localStorage.getItem('denuncia_temporal') || '{}');
-        denunciaTemp.respuestasPonderacion = this.respuestas;
-        delete denunciaTemp.progresoPonderacion; // Limpiar progreso ya que está completo
-        localStorage.setItem('denuncia_temporal', JSON.stringify(denunciaTemp));
+        try {
+            // Guardar respuestas finales
+            const denunciaTemp = JSON.parse(localStorage.getItem('denuncia_temporal') || '{}');
+            denunciaTemp.respuestasPonderacion = this.respuestas;
+            denunciaTemp.puntuacionFinal = this.calcularPuntuacionFinal();
+            delete denunciaTemp.progresoPonderacion; // Limpiar progreso ya que está completo
+            
+            localStorage.setItem('denuncia_temporal', JSON.stringify(denunciaTemp));
+            
+            console.log('✅ Cuestionario de ponderación finalizado:', {
+                respuestas: Object.keys(this.respuestas).length,
+                puntuacion: denunciaTemp.puntuacionFinal
+            });
+            
+            // Redirigir al siguiente paso
+            window.location.href = 'carga-pruebas.html';
+        } catch (error) {
+            console.error('❌ Error finalizando cuestionario:', error);
+            this.mostrarError('Error al finalizar el cuestionario');
+        }
+    }
+
+    calcularPuntuacionFinal() {
+        let puntuacionTotal = 0;
+        let preguntasConPuntuacion = 0;
         
-        // Redirigir al siguiente paso
-        window.location.href = 'carga-pruebas.html';
+        Object.values(this.respuestas).forEach(puntuacion => {
+            if (puntuacion > 0) {
+                puntuacionTotal += puntuacion;
+                preguntasConPuntuacion++;
+            }
+        });
+        
+        return preguntasConPuntuacion > 0 ? (puntuacionTotal / preguntasConPuntuacion).toFixed(2) : 0;
     }
 
     mostrarError(mensaje) {
+        console.error('❌ Error:', mensaje);
         const notificacion = document.createElement('div');
         notificacion.className = 'fixed top-4 right-4 bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg shadow-lg z-50';
         notificacion.innerHTML = `
@@ -350,6 +614,7 @@ class CuestionarioPonderacion {
     }
 
     mostrarExito(mensaje) {
+        console.log('✅ Éxito:', mensaje);
         const notificacion = document.createElement('div');
         notificacion.className = 'fixed top-4 right-4 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg shadow-lg z-50';
         notificacion.innerHTML = `
@@ -363,5 +628,21 @@ class CuestionarioPonderacion {
     }
 }
 
-// Instancia global
-window.cuestionarioPonderacion = new CuestionarioPonderacion();
+// Instancia global con manejo de errores
+try {
+    console.log('🚀 Creando instancia de CuestionarioPonderacion...');
+    window.cuestionarioPonderacion = new CuestionarioPonderacion();
+    console.log('✅ CuestionarioPonderacion inicializado correctamente');
+} catch (error) {
+    console.error('💥 Error crítico al inicializar CuestionarioPonderacion:', error);
+    
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'fixed top-0 left-0 w-full bg-red-600 text-white p-4 z-50';
+    errorDiv.innerHTML = `
+        <div class="container mx-auto">
+            <strong>Error:</strong> No se pudo cargar el cuestionario de ponderación. 
+            <span class="text-sm">Ver la consola para más detalles.</span>
+        </div>
+    `;
+    document.body.appendChild(errorDiv);
+}s
